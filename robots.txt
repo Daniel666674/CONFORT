@@ -1,0 +1,25 @@
+# robots.txt for Colchones Real Confort MD
+# https://colchonesrealconfort.com/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /api/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://colchonesrealconfort.com/sitemap.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
