@@ -133,6 +133,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .pc-vis{height:196px;background:linear-gradient(140deg,#eef7fd 0%,#cde5f5 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .pc-vis::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);transform:translateX(-100%);transition:transform .7s ease;z-index:2}
 .pc:hover .pc-vis::before{transform:translateX(160%)}
+.pc-vis img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
+.pc:hover .pc-vis img{transform:scale(1.06)}
+.pc-zoom-hint{position:absolute;bottom:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(5,13,26,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:3;opacity:0;transform:scale(.8);transition:all .25s}
+.pc:hover .pc-zoom-hint{opacity:1;transform:scale(1)}
 .pc-body{padding:22px 24px}
 .badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);background:rgba(91,200,234,.1);padding:4px 10px;border-radius:20px;margin-bottom:10px}
 .pc-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--text);margin-bottom:6px}
@@ -145,6 +149,27 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
 .dot{width:8px;height:8px;border-radius:50%;background:rgba(91,200,234,.25);cursor:pointer;transition:all .25s}
 .dot.active{background:var(--navy);transform:scale(1.3);width:24px;border-radius:4px}
+
+/* ===== CAMAS (grid, reuses .pc card style) ===== */
+#camas{background:var(--cream2);padding:0 0 90px}
+.camas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(5,13,26,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox-box{background:#fff;border-radius:20px;max-width:860px;width:100%;max-height:88vh;overflow:auto;display:grid;grid-template-columns:1.1fr 1fr;position:relative;transform:translateY(14px);transition:transform .25s}
+.lightbox.open .lightbox-box{transform:translateY(0)}
+.lightbox-img{background:#eef6fd;min-height:320px;display:flex}
+.lightbox-img img{width:100%;height:100%;object-fit:cover}
+.lightbox-info{padding:32px 30px;display:flex;flex-direction:column}
+.lightbox-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(5,13,26,.75);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;font-size:18px;line-height:1}
+.lightbox-close:hover{background:var(--navy)}
+.lightbox-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--text);margin:2px 0 10px}
+.lightbox-desc{font-size:14.5px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.lightbox-price{font-size:26px;font-weight:700;color:var(--gold-dk);margin-bottom:22px}
+.lightbox-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#25d366;color:#fff;padding:14px 22px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;margin-top:auto}
+.lightbox-cta:hover{background:#1db857;transform:translateY(-2px)}
+@media(max-width:640px){.lightbox-box{grid-template-columns:1fr}.lightbox-img{min-height:220px}}
 
 /* ===== WHY US ===== */
 #why{background:var(--navy);padding:100px 64px}
@@ -171,6 +196,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .gal-item:first-child{grid-row:1/3}
 .gal-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .5s ease;position:relative}
 .gal-item:hover .gal-bg{transform:scale(1.04)}
+.gal-bg img{width:100%;height:100%;object-fit:cover;display:block}
 .gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,13,26,.7) 0%,transparent 55%);opacity:0;transition:opacity .3s}
 .gal-item:hover .gal-overlay{opacity:1}
 .gal-label{position:absolute;bottom:16px;left:16px;color:#fff;font-size:13px;font-weight:600;opacity:0;transform:translateY(6px);transition:all .3s}
@@ -301,8 +327,6 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 .rev{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease}
 .rev.in{opacity:1;transform:translateY(0)}
 
-/* ===== DEMO BADGE ===== */
-.demo-badge{position:fixed;top:70px;left:0;background:var(--gold);color:var(--navy);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:5px 12px 5px 10px;border-radius:0 6px 6px 0;z-index:999;writing-mode:horizontal-tb}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:1100px){
@@ -312,6 +336,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   .alt-row{grid-template-columns:1fr;gap:28px}
   .alt-row.reverse{direction:ltr}
   .bundle-grid{grid-template-columns:1fr}
+  .camas-grid{grid-template-columns:1fr 1fr}
   .steps-grid{grid-template-columns:1fr}
   .steps-grid::before{display:none}
   .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
@@ -321,7 +346,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   nav{padding:14px 20px}
   .nav-links{display:none}
   #hero{padding:80px 20px 0}
-  .trust-strip,.stats-bar,#how,#products,.products-inner,#why,#sizes,#gallery,#testi,#bundles,#contact,#pays,#cta,footer,.trust-badges{padding-left:20px;padding-right:20px}
+  .trust-strip,.stats-bar,#how,#products,.products-inner,#camas,#why,#sizes,#gallery,#testi,#bundles,#contact,#pays,#cta,footer,.trust-badges{padding-left:20px;padding-right:20px}
+  .camas-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
   .foot-bottom{flex-direction:column;gap:8px;text-align:center}
   .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto}
@@ -344,9 +370,6 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 
 <body>
 
-<!-- DEMO BADGE -->
-<div class="demo-badge">DEMO · BlackScale</div>
-
 <!-- ANNOUNCEMENT BAR -->
 <div class="ann-bar">
   🚚 Envío GRATIS a Bogotá, Soacha, Chía, Mosquera y Cundinamarca &nbsp;·&nbsp; ⭐ 4.9/5 en 147 reseñas verificadas
@@ -359,7 +382,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <div class="nav-brand"><div class="n1">Real <span>Confort</span> MD</div><div class="n2">Calidad y Pleno Descanso</div></div>
   </a>
   <ul class="nav-links">
-    <li><a href="#products">Productos</a></li>
+    <li><a href="#products">Colchones</a></li>
+    <li><a href="#camas">Camas</a></li>
     <li><a href="#how">Cómo Funciona</a></li>
     <li><a href="#sizes">Medidas</a></li>
     <li><a href="#bundles">Combos</a></li>
@@ -488,40 +512,87 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <div class="carousel-wrap">
       <div class="carousel-track" id="carouselTrack">
 
-        <div class="pc rev">
+        <div class="pc rev" data-lightbox data-img="images/colchones/colchon-sencillo.jpg" data-name="Colchón Sencillo" data-desc="100 × 190 cm · Espuma de alta densidad. Ideal para cuartos individuales." data-price="Desde $350.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20Sencillo">
           <div class="pc-badge-popular">Más Vendido</div>
-          <div class="pc-vis"><svg width="160" height="145" viewBox="0 0 170 148" fill="none"><polygon points="85,18 130,40 85,62 40,40" fill="#ddf1fb"/><polygon points="130,40 130,80 85,102 85,62" fill="#5bc8ea" opacity=".85"/><polygon points="40,40 85,62 85,102 40,80" fill="#3aaed4" opacity=".9"/><polygon points="40,48 40,58 85,70 85,80" fill="rgba(242,198,64,.65)"/><polygon points="85,70 130,48 130,58 85,80" fill="rgba(242,198,64,.45)"/><ellipse cx="72" cy="36" rx="20" ry="8" fill="white" opacity=".8" transform="rotate(-27 72 36)"/><ellipse cx="85" cy="106" rx="52" ry="8" fill="rgba(11,61,107,.18)"/></svg></div>
+          <div class="pc-vis"><img src="images/colchones/colchon-sencillo.jpg" alt="Colchón Sencillo 100x190 cm" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
           <div class="pc-body"><div class="badge">Individual</div><div class="pc-name">Colchón Sencillo</div><div class="pc-desc">100 × 190 cm · Espuma de alta densidad. Ideal para cuartos individuales.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$350.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20Sencillo" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
-        <div class="pc rev">
-          <div class="pc-vis"><svg width="160" height="145" viewBox="0 0 170 148" fill="none"><polygon points="85,16 138,40 85,64 32,40" fill="#ddf1fb"/><polygon points="138,40 138,80 85,104 85,64" fill="#5bc8ea" opacity=".85"/><polygon points="32,40 85,64 85,104 32,80" fill="#3aaed4" opacity=".9"/><polygon points="32,48 32,60 85,74 85,84" fill="rgba(242,198,64,.65)"/><polygon points="85,74 138,48 138,60 85,84" fill="rgba(242,198,64,.45)"/><ellipse cx="65" cy="34" rx="20" ry="8" fill="white" opacity=".8" transform="rotate(-27 65 34)"/><ellipse cx="105" cy="22" rx="20" ry="8" fill="white" opacity=".72" transform="rotate(-27 105 22)"/><ellipse cx="85" cy="108" rx="56" ry="8" fill="rgba(11,61,107,.18)"/></svg></div>
+        <div class="pc rev" data-lightbox data-img="images/colchones/colchon-doble-lifestyle.jpg" data-name="Colchón Doble" data-desc="140 × 190 cm · Resortes templados con foam viscoelástico. Máximo soporte." data-price="Desde $480.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20Doble">
+          <div class="pc-vis"><img src="images/colchones/colchon-doble-lifestyle.jpg" alt="Colchón Doble 140x190 cm" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
           <div class="pc-body"><div class="badge" style="color:#0b3d6b;background:rgba(11,61,107,.08)">Parejas</div><div class="pc-name">Colchón Doble</div><div class="pc-desc">140 × 190 cm · Resortes templados con foam viscoelástico. Máximo soporte.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$480.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20Doble" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
-        <div class="pc rev">
-          <div class="pc-vis" style="background:linear-gradient(140deg,#fffbeb 0%,#fde68a 100%)"><svg width="160" height="145" viewBox="0 0 170 148" fill="none"><polygon points="85,14 142,40 85,66 28,40" fill="#fffbeb"/><polygon points="142,40 142,82 85,108 85,66" fill="#f2c640" opacity=".85"/><polygon points="28,40 85,66 85,108 28,82" fill="#d4a700" opacity=".85"/><polygon points="28,50 28,64 85,80 85,92" fill="rgba(255,255,255,.45)"/><polygon points="85,80 142,50 142,64 85,92" fill="rgba(255,255,255,.28)"/><ellipse cx="63" cy="32" rx="21" ry="8.5" fill="white" opacity=".82" transform="rotate(-27 63 32)"/><ellipse cx="107" cy="18" rx="21" ry="8.5" fill="white" opacity=".72" transform="rotate(-27 107 18)"/><ellipse cx="85" cy="112" rx="60" ry="8" fill="rgba(200,154,0,.22)"/></svg></div>
+        <div class="pc rev" data-lightbox data-img="images/colchones/colchon-queen-pillowtop.jpg" data-name="Colchón Queen" data-desc="160 × 190 cm · Memory foam premium con zonas de presión diferencial." data-price="Desde $680.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20Queen">
+          <div class="pc-vis"><img src="images/colchones/colchon-queen-pillowtop.jpg" alt="Colchón Queen 160x190 cm premium pillow top" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
           <div class="pc-body"><div class="badge" style="color:var(--gold-dk);background:rgba(242,198,64,.12)">⭐ Premium</div><div class="pc-name">Colchón Queen</div><div class="pc-desc">160 × 190 cm · Memory foam premium con zonas de presión diferencial.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$680.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20Queen" class="pc-btn" style="background:var(--gold-dk)">Cotizar →</a></div></div>
         </div>
 
-        <div class="pc rev">
-          <div class="pc-vis" style="background:linear-gradient(140deg,#0a1e35 0%,#0b3d6b 100%)"><svg width="160" height="145" viewBox="0 0 170 148" fill="none"><polygon points="85,12 146,40 85,68 24,40" fill="rgba(91,200,234,.2)"/><polygon points="146,40 146,82 85,110 85,68" fill="rgba(91,200,234,.45)"/><polygon points="24,40 85,68 85,110 24,82" fill="rgba(91,200,234,.35)"/><polygon points="24,50 24,65 85,84 85,96" fill="rgba(242,198,64,.55)"/><polygon points="85,84 146,50 146,65 85,96" fill="rgba(242,198,64,.38)"/><ellipse cx="60" cy="30" rx="21" ry="8.5" fill="white" opacity=".45" transform="rotate(-27 60 30)"/><ellipse cx="110" cy="15" rx="21" ry="8.5" fill="white" opacity=".35" transform="rotate(-27 110 15)"/><ellipse cx="85" cy="114" rx="62" ry="9" fill="rgba(11,61,107,.5)"/></svg></div>
+        <div class="pc rev" data-lightbox data-img="images/colchones/colchon-king-lifestyle.jpg" data-name="Colchón King" data-desc="200 × 200 cm · El rey del descanso. Lujo máximo para el hogar más exigente." data-price="Desde $950.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20King">
+          <div class="pc-vis"><img src="images/colchones/colchon-king-lifestyle.jpg" alt="Colchón King 200x200 cm" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
           <div class="pc-body"><div class="badge" style="color:#5bc8ea;background:rgba(91,200,234,.1)">Exclusivo</div><div class="pc-name">Colchón King</div><div class="pc-desc">200 × 200 cm · El rey del descanso. Lujo máximo para el hogar más exigente.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$950.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20King" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
-        <div class="pc rev">
-          <div class="pc-vis"><svg width="160" height="145" viewBox="0 0 180 148" fill="none"><polygon points="90,78 138,100 90,122 42,100" fill="#1b6ca8" opacity=".9"/><polygon points="138,100 138,120 90,142 90,122" fill="#0b3d6b"/><polygon points="42,100 90,122 90,142 42,120" fill="#072a4c"/><polygon points="90,38 138,60 90,82 42,60" fill="#ddf1fb"/><polygon points="138,60 138,98 90,120 90,82" fill="#5bc8ea" opacity=".85"/><polygon points="42,60 90,82 90,120 42,98" fill="#3aaed4" opacity=".9"/><polygon points="42,68 42,78 90,92 90,102" fill="rgba(242,198,64,.65)"/><polygon points="90,92 138,68 138,78 90,102" fill="rgba(242,198,64,.45)"/></svg></div>
+        <div class="pc rev" data-lightbox data-img="images/colchones/showroom-real-bogota.jpg" data-name="Conjunto Base + Colchón" data-desc="Base cajón o dividida + colchón a elegir. La solución completa en un precio." data-price="Desde $750.000" data-wa="https://wa.me/573001234567?text=Cotización%20Conjunto%20Base">
+          <div class="pc-vis"><img src="images/colchones/showroom-real-bogota.jpg" alt="Conjunto base y colchón entregado en Bogotá" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
           <div class="pc-body"><div class="badge" style="color:#1a7a3c;background:rgba(26,122,60,.09)">Ahorra Más</div><div class="pc-name">Conjunto Base + Colchón</div><div class="pc-desc">Base cajón o dividida + colchón a elegir. La solución completa en un precio.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$750.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Conjunto%20Base" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
-        <div class="pc rev">
-          <div class="pc-vis" style="background:linear-gradient(140deg,#f5f0ff 0%,#e8deff 100%)"><svg width="160" height="145" viewBox="0 0 170 148" fill="none"><polygon points="85,16 140,42 85,68 30,42" fill="#ede5ff"/><polygon points="140,42 140,82 85,108 85,68" fill="#9b7fd4" opacity=".85"/><polygon points="30,42 85,68 85,108 30,82" fill="#7b5fb4" opacity=".85"/><polygon points="30,52 30,64 85,80 85,90" fill="rgba(242,198,64,.55)"/><polygon points="85,80 140,52 140,64 85,90" fill="rgba(242,198,64,.38)"/></svg></div>
+        <div class="pc rev" data-lightbox data-img="images/colchones/colchon-medidas.jpg" data-name="Medidas Especiales" data-desc="¿Tu cama tiene medidas atípicas? Fabricamos el colchón exacto. Sin restricciones." data-price="Precio a consultar" data-wa="https://wa.me/573001234567?text=Necesito%20medida%20especial">
+          <div class="pc-vis"><img src="images/colchones/colchon-medidas.jpg" alt="Colchón fabricado a medida especial" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
           <div class="pc-body"><div class="badge" style="color:#7b5fb4;background:rgba(155,127,212,.1)">Personalizado</div><div class="pc-name">Medidas Especiales</div><div class="pc-desc">¿Tu cama tiene medidas atípicas? Fabricamos el colchón exacto. Sin restricciones.</div><div class="pc-foot"><div class="pc-price"><span class="from">Precio</span><span class="amount">Consultar</span></div><a href="https://wa.me/573001234567?text=Necesito%20medida%20especial" class="pc-btn" style="background:#7b5fb4">Consultar →</a></div></div>
         </div>
 
       </div>
     </div>
     <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- CAMAS -->
+<section id="camas">
+  <div class="products-inner">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Camas Tapizadas</div>
+        <h2 class="sec-h2">Camas para <strong>vestir tu cuarto</strong></h2>
+        <p class="sec-p">Bases tapizadas y con almacenamiento, fabricadas para acompañar tu colchón nuevo.</p>
+      </div>
+    </div>
+    <div class="camas-grid">
+
+      <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-crema.jpg" data-name="Cama Tapizada Crema" data-desc="Cabecero capitoné en tela crema. Estructura reforzada, patas en madera maciza." data-price="Desde $620.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Tapizada%20Crema">
+        <div class="pc-vis"><img src="images/camas/cama-tapizada-crema.jpg" alt="Cama tapizada color crema con cabecero capitoné" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+        <div class="pc-body"><div class="badge">Doble/Queen</div><div class="pc-name">Cama Tapizada Crema</div><div class="pc-desc">Cabecero capitoné en tela crema. Estructura reforzada, patas en madera maciza.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$620.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Tapizada%20Crema" class="pc-btn">Cotizar →</a></div></div>
+      </div>
+
+      <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-gris-premium.jpg" data-name="Cama Tapizada Gris Premium" data-desc="Cabecero acolchado en gris con base para almacenamiento. Incluye banca a juego." data-price="Desde $780.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Gris%20Premium">
+        <div class="pc-badge-popular">Más Vendida</div>
+        <div class="pc-vis"><img src="images/camas/cama-tapizada-gris-premium.jpg" alt="Cama tapizada gris premium con banca" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+        <div class="pc-body"><div class="badge" style="color:var(--gold-dk);background:rgba(242,198,64,.12)">⭐ Premium</div><div class="pc-name">Cama Tapizada Gris Premium</div><div class="pc-desc">Cabecero acolchado en gris con base para almacenamiento. Incluye banca a juego.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$780.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Gris%20Premium" class="pc-btn" style="background:var(--gold-dk)">Cotizar →</a></div></div>
+      </div>
+
+      <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-azul-navy.jpg" data-name="Cama Tapizada Azul Navy" data-desc="Cabecero de canales en terciopelo azul navy. Un statement elegante para el cuarto." data-price="Desde $690.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Azul%20Navy">
+        <div class="pc-vis"><img src="images/camas/cama-tapizada-azul-navy.jpg" alt="Cama tapizada azul navy con cabecero de canales" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+        <div class="pc-body"><div class="badge" style="color:#5bc8ea;background:rgba(91,200,234,.1)">Exclusivo</div><div class="pc-name">Cama Tapizada Azul Navy</div><div class="pc-desc">Cabecero de canales en terciopelo azul navy. Un statement elegante para el cuarto.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$690.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Azul%20Navy" class="pc-btn">Cotizar →</a></div></div>
+      </div>
+
+      <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-negra.jpg" data-name="Cama Tapizada Negra" data-desc="Cabecero capitoné en negro, líneas minimalistas. Combina con cualquier decoración." data-price="Desde $640.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Negra">
+        <div class="pc-vis"><img src="images/camas/cama-tapizada-negra.jpg" alt="Cama tapizada negra con cabecero capitoné" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+        <div class="pc-body"><div class="badge" style="color:#0b3d6b;background:rgba(11,61,107,.08)">Minimalista</div><div class="pc-name">Cama Tapizada Negra</div><div class="pc-desc">Cabecero capitoné en negro, líneas minimalistas. Combina con cualquier decoración.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$640.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Negra" class="pc-btn">Cotizar →</a></div></div>
+      </div>
+
+      <div class="pc rev" data-lightbox data-img="images/camas/base-almacenamiento-elevable.jpg" data-name="Base con Almacenamiento Elevable" data-desc="Base elevable a gas para guardar cobijas y maletas debajo del colchón. Máximo aprovechamiento del espacio." data-price="Desde $580.000" data-wa="https://wa.me/573001234567?text=Cotización%20Base%20con%20Almacenamiento">
+        <div class="pc-vis"><img src="images/camas/base-almacenamiento-elevable.jpg" alt="Base de cama elevable con almacenamiento" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+        <div class="pc-body"><div class="badge" style="color:#1a7a3c;background:rgba(26,122,60,.09)">Ahorra Espacio</div><div class="pc-name">Base con Almacenamiento</div><div class="pc-desc">Base elevable a gas para guardar cobijas y maletas debajo del colchón.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$580.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Base%20con%20Almacenamiento" class="pc-btn">Cotizar →</a></div></div>
+      </div>
+
+      <div class="pc rev" data-lightbox data-img="images/camas/base-cama-gris.jpg" data-name="Base Clásica Gris" data-desc="Base tapizada gris, sencilla y resistente. La opción más económica para tu colchón." data-price="Desde $320.000" data-wa="https://wa.me/573001234567?text=Cotización%20Base%20Clásica">
+        <div class="pc-vis"><img src="images/camas/base-cama-gris.jpg" alt="Base de cama gris clásica" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+        <div class="pc-body"><div class="badge" style="color:#7b5fb4;background:rgba(155,127,212,.1)">Económica</div><div class="pc-name">Base Clásica Gris</div><div class="pc-desc">Base tapizada gris, sencilla y resistente. La opción más económica para tu colchón.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$320.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Base%20Clásica" class="pc-btn" style="background:#7b5fb4">Cotizar →</a></div></div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -573,67 +644,39 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <div class="gallery-grid">
       <!-- Main large item -->
       <div class="gal-item rev">
-        <div class="gal-bg" style="background:linear-gradient(140deg,#0a1e35,#1b6ca8);height:100%;min-height:454px">
-          <svg width="260" height="240" viewBox="0 0 300 260" fill="none">
-            <polygon points="150,30 230,72 150,114 70,72" fill="rgba(255,255,255,.12)"/>
-            <polygon points="230,72 230,162 150,204 150,114" fill="rgba(91,200,234,.25)"/>
-            <polygon points="70,72 150,114 150,204 70,162" fill="rgba(91,200,234,.18)"/>
-            <polygon points="70,84 70,104 150,136 150,154" fill="rgba(242,198,64,.4)"/>
-            <polygon points="150,136 230,84 230,104 150,154" fill="rgba(242,198,64,.28)"/>
-            <ellipse cx="120" cy="56" rx="36" ry="14" fill="white" opacity=".35" transform="rotate(-27 120 56)"/>
-            <ellipse cx="180" cy="32" rx="36" ry="14" fill="white" opacity=".25" transform="rotate(-27 180 32)"/>
-          </svg>
+        <div class="gal-bg" style="height:100%;min-height:454px">
+          <img src="images/colchones/showroom-real-bogota.jpg" alt="Entrega e instalación real en Bogotá" loading="lazy">
           <div class="gal-overlay"></div>
-          <div class="gal-label">Showroom Principal · Bogotá</div>
+          <div class="gal-label">Instalación Real · Bogotá</div>
         </div>
       </div>
       <!-- 4 smaller items -->
       <div class="gal-item rev">
-        <div class="gal-bg" style="background:linear-gradient(140deg,#eef7fd,#cde5f5);height:220px">
-          <svg width="140" height="120" viewBox="0 0 160 130" fill="none">
-            <polygon points="80,12 128,36 80,60 32,36" fill="#ddf1fb"/>
-            <polygon points="128,36 128,72 80,96 80,60" fill="#5bc8ea" opacity=".8"/>
-            <polygon points="32,36 80,60 80,96 32,72" fill="#3aaed4" opacity=".8"/>
-            <polygon points="32,44 32,54 80,68 80,78" fill="rgba(242,198,64,.6)"/>
-            <polygon points="80,68 128,44 128,54 80,78" fill="rgba(242,198,64,.4)"/>
-          </svg>
-          <div class="gal-overlay"></div>
-          <div class="gal-label">Colchón Sencillo</div>
-        </div>
-      </div>
-      <div class="gal-item rev">
-        <div class="gal-bg" style="background:linear-gradient(140deg,#fffbeb,#fde68a);height:220px">
-          <svg width="140" height="120" viewBox="0 0 160 130" fill="none">
-            <polygon points="80,10 130,36 80,62 30,36" fill="#fffbeb"/>
-            <polygon points="130,36 130,74 80,100 80,62" fill="#f2c640" opacity=".8"/>
-            <polygon points="30,36 80,62 80,100 30,74" fill="#d4a700" opacity=".8"/>
-          </svg>
+        <div class="gal-bg" style="height:220px">
+          <img src="images/colchones/colchon-queen-pillowtop.jpg" alt="Detalle de colchón Queen premium" loading="lazy">
           <div class="gal-overlay"></div>
           <div class="gal-label">Colchón Queen Premium</div>
         </div>
       </div>
       <div class="gal-item rev">
-        <div class="gal-bg" style="background:linear-gradient(140deg,#e8f5e9,#c8e6c9);height:220px">
-          <svg width="100" height="90" viewBox="0 0 120 100" fill="none">
-            <rect x="20" y="20" width="80" height="60" rx="8" fill="rgba(11,61,107,.15)"/>
-            <rect x="28" y="28" width="64" height="44" rx="6" fill="rgba(11,61,107,.1)"/>
-            <circle cx="60" cy="50" r="12" fill="rgba(242,198,64,.4)"/>
-            <path d="M54 50l4 4 8-8" stroke="#c89a00" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
+        <div class="gal-bg" style="height:220px">
+          <img src="images/camas/cama-tapizada-gris-premium.jpg" alt="Cama tapizada gris premium en el showroom" loading="lazy">
           <div class="gal-overlay"></div>
-          <div class="gal-label">Garantía 2 Años</div>
+          <div class="gal-label">Cama Premium</div>
         </div>
       </div>
       <div class="gal-item rev">
-        <div class="gal-bg" style="background:linear-gradient(140deg,#fce4ec,#f8bbd0);height:220px">
-          <svg width="100" height="90" viewBox="0 0 120 100" fill="none">
-            <rect x="10" y="20" width="40" height="60" rx="6" fill="rgba(11,61,107,.12)"/>
-            <rect x="70" y="30" width="40" height="50" rx="6" fill="rgba(11,61,107,.12)"/>
-            <rect x="18" y="28" width="24" height="44" rx="4" fill="rgba(91,200,234,.25)"/>
-            <rect x="78" y="38" width="24" height="34" rx="4" fill="rgba(242,198,64,.25)"/>
-          </svg>
+        <div class="gal-bg" style="height:220px">
+          <img src="images/camas/base-almacenamiento-elevable.jpg" alt="Base elevable con almacenamiento" loading="lazy">
           <div class="gal-overlay"></div>
-          <div class="gal-label">Medidas para Todos</div>
+          <div class="gal-label">Almacenamiento Inteligente</div>
+        </div>
+      </div>
+      <div class="gal-item rev">
+        <div class="gal-bg" style="height:220px">
+          <img src="images/camas/cama-tapizada-negra-cristales.jpg" alt="Cama tapizada negra con acabados de lujo" loading="lazy">
+          <div class="gal-overlay"></div>
+          <div class="gal-label">Acabados de Lujo</div>
         </div>
       </div>
     </div>
@@ -785,7 +828,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <p>Escríbenos por WhatsApp y un asesor te ayuda a elegir el colchón perfecto en menos de 5 minutos.</p>
     <div class="cta-btns">
       <a href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20conocer%20sus%20colchones" class="btn-wa-big">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 17.302 21.6 12 21.6z"/></svg>
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
         Escribir por WhatsApp
       </a>
       <a href="tel:+573001234567" class="btn-outline-lt">
@@ -811,11 +854,10 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <div class="foot-col">
       <h4>Productos</h4>
       <ul>
-        <li><a href="#">Colchón Sencillo</a></li>
-        <li><a href="#">Colchón Doble</a></li>
-        <li><a href="#">Colchón Queen</a></li>
-        <li><a href="#">Colchón King</a></li>
-        <li><a href="#">Medidas Especiales</a></li>
+        <li><a href="#products">Colchones</a></li>
+        <li><a href="#camas">Camas Tapizadas</a></li>
+        <li><a href="#bundles">Combos</a></li>
+        <li><a href="#products">Medidas Especiales</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -868,6 +910,24 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     WhatsApp
   </a>
   <a href="tel:+573001234567" class="mcta-tel">📞 Llamar</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-box">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">✕</button>
+    <div class="lightbox-img"><img id="lightboxImg" src="" alt=""></div>
+    <div class="lightbox-info">
+      <div class="badge" id="lightboxBadge" style="width:fit-content">Producto</div>
+      <div class="lightbox-name" id="lightboxName"></div>
+      <p class="lightbox-desc" id="lightboxDesc"></p>
+      <div class="lightbox-price" id="lightboxPrice"></div>
+      <a href="#" id="lightboxCta" class="lightbox-cta" target="_blank" rel="noopener">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
+        Cotizar por WhatsApp
+      </a>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -933,6 +993,44 @@ function handleFormSubmit(e){
   setTimeout(()=>{form.reset();el.style.display='none';},4000);
   setTimeout(()=>{window.open(`https://wa.me/573001234567?text=${msg}`,'_blank');},600);
 }
+
+// ===== PRODUCT LIGHTBOX =====
+(function(){
+  const lightbox=document.getElementById('lightbox');
+  const img=document.getElementById('lightboxImg');
+  const name=document.getElementById('lightboxName');
+  const desc=document.getElementById('lightboxDesc');
+  const price=document.getElementById('lightboxPrice');
+  const badge=document.getElementById('lightboxBadge');
+  const cta=document.getElementById('lightboxCta');
+  const closeBtn=document.getElementById('lightboxClose');
+
+  function openLightbox(card){
+    img.src=card.dataset.img;
+    img.alt=card.dataset.name;
+    name.textContent=card.dataset.name;
+    desc.textContent=card.dataset.desc;
+    price.textContent=card.dataset.price;
+    cta.href=card.dataset.wa;
+    const badgeEl=card.querySelector('.badge');
+    badge.textContent=badgeEl?badgeEl.textContent:'Producto';
+    lightbox.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow='';
+  }
+  document.querySelectorAll('[data-lightbox]').forEach(card=>{
+    card.addEventListener('click',(e)=>{
+      if(e.target.closest('.pc-btn'))return;
+      openLightbox(card);
+    });
+  });
+  closeBtn.addEventListener('click',closeLightbox);
+  lightbox.addEventListener('click',(e)=>{if(e.target===lightbox)closeLightbox();});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeLightbox();});
+})();
 
 // ===== LAZY LOAD =====
 if('IntersectionObserver' in window){
