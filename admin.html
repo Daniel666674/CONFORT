@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel Admin — Real Confort MD</title>
+<meta name="theme-color" content="#050d1a">
+<link rel="manifest" href="admin-manifest.json">
+<link rel="icon" href="admin-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#050d1a; --navy2:#0a1e35; --blue:#0b3d6b;
+  --sky:#5bc8ea; --gold:#f2c640; --gold-dk:#c89a00;
+  --cream:#f4f9fe; --cream2:#eef6fd; --cream3:#cde5f5;
+  --text:#0e1a28; --muted:#607080; --border:#dbe8f4;
+  --radius:14px;
+  --ok:#1a7a3c; --ok-bg:rgba(26,122,60,.1);
+  --warn:#b45309; --warn-bg:rgba(180,83,9,.1);
+  --bad:#c0392b; --bad-bg:rgba(192,57,43,.1);
+  --draft:#607080; --draft-bg:rgba(96,112,128,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--cream2);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:'Cormorant Garamond',serif}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:14px}
+::selection{background:rgba(91,200,234,.3)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+
+/* ===== LOGIN GATE ===== */
+#loginGate{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:500;padding:20px}
+.login-card{background:#fff;border-radius:20px;padding:40px 36px;max-width:380px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.login-logo svg{flex-shrink:0}
+.login-logo .n1{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--navy)}
+.login-logo .n1 span{color:var(--gold-dk)}
+.login-logo .n2{font-size:8px;font-weight:600;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.login-card h1{font-size:22px;font-weight:600;margin-bottom:6px}
+.login-card p.sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;font-size:14px;outline:none;transition:border-color .15s;width:100%;background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--sky)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:none;border-radius:9px;padding:11px 18px;font-size:14px;font-weight:600;transition:all .15s;white-space:nowrap}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--blue)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:#fde68a}
+.btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--sky)}
+.btn-danger{background:var(--bad-bg);color:var(--bad)}
+.btn-danger:hover{background:var(--bad);color:#fff}
+.btn-sm{padding:7px 12px;font-size:12.5px;border-radius:7px}
+.btn-block{width:100%}
+.login-error{background:var(--bad-bg);color:var(--bad);font-size:13px;padding:10px 12px;border-radius:8px;margin-bottom:14px;display:none}
+.login-hint{font-size:11.5px;color:var(--muted);margin-top:16px;line-height:1.6;border-top:1px solid var(--border);padding-top:14px}
+
+/* ===== APP SHELL ===== */
+#app{display:none;min-height:100vh}
+#app.visible{display:block}
+.topbar{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar .brand{display:flex;align-items:center;gap:10px}
+.topbar .brand .n1{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600}
+.topbar .brand .n1 span{color:var(--gold)}
+.topbar .brand .n2{font-size:8px;letter-spacing:.2em;color:var(--sky);text-transform:uppercase;opacity:.8}
+.topbar-right{display:flex;align-items:center;gap:14px;font-size:13px}
+.session-pill{background:rgba(255,255,255,.08);padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.75)}
+.session-pill .dot{width:6px;height:6px;border-radius:50%;background:#22c55e}
+
+.layout{display:flex;min-height:calc(100vh - 57px)}
+.sidenav{width:200px;background:var(--navy2);flex-shrink:0;padding:20px 12px;display:flex;flex-direction:column;gap:2px}
+.sidenav button{background:transparent;border:none;text-align:left;color:rgba(255,255,255,.55);padding:11px 14px;border-radius:9px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:10px;transition:all .15s}
+.sidenav button:hover{background:rgba(255,255,255,.05);color:#fff}
+.sidenav button.active{background:rgba(242,198,64,.12);color:var(--gold)}
+main{flex:1;padding:28px 32px;max-width:1400px}
+.view{display:none}
+.view.active{display:block}
+.view-head{margin-bottom:22px}
+.view-head h2{font-size:26px;font-weight:600;color:var(--navy)}
+.view-head p{font-size:13.5px;color:var(--muted);margin-top:3px}
+
+/* ===== STAT TILES ===== */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+.stat-tile{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;cursor:pointer;transition:all .18s;text-align:left}
+.stat-tile:hover{border-color:var(--sky);transform:translateY(-2px);box-shadow:0 10px 26px rgba(11,61,107,.08)}
+.stat-tile.on{border-color:var(--gold);background:rgba(242,198,64,.05)}
+.stat-tile .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-tile .val{font-size:28px;font-weight:700;color:var(--navy)}
+.stat-tile.warn .val{color:var(--warn)}
+.stat-tile.bad .val{color:var(--bad)}
+.stat-tile .sub{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* ===== TOOLBAR / FILTERS ===== */
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.toolbar input[type=text]{border:1.5px solid var(--border);border-radius:9px;padding:9px 12px;font-size:13.5px;min-width:220px;background:#fff}
+.toolbar select{border:1.5px solid var(--border);border-radius:9px;padding:9px 12px;font-size:13.5px;background:#fff}
+.toolbar .spacer{flex:1}
+
+/* ===== TABLE ===== */
+.table-wrap{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px}
+thead th{text-align:left;padding:12px 16px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border-bottom:1.5px solid var(--border);white-space:nowrap}
+tbody td{padding:12px 16px;border-bottom:1px solid var(--cream2);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--cream2)}
+.prod-cell{display:flex;align-items:center;gap:10px}
+.prod-cell img{width:40px;height:40px;object-fit:cover;border-radius:7px;flex-shrink:0;background:var(--cream2)}
+.prod-cell .name{font-weight:600;color:var(--text)}
+.prod-cell .sku{font-size:11.5px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.03em}
+.pill.in{background:var(--ok-bg);color:var(--ok)}
+.pill.low{background:var(--warn-bg);color:var(--warn)}
+.pill.out{background:var(--bad-bg);color:var(--bad)}
+.pill.draft{background:var(--draft-bg);color:var(--draft)}
+.row-actions{display:flex;gap:6px}
+.icon-btn{background:transparent;border:1.5px solid var(--border);border-radius:7px;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;transition:all .15s}
+.icon-btn:hover{border-color:var(--sky);background:var(--cream2)}
+.empty-state{padding:50px 20px;text-align:center;color:var(--muted);font-size:14px}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(5,13,26,.6);backdrop-filter:blur(3px);z-index:400;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:18px;max-width:720px;width:100%;padding:0;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;border-bottom:1.5px solid var(--border)}
+.modal-head h3{font-size:21px;font-weight:600}
+.modal-body{padding:22px 26px;max-height:70vh;overflow-y:auto}
+.modal-foot{padding:16px 26px;border-top:1.5px solid var(--border);display:flex;justify-content:space-between;gap:10px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid .full{grid-column:1/-1}
+.toggle-row{display:flex;align-items:center;gap:10px;font-size:13.5px}
+.switch{position:relative;width:40px;height:22px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.switch .slider{position:absolute;inset:0;background:var(--border);border-radius:20px;transition:.2s;cursor:pointer}
+.switch .slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.switch input:checked + .slider{background:var(--ok)}
+.switch input:checked + .slider::before{transform:translateX(18px)}
+.section-label{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
+
+/* ===== PHOTO UPLOAD ===== */
+.dropzone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;transition:all .15s}
+.dropzone.drag{border-color:var(--sky);background:var(--cream2)}
+.photo-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.photo-thumb{position:relative;width:78px;height:78px;border-radius:9px;overflow:hidden;border:1.5px solid var(--border)}
+.photo-thumb img{width:100%;height:100%;object-fit:cover}
+.photo-thumb.primary{border-color:var(--gold)}
+.photo-thumb .badge{position:absolute;top:3px;left:3px;background:var(--gold);color:var(--navy);font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px}
+.photo-thumb .rm{position:absolute;top:3px;right:3px;background:rgba(5,13,26,.7);color:#fff;width:18px;height:18px;border-radius:50%;border:none;font-size:11px;line-height:1;display:flex;align-items:center;justify-content:center}
+.photo-thumb .mk{position:absolute;bottom:3px;left:3px;right:3px;background:rgba(5,13,26,.7);color:#fff;font-size:9px;border:none;border-radius:4px;padding:2px 0}
+
+/* ===== VARIANT ROWS ===== */
+.variant-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.variant-row select,.variant-row input{border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;background:#fff}
+.variant-row select{flex:1.4}
+.variant-row input[type=number]{width:90px}
+.variant-row button{flex-shrink:0}
+
+/* ===== VALIDATION ===== */
+.issue-list{list-style:none;margin-top:8px}
+.issue-list li{font-size:12.5px;padding:7px 10px;border-radius:7px;margin-bottom:5px;display:flex;gap:7px}
+.issue-list li.error{background:var(--bad-bg);color:var(--bad)}
+.issue-list li.warning{background:var(--warn-bg);color:var(--warn)}
+
+/* ===== PUBLISH LOG ===== */
+.pub-log{background:var(--navy);color:#d5e6f2;border-radius:10px;padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.9;max-height:280px;overflow-y:auto}
+.pub-log .ok{color:#6fe3a3}
+.pub-log .demo{color:var(--gold)}
+.pub-log .fail{color:#ff8a80}
+.pub-log .muted{color:rgba(213,230,242,.45)}
+
+/* ===== SALES ===== */
+.sale-form{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:22px}
+.sale-form-grid{display:grid;grid-template-columns:2fr 1.4fr 1fr auto;gap:10px;align-items:end}
+.sale-form .field{margin-bottom:0}
+
+/* ===== ANALYTICS ===== */
+.analytics-connect{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.connect-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px}
+.connect-card h4{font-size:15px;font-weight:600;margin-bottom:6px}
+.connect-card p{font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.demo-badge-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--draft-bg);padding:3px 9px;border-radius:20px;margin-bottom:10px}
+.demo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.demo-stat{background:repeating-linear-gradient(135deg,#fff,#fff 8px,var(--cream2) 8px,var(--cream2) 16px);border:1.5px dashed var(--border);border-radius:10px;padding:14px}
+.demo-stat .n{font-size:22px;font-weight:700;color:var(--navy)}
+.demo-stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+
+/* ===== TOAST ===== */
+#toast{position:fixed;bottom:24px;right:24px;z-index:600;display:flex;flex-direction:column;gap:8px}
+.toast-item{background:var(--navy);color:#fff;padding:12px 18px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px;animation:toastIn .25s ease}
+.toast-item.err{background:var(--bad)}
+@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:900px){
+  .layout{flex-direction:column}
+  .sidenav{width:100%;flex-direction:row;overflow-x:auto}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .analytics-connect{grid-template-columns:1fr}
+  .sale-form-grid{grid-template-columns:1fr}
+  main{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== LOGIN GATE ===================== -->
+<div id="loginGate">
+  <div class="login-card">
+    <div class="login-logo">
+      <svg width="30" height="26" viewBox="0 0 40 34" fill="none"><path d="M20 4L26 16L34 10L30 28H10L6 10L14 16L20 4Z" fill="#f2c640"/><rect x="10" y="28" width="20" height="4" rx="1" fill="#c89a00"/></svg>
+      <div><div class="n1">Real <span>Confort</span> MD</div><div class="n2">Panel Admin</div></div>
+    </div>
+    <h1>Iniciar sesión</h1>
+    <p class="sub">Acceso restringido a administradores de inventario.</p>
+    <div class="login-error" id="loginError"></div>
+    <form id="loginForm">
+      <div class="field">
+        <label>Correo</label>
+        <input type="email" id="loginEmail" placeholder="admin@realconfort.co" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label>Código de acceso</label>
+        <input type="password" id="loginToken" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+    </form>
+    <div class="login-hint">
+      Demo: usa <strong>admin@realconfort.co</strong> con código <strong>rc2026</strong>.<br>
+      Esta pantalla es un candado del lado del cliente para la demo — en producción la verificación de sesión debe hacerse en un backend real (token firmado u OAuth), nunca solo en el navegador.
+    </div>
+  </div>
+</div>
+
+<!-- ===================== APP SHELL ===================== -->
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <svg width="26" height="22" viewBox="0 0 40 34" fill="none"><path d="M20 4L26 16L34 10L30 28H10L6 10L14 16L20 4Z" fill="#f2c640"/><rect x="10" y="28" width="20" height="4" rx="1" fill="#c89a00"/></svg>
+      <div><div class="n1">Real <span>Confort</span> MD</div><div class="n2">Panel Admin</div></div>
+    </div>
+    <div class="topbar-right">
+      <span class="session-pill"><span class="dot"></span><span id="sessionEmail"></span></span>
+      <button class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.25)" onclick="logout()">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidenav">
+      <button data-view="resumen" onclick="switchView('resumen')">📊 Resumen</button>
+      <button data-view="inventario" onclick="switchView('inventario')">📦 Inventario</button>
+      <button data-view="ventas" onclick="switchView('ventas')">🧾 Ventas</button>
+      <button data-view="analitica" onclick="switchView('analitica')">📈 Analítica</button>
+    </nav>
+
+    <main>
+      <!-- ===================== RESUMEN ===================== -->
+      <section class="view" id="view-resumen">
+        <div class="view-head">
+          <h2>Resumen</h2>
+          <p>Estado general del catálogo e inventario.</p>
+        </div>
+        <div class="stat-row" id="resumenStats"></div>
+        <div class="section-label">Actividad reciente</div>
+        <div class="table-wrap" style="margin-bottom:20px">
+          <table>
+            <tbody id="recentActivity"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== INVENTARIO ===================== -->
+      <section class="view" id="view-inventario">
+        <div class="view-head">
+          <h2>Inventario</h2>
+          <p>Catálogo completo de productos, tallas/colores y existencias.</p>
+        </div>
+
+        <div class="stat-row" id="invStats"></div>
+
+        <div class="toolbar">
+          <input type="text" id="searchInput" placeholder="Buscar por nombre, SKU o marca…" oninput="onFilterChange()">
+          <select id="categoryFilter" onchange="onFilterChange()">
+            <option value="all">Todas las categorías</option>
+          </select>
+          <select id="statusFilter" onchange="onFilterChange()">
+            <option value="all">Todos los estados</option>
+            <option value="in">En stock</option>
+            <option value="low">Stock bajo</option>
+            <option value="out">Agotado</option>
+            <option value="draft">Borrador</option>
+          </select>
+          <div class="spacer"></div>
+          <button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇ Exportar CSV</button>
+          <label class="btn btn-ghost btn-sm" style="margin:0">⬆ Importar CSV<input type="file" accept=".csv" style="display:none" onchange="importCSV(event)"></label>
+          <button class="btn btn-ghost btn-sm" onclick="openEditor(null)">+ Nuevo producto</button>
+          <button class="btn btn-gold btn-sm" onclick="runPublish()">🚀 Publicar cambios</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th><th>Categoría</th><th>Precio</th><th>Existencias</th><th>Estado</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== VENTAS ===================== -->
+      <section class="view" id="view-ventas">
+        <div class="view-head">
+          <h2>Ventas</h2>
+          <p>Registra una venta para descontar existencias automáticamente.</p>
+        </div>
+
+        <div class="stat-row" id="salesStats"></div>
+
+        <div class="sale-form">
+          <div class="section-label" style="margin-top:0">Registrar venta</div>
+          <div class="sale-form-grid">
+            <div class="field">
+              <label>Producto</label>
+              <select id="saleProduct" onchange="onSaleProductChange()"></select>
+            </div>
+            <div class="field">
+              <label id="saleVariantLabel">Variante</label>
+              <select id="saleVariant"></select>
+            </div>
+            <div class="field">
+              <label>Cantidad</label>
+              <input type="number" id="saleQty" min="1" value="1">
+            </div>
+            <button class="btn btn-primary" onclick="registerSale()">Registrar</button>
+          </div>
+        </div>
+
+        <div class="section-label">Historial de ventas</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Fecha</th><th>Producto</th><th>Variante</th><th>Cant.</th><th>Total</th></tr></thead>
+            <tbody id="salesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== ANALÍTICA ===================== -->
+      <section class="view" id="view-analitica">
+        <div class="view-head">
+          <h2>Analítica</h2>
+          <p>Tráfico y comportamiento del sitio público.</p>
+        </div>
+
+        <div class="analytics-connect">
+          <div class="connect-card">
+            <h4>Google Analytics 4</h4>
+            <p>Conecta GA4 para ver sesiones, fuentes de tráfico y conversiones reales del sitio.</p>
+            <button class="btn btn-ghost btn-sm" onclick="showConnectInfo('GA4')">Conectar GA4</button>
+          </div>
+          <div class="connect-card">
+            <h4>Google Search Console</h4>
+            <p>Conecta Search Console para ver impresiones, clics y posición promedio en Google.</p>
+            <button class="btn btn-ghost btn-sm" onclick="showConnectInfo('GSC')">Conectar Search Console</button>
+          </div>
+        </div>
+
+        <span class="demo-badge-tag">Datos de ejemplo — no reales</span>
+        <div class="demo-stats">
+          <div class="demo-stat"><div class="n">1,204</div><div class="l">Sesiones (30 días)</div></div>
+          <div class="demo-stat"><div class="n">3.8%</div><div class="l">Tasa de clic WhatsApp</div></div>
+          <div class="demo-stat"><div class="n">"colchones bogotá"</div><div class="l">Consulta top (GSC)</div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ===================== PRODUCT EDITOR MODAL ===================== -->
+<div class="modal-overlay" id="editorModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="editorTitle">Nuevo producto</h3>
+      <button class="icon-btn" onclick="closeEditor()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="issue-list" id="editorIssues"></div>
+      <div class="form-grid">
+        <div class="field"><label>Nombre</label><input type="text" id="f_name" oninput="onNameInput()"></div>
+        <div class="field"><label>Slug (URL)</label><input type="text" id="f_slug"></div>
+        <div class="field"><label>Marca</label><input type="text" id="f_brand" value="Real Confort MD"></div>
+        <div class="field"><label>Categoría</label><select id="f_category" onchange="onCategoryChange()"></select></div>
+        <div class="field"><label>Precio (COP)</label><input type="number" id="f_price" min="0" step="1000"></div>
+        <div class="field"><label>SKU</label><input type="text" id="f_sku"></div>
+        <div class="field full"><label>Descripción / spec</label><textarea id="f_spec" rows="2"></textarea></div>
+        <div class="field full toggle-row">
+          <label class="switch"><input type="checkbox" id="f_published"><span class="slider"></span></label>
+          <span>Publicado (visible en el sitio)</span>
+        </div>
+      </div>
+
+      <div class="section-label">Fotos</div>
+      <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+        Arrastra fotos aquí o haz clic para seleccionar (se comprimen automáticamente)
+        <input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="handleFiles(this.files)">
+      </div>
+      <div class="photo-grid" id="photoGrid"></div>
+
+      <div class="section-label" id="variantSectionLabel">Existencias</div>
+      <div id="variantContainer"></div>
+      <button class="btn btn-ghost btn-sm" id="addVariantBtn" onclick="addVariantRow()" style="display:none">+ Agregar variante</button>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-danger" id="deleteProductBtn" onclick="deleteCurrentProduct()">Eliminar producto</button>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-ghost" onclick="closeEditor()">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveProduct()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PUBLISH MODAL ===================== -->
+<div class="modal-overlay" id="publishModal">
+  <div class="modal-box" style="max-width:600px">
+    <div class="modal-head">
+      <h3>Publicando cambios</h3>
+      <button class="icon-btn" onclick="closePublishModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="issue-list" id="publishIssues"></div>
+      <div class="pub-log" id="publishLog"></div>
+      <div id="publishPreviewLinks" style="margin-top:14px;display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+    <div class="modal-foot">
+      <span style="font-size:12px;color:var(--muted);align-self:center">Los pasos marcados DEMO son simulados en este archivo estático.</span>
+      <button class="btn btn-primary" onclick="closePublishModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="products.js"></script>
+<script>
+/* =========================================================================
+   STATE & PERSISTENCE
+   ========================================================================= */
+const ADMIN_ALLOWLIST = [
+  { email: "admin@realconfort.co", token: "rc2026" },
+  { email: "daniel@blackscale.co", token: "rc2026" }
+];
+// LOW_STOCK_THRESHOLD is declared once in products.js and shared here —
+// top-level const/let bindings are shared across classic <script> tags
+// in the same document, so redeclaring it here would throw and silently
+// abort this entire script.
+const WA_NUMBER = "573001234567";
+
+let products = [];
+let sales = [];
+let filters = { search: "", category: "all", status: "all" };
+let currentView = "resumen";
+let editingId = null;   // product currently open in the editor, or null = new
+let editingImages = []; // working copy of gallery while editor is open
+let editingVariants = []; // working copy of sizes/colors/units rows
+
+function loadState() {
+  const storedProducts = localStorage.getItem("rc_admin_products");
+  products = storedProducts ? JSON.parse(storedProducts) : JSON.parse(JSON.stringify(window.PRODUCTS));
+  const storedSales = localStorage.getItem("rc_admin_sales");
+  sales = storedSales ? JSON.parse(storedSales) : [];
+  products.forEach(p => { if (!p._snapshot) p._snapshot = computeSnapshot(p); if (!p.rev) p.rev = 1; });
+}
+function saveState() {
+  localStorage.setItem("rc_admin_products", JSON.stringify(products));
+  localStorage.setItem("rc_admin_sales", JSON.stringify(sales));
+}
+
+/* =========================================================================
+   HELPERS
+   ========================================================================= */
+function escapeHtml(str) {
+  return String(str ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+function uid(prefix) { return prefix + "_" + Math.random().toString(36).slice(2, 9); }
+function formatCOP(n) { return "$" + Math.round(n || 0).toLocaleString("es-CO"); }
+function slugify(s) {
+  return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+function categoryConfig(cat) { return window.CATEGORY_CONFIG[cat] || { label: cat, variantType: "units", variantLabel: null, options: [] }; }
+
+// Returns {type, items:[{label,units}]} regardless of category shape.
+function getVariants(product) {
+  const cfg = categoryConfig(product.category);
+  if (cfg.variantType === "sizes") return { type: "sizes", items: product.sizes || [] };
+  if (cfg.variantType === "colors") return { type: "colors", items: product.colors || [] };
+  return { type: "units", items: [{ label: null, units: product.units || 0 }] };
+}
+function totalUnits(product) {
+  const v = getVariants(product);
+  return v.items.reduce((sum, it) => sum + (Number(it.units) || 0), 0);
+}
+function stockStatus(product) {
+  if (!product.published) return "draft";
+  const total = totalUnits(product);
+  if (total <= 0) return "out";
+  if (total <= LOW_STOCK_THRESHOLD) return "low";
+  return "in";
+}
+function statusLabel(status) {
+  return { in: "En stock", low: "Stock bajo", out: "Agotado", draft: "Borrador" }[status] || status;
+}
+// Fields that affect the rendered product page — used to skip no-op regeneration.
+function computeSnapshot(p) {
+  return JSON.stringify({
+    name: p.name, brand: p.brand, spec: p.spec, price: p.price, sku: p.sku,
+    images: p.images, sizes: p.sizes, colors: p.colors, units: p.units,
+    slug: p.slug, published: p.published, category: p.category
+  });
+}
+function toast(msg, isErr) {
+  const el = document.createElement("div");
+  el.className = "toast-item" + (isErr ? " err" : "");
+  el.textContent = msg;
+  document.getElementById("toast").appendChild(el);
+  setTimeout(() => el.remove(), 3200);
+}
+
+/* =========================================================================
+   LOGIN
+   ========================================================================= */
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const token = document.getElementById("loginToken").value;
+  // DEMO ONLY: this check happens entirely in the browser and is trivially
+  // bypassable via devtools. Real access control must be verified server-side
+  // (signed session token or OAuth), with this allow-list living on a backend.
+  const match = ADMIN_ALLOWLIST.find(a => a.email === email && a.token === token);
+  const errEl = document.getElementById("loginError");
+  if (!match) {
+    errEl.textContent = "Correo o código incorrecto.";
+    errEl.style.display = "block";
+    return;
+  }
+  errEl.style.display = "none";
+  localStorage.setItem("rc_admin_session", JSON.stringify({ email, ts: Date.now() }));
+  enterApp(email);
+});
+function enterApp(email) {
+  document.getElementById("loginGate").style.display = "none";
+  document.getElementById("app").classList.add("visible");
+  document.getElementById("sessionEmail").textContent = email;
+  loadState();
+  initCategoryOptions();
+  switchView("resumen");
+  registerServiceWorker();
+}
+function logout() {
+  localStorage.removeItem("rc_admin_session");
+  location.reload();
+}
+(function checkExistingSession() {
+  const raw = localStorage.getItem("rc_admin_session");
+  if (raw) { try { enterApp(JSON.parse(raw).email); } catch (e) {} }
+})();
+function registerServiceWorker() {
+  // PWA install is intentionally scoped to this page only — the public
+  // storefront never links a manifest or registers a worker, so it stays
+  // non-installable while this panel can be added to the home screen.
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("admin-sw.js", { scope: "./admin.html" }).catch(() => {});
+  }
+}
+
+/* =========================================================================
+   NAVIGATION
+   ========================================================================= */
+function switchView(view) {
+  currentView = view;
+  document.querySelectorAll(".sidenav button").forEach(b => b.classList.toggle("active", b.dataset.view === view));
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + view));
+  if (view === "resumen") renderResumen();
+  if (view === "inventario") renderInventario();
+  if (view === "ventas") renderVentas();
+}
+function initCategoryOptions() {
+  const sel = document.getElementById("categoryFilter");
+  Object.keys(window.CATEGORY_CONFIG).forEach(key => {
+    const opt = document.createElement("option");
+    opt.value = key; opt.textContent = window.CATEGORY_CONFIG[key].label;
+    sel.appendChild(opt);
+  });
+}
+
+/* =========================================================================
+   RESUMEN VIEW
+   ========================================================================= */
+function renderResumen() {
+  const totalValue = products.filter(p => p.published).reduce((s, p) => s + p.price * totalUnits(p), 0);
+  const totalU = products.reduce((s, p) => s + totalUnits(p), 0);
+  const lowCount = products.filter(p => stockStatus(p) === "low").length;
+  const outCount = products.filter(p => stockStatus(p) === "out").length;
+  const unpublishedChanges = products.filter(p => p._snapshot !== computeSnapshot(p)).length;
+
+  document.getElementById("resumenStats").innerHTML = `
+    ${statTile("Valor de inventario", formatCOP(totalValue), "", "")}
+    ${statTile("Unidades totales", totalU.toLocaleString("es-CO"), "", "")}
+    ${statTile("Stock bajo", lowCount, lowCount ? "warn" : "", "")}
+    ${statTile("Cambios sin publicar", unpublishedChanges, unpublishedChanges ? "warn" : "", "")}
+  `;
+
+  const recent = sales.slice(-6).reverse();
+  const body = document.getElementById("recentActivity");
+  if (!recent.length) {
+    body.innerHTML = `<tr><td class="empty-state">Sin actividad reciente. Registra una venta o publica cambios para verla aquí.</td></tr>`;
+  } else {
+    body.innerHTML = recent.map(s => `
+      <tr><td>${new Date(s.ts).toLocaleString("es-CO")}</td>
+      <td>Venta: ${escapeHtml(s.productName)}${s.variantLabel ? " — " + escapeHtml(s.variantLabel) : ""} ×${s.qty}</td>
+      <td style="text-align:right;font-weight:600">${formatCOP(s.total)}</td></tr>
+    `).join("");
+  }
+}
+function statTile(label, value, tone, sub) {
+  return `<div class="stat-tile ${tone}"><div class="lbl">${label}</div><div class="val">${value}</div>${sub ? `<div class="sub">${sub}</div>` : ""}</div>`;
+}
+
+/* =========================================================================
+   INVENTARIO VIEW
+   ========================================================================= */
+function renderInventario() {
+  const totalValue = products.reduce((s, p) => s + p.price * totalUnits(p), 0);
+  const totalU = products.reduce((s, p) => s + totalUnits(p), 0);
+  const lowCount = products.filter(p => stockStatus(p) === "low").length;
+  const outCount = products.filter(p => stockStatus(p) === "out").length;
+
+  document.getElementById("invStats").innerHTML = `
+    ${clickableStat("Valor de inventario", formatCOP(totalValue), "all", "")}
+    ${clickableStat("Unidades totales", totalU.toLocaleString("es-CO"), "all", "")}
+    ${clickableStat("Stock bajo", lowCount, "low", "warn")}
+    ${clickableStat("Agotado", outCount, "out", "bad")}
+  `;
+  document.querySelectorAll("#invStats .stat-tile").forEach(el => {
+    el.addEventListener("click", () => {
+      filters.status = el.dataset.status;
+      document.getElementById("statusFilter").value = filters.status;
+      renderInventario();
+    });
+    if (el.dataset.status === filters.status) el.classList.add("on");
+  });
+
+  renderProductTable();
+}
+function clickableStat(label, value, statusVal, tone) {
+  return `<div class="stat-tile ${tone}" data-status="${statusVal}"><div class="lbl">${label}</div><div class="val">${value}</div></div>`;
+}
+function onFilterChange() {
+  filters.search = document.getElementById("searchInput").value.trim().toLowerCase();
+  filters.category = document.getElementById("categoryFilter").value;
+  filters.status = document.getElementById("statusFilter").value;
+  renderProductTable();
+}
+function filteredProducts() {
+  return products.filter(p => {
+    if (filters.category !== "all" && p.category !== filters.category) return false;
+    if (filters.status !== "all" && stockStatus(p) !== filters.status) return false;
+    if (filters.search) {
+      const hay = (p.name + " " + p.sku + " " + p.brand).toLowerCase();
+      if (!hay.includes(filters.search)) return false;
+    }
+    return true;
+  });
+}
+function renderProductTable() {
+  const list = filteredProducts();
+  const body = document.getElementById("productTableBody");
+  if (!list.length) {
+    body.innerHTML = `<tr><td colspan="6" class="empty-state">No hay productos que coincidan con el filtro.</td></tr>`;
+    return;
+  }
+  body.innerHTML = list.map(p => {
+    const status = stockStatus(p);
+    const v = getVariants(p);
+    const stockText = v.type === "units"
+      ? totalUnits(p) + " uds"
+      : v.items.map(it => `${it.label.split(" ")[0]}:${it.units}`).join(" · ");
+    return `
+      <tr>
+        <td>
+          <div class="prod-cell">
+            <img src="${escapeHtml(p.images?.[0] || "")}" alt="">
+            <div><div class="name">${escapeHtml(p.name)}</div><div class="sku">${escapeHtml(p.sku)}</div></div>
+          </div>
+        </td>
+        <td>${escapeHtml(categoryConfig(p.category).label)}</td>
+        <td>${p.price ? formatCOP(p.price) : "Consultar"}</td>
+        <td>${escapeHtml(stockText)}</td>
+        <td><span class="pill ${status}">${statusLabel(status)}</span></td>
+        <td>
+          <div class="row-actions">
+            <button class="icon-btn" title="Editar" onclick="openEditor('${p.id}')">✎</button>
+            <button class="icon-btn" title="Ver página generada" onclick="previewProductPage('${p.id}')">👁</button>
+          </div>
+        </td>
+      </tr>`;
+  }).join("");
+}
+
+/* =========================================================================
+   PRODUCT EDITOR
+   ========================================================================= */
+function openEditor(id) {
+  editingId = id;
+  const p = id ? products.find(x => x.id === id) : null;
+  document.getElementById("editorTitle").textContent = p ? "Editar producto" : "Nuevo producto";
+  document.getElementById("editorIssues").innerHTML = "";
+  document.getElementById("deleteProductBtn").style.display = p ? "inline-flex" : "none";
+
+  document.getElementById("f_name").value = p?.name || "";
+  document.getElementById("f_slug").value = p?.slug || "";
+  document.getElementById("f_brand").value = p?.brand || "Real Confort MD";
+  document.getElementById("f_price").value = p?.price ?? "";
+  document.getElementById("f_sku").value = p?.sku || "";
+  document.getElementById("f_spec").value = p?.spec || "";
+  document.getElementById("f_published").checked = p ? !!p.published : true;
+
+  const catSel = document.getElementById("f_category");
+  catSel.innerHTML = Object.keys(window.CATEGORY_CONFIG).map(k =>
+    `<option value="${k}">${window.CATEGORY_CONFIG[k].label}</option>`).join("");
+  catSel.value = p?.category || Object.keys(window.CATEGORY_CONFIG)[0];
+
+  editingImages = p ? [...(p.images || [])] : [];
+  renderPhotoGrid();
+
+  const v = p ? getVariants(p) : null;
+  editingVariants = v && v.type !== "units" ? v.items.map(it => ({ ...it })) : [];
+  renderVariantSection();
+
+  document.getElementById("editorModal").classList.add("open");
+}
+function closeEditor() {
+  document.getElementById("editorModal").classList.remove("open");
+  editingId = null;
+}
+function onNameInput() {
+  const slugField = document.getElementById("f_slug");
+  if (!editingId || !slugField.value) slugField.value = slugify(document.getElementById("f_name").value);
+}
+function onCategoryChange() {
+  editingVariants = [];
+  renderVariantSection();
+}
+function renderVariantSection() {
+  const cat = document.getElementById("f_category").value;
+  const cfg = categoryConfig(cat);
+  const label = document.getElementById("variantSectionLabel");
+  const addBtn = document.getElementById("addVariantBtn");
+  const container = document.getElementById("variantContainer");
+
+  if (cfg.variantType === "units") {
+    label.textContent = "Existencias";
+    addBtn.style.display = "none";
+    const current = editingId ? (products.find(x => x.id === editingId)?.units ?? 0) : 0;
+    container.innerHTML = `<div class="field" style="max-width:160px"><label>Unidades disponibles</label><input type="number" id="unitsField" min="0" value="${current}"></div>`;
+    return;
+  }
+  label.textContent = cfg.variantLabel + "s y existencias";
+  addBtn.style.display = "inline-flex";
+  container.innerHTML = editingVariants.map((row, i) => variantRowHTML(cfg, row, i)).join("") || `<p style="font-size:12.5px;color:var(--muted)">Agrega al menos una ${cfg.variantLabel.toLowerCase()}.</p>`;
+}
+function variantRowHTML(cfg, row, i) {
+  const opts = cfg.options.map(o => `<option value="${escapeHtml(o)}" ${o === row.label ? "selected" : ""}>${escapeHtml(o)}</option>`).join("");
+  return `
+    <div class="variant-row">
+      <select onchange="editingVariants[${i}].label=this.value">${opts}</select>
+      <input type="number" min="0" value="${row.units}" onchange="editingVariants[${i}].units=Number(this.value)">
+      <button class="icon-btn" onclick="removeVariantRow(${i})">✕</button>
+    </div>`;
+}
+function addVariantRow() {
+  const cfg = categoryConfig(document.getElementById("f_category").value);
+  const used = editingVariants.map(v => v.label);
+  const next = cfg.options.find(o => !used.includes(o)) || cfg.options[0];
+  editingVariants.push({ label: next, units: 0 });
+  renderVariantSection();
+}
+function removeVariantRow(i) {
+  editingVariants.splice(i, 1);
+  renderVariantSection();
+}
+
+/* ---- photo upload + client-side compression ---- */
+const dz = document.getElementById("dropzone");
+dz.addEventListener("dragover", e => { e.preventDefault(); dz.classList.add("drag"); });
+dz.addEventListener("dragleave", () => dz.classList.remove("drag"));
+dz.addEventListener("drop", e => { e.preventDefault(); dz.classList.remove("drag"); handleFiles(e.dataTransfer.files); });
+
+function handleFiles(fileList) {
+  Array.from(fileList).forEach(file => {
+    if (!file.type.startsWith("image/")) return;
+    compressImage(file).then(dataUrl => {
+      editingImages.push(dataUrl); // NOTE: pushed, never overwritten — every photo must survive to publish, not just images[0]
+      renderPhotoGrid();
+    });
+  });
+}
+function compressImage(file, maxDim, quality) {
+  maxDim = maxDim || 1200; quality = quality || 0.82;
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          const scale = maxDim / Math.max(width, height);
+          width = Math.round(width * scale); height = Math.round(height * scale);
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width; canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function renderPhotoGrid() {
+  const grid = document.getElementById("photoGrid");
+  // GUARD: render (and later publish) the FULL gallery array, not just index 0 —
+  // a prior version of this tool only ever sent images[0] to the live page.
+  grid.innerHTML = editingImages.map((src, i) => `
+    <div class="photo-thumb ${i === 0 ? "primary" : ""}">
+      <img src="${src}" alt="">
+      ${i === 0 ? '<span class="badge">Principal</span>' : `<button class="mk" onclick="makePrimary(${i})">Hacer principal</button>`}
+      <button class="rm" onclick="removePhoto(${i})">✕</button>
+    </div>`).join("");
+}
+function makePrimary(i) { const [img] = editingImages.splice(i, 1); editingImages.unshift(img); renderPhotoGrid(); }
+function removePhoto(i) { editingImages.splice(i, 1); renderPhotoGrid(); }
+
+/* ---- save / delete ---- */
+function saveProduct() {
+  const cat = document.getElementById("f_category").value;
+  const cfg = categoryConfig(cat);
+  const draft = {
+    id: editingId || uid("p"),
+    slug: document.getElementById("f_slug").value.trim() || slugify(document.getElementById("f_name").value),
+    name: document.getElementById("f_name").value.trim(),
+    brand: document.getElementById("f_brand").value.trim(),
+    category: cat,
+    spec: document.getElementById("f_spec").value.trim(),
+    price: Number(document.getElementById("f_price").value) || 0,
+    sku: document.getElementById("f_sku").value.trim(),
+    published: document.getElementById("f_published").checked,
+    images: [...editingImages],
+    rev: (editingId ? products.find(x => x.id === editingId)?.rev || 0 : 0) + 1
+  };
+  if (cfg.variantType === "sizes") draft.sizes = editingVariants;
+  else if (cfg.variantType === "colors") draft.colors = editingVariants;
+  else draft.units = Number(document.getElementById("unitsField")?.value) || 0;
+
+  const issues = validateCatalog(mergeDraft(draft)).filter(i => i.productId === draft.id);
+  const errors = issues.filter(i => i.level === "error");
+  if (errors.length) {
+    document.getElementById("editorIssues").innerHTML = issues.map(i => `<li class="${i.level}">${escapeHtml(i.message)}</li>`).join("");
+    return;
+  }
+
+  const existing = products.findIndex(x => x.id === draft.id);
+  if (existing >= 0) products[existing] = { ...products[existing], ...draft };
+  else { draft._snapshot = ""; products.push(draft); }
+
+  saveState();
+  closeEditor();
+  toast("Producto guardado.");
+  if (currentView === "inventario") renderInventario(); else switchView(currentView);
+}
+function mergeDraft(draft) {
+  return products.filter(p => p.id !== draft.id).concat([draft]);
+}
+function deleteCurrentProduct() {
+  if (!editingId) return;
+  if (!confirm("¿Eliminar este producto del catálogo?")) return;
+  products = products.filter(p => p.id !== editingId);
+  saveState();
+  closeEditor();
+  toast("Producto eliminado.");
+  renderInventario();
+}
+
+/* =========================================================================
+   VALIDATION — run before every publish, and on every save.
+   ========================================================================= */
+function validateCatalog(list) {
+  const issues = [];
+  const skuSeen = {};
+  list.forEach(p => {
+    if (!p.name) issues.push({ level: "error", productId: p.id, message: `Falta el nombre (${p.sku || p.id}).` });
+    if (!p.category || !window.CATEGORY_CONFIG[p.category]) issues.push({ level: "error", productId: p.id, message: `Categoría inválida en "${p.name || p.id}".` });
+    if (!p.sku) issues.push({ level: "error", productId: p.id, message: `Falta el SKU en "${p.name || p.id}".` });
+    else { skuSeen[p.sku] = (skuSeen[p.sku] || 0) + 1; }
+    if (p.published && !p.price && p.category !== "combos") issues.push({ level: "warning", productId: p.id, message: `"${p.name}" está publicado sin precio.` });
+
+    const cfg = categoryConfig(p.category);
+    if (cfg.variantType === "sizes" && (!p.sizes || p.sizes.length === 0)) issues.push({ level: "error", productId: p.id, message: `"${p.name}" es de una categoría por talla pero no tiene tallas definidas.` });
+    if (cfg.variantType === "colors" && (!p.colors || p.colors.length === 0)) issues.push({ level: "error", productId: p.id, message: `"${p.name}" es de una categoría por color pero no tiene colores definidos.` });
+
+    const v = getVariants(p);
+    v.items.forEach(it => {
+      if (Number(it.units) < 0) issues.push({ level: "error", productId: p.id, message: `"${p.name}"${it.label ? " (" + it.label + ")" : ""} tiene existencias negativas.` });
+    });
+  });
+  Object.keys(skuSeen).forEach(sku => {
+    if (skuSeen[sku] > 1) {
+      // Tag the issue against every product sharing the SKU (not a global
+      // null-productId issue) — otherwise per-product checks like the one
+      // in saveProduct(), which filter issues by draft.id, silently miss it.
+      list.filter(p => p.sku === sku).forEach(p => {
+        issues.push({ level: "error", productId: p.id, message: `SKU duplicado: "${sku}" también lo usa otro producto.` });
+      });
+    }
+  });
+  return issues;
+}
+
+/* =========================================================================
+   PUBLISH FLOW (simulated deploy — see comments)
+   ========================================================================= */
+function runPublish() {
+  const issues = validateCatalog(products);
+  const errors = issues.filter(i => i.level === "error");
+  document.getElementById("publishModal").classList.add("open");
+  const issuesEl = document.getElementById("publishIssues");
+  const logEl = document.getElementById("publishLog");
+  const linksEl = document.getElementById("publishPreviewLinks");
+  logEl.innerHTML = ""; linksEl.innerHTML = "";
+  issuesEl.innerHTML = issues.map(i => `<li class="${i.level}">${escapeHtml(i.message)}</li>`).join("");
+
+  if (errors.length) {
+    log(logEl, `✗ Validación falló — ${errors.length} error(es). Publicación detenida.`, "fail");
+    return;
+  }
+
+  const steps = [];
+  steps.push(() => log(logEl, "Validando catálogo… ✓", "ok"));
+  steps.push(() => log(logEl, `Escribiendo products.js (${products.length} productos)… ✓`, "ok"));
+  steps.push(() => {
+    const changed = products.filter(p => p._snapshot !== computeSnapshot(p));
+    if (!changed.length) { log(logEl, "Sin cambios que afecten páginas publicadas — no se regenera nada.", "muted"); return; }
+    log(logEl, `Regenerando ${changed.length} de ${products.length} página(s) (solo las que cambiaron)…`, "ok");
+    changed.forEach(p => {
+      p.rev = (p.rev || 1) + 1;
+      p._snapshot = computeSnapshot(p);
+      log(logEl, `  → ${p.slug}.html actualizado (v${p.rev})`, "ok");
+      const url = URL.createObjectURL(new Blob([renderProductPage(p)], { type: "text/html" }));
+      const a = document.createElement("a");
+      a.href = url; a.target = "_blank"; a.textContent = `Ver ${p.name} →`;
+      a.style.fontSize = "13px"; a.style.color = "var(--sky, #0b3d6b)";
+      linksEl.appendChild(a);
+    });
+  });
+  steps.push(() => log(logEl, "Actualizando sitemap.xml… ✓", "ok"));
+  steps.push(() => log(logEl, "DEMO: git commit + push + despliegue simulados (sin backend en esta fase).", "demo"));
+  steps.push(() => log(logEl, "Verificando despliegue en vivo… ✓ (simulado)", "ok"));
+  steps.push(() => { saveState(); toast("Cambios publicados."); renderInventario(); renderResumen(); });
+
+  steps.forEach((fn, i) => setTimeout(fn, i * 380));
+}
+function log(el, text, cls) {
+  const line = document.createElement("div");
+  if (cls) line.className = cls;
+  line.textContent = text;
+  el.appendChild(line);
+  el.scrollTop = el.scrollHeight;
+}
+function closePublishModal() { document.getElementById("publishModal").classList.remove("open"); }
+
+function previewProductPage(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  const url = URL.createObjectURL(new Blob([renderProductPage(p)], { type: "text/html" }));
+  window.open(url, "_blank");
+}
+
+/* =========================================================================
+   STATIC PRODUCT PAGE GENERATOR
+   Self-contained HTML: gallery + hand-built lightbox, variant selector wired
+   to real remaining stock, qty stepper capped per variant, WhatsApp CTA.
+   Every interpolated field is escaped — this HTML is served publicly.
+   ========================================================================= */
+function renderProductPage(p) {
+  const cfg = categoryConfig(p.category);
+  const images = (p.images && p.images.length ? p.images : ["images/colchones/showroom-real-bogota.jpg"])
+    .map(src => src + (src.startsWith("data:") ? "" : (src.includes("?") ? "&" : "?") + "v=" + (p.rev || 1)));
+  const variants = getVariants(p);
+  const hasVariants = variants.type !== "units";
+  const variantData = hasVariants ? variants.items.map(v => ({ label: v.label, units: Number(v.units) || 0 })) : [];
+  const flatUnits = variants.type === "units" ? Number(variants.items[0].units) || 0 : 0;
+
+  const name = escapeHtml(p.name), brand = escapeHtml(p.brand || "Real Confort MD"), spec = escapeHtml(p.spec || "");
+  const priceText = p.price ? "$" + Math.round(p.price).toLocaleString("es-CO") : "Consultar";
+  const variantLabel = escapeHtml(cfg.variantLabel || "");
+
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${name} — Real Confort MD</title>
+<meta name="description" content="${spec}">
+<style>
+:root{--navy:#050d1a;--gold:#f2c640;--gold-dk:#c89a00;--sky:#5bc8ea;--cream2:#eef6fd;--border:#dbe8f4;--muted:#607080}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#0e1a28;background:#fff}
+.wrap{max-width:1000px;margin:0 auto;padding:28px 20px}
+.back{font-size:13px;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.gallery-main{border-radius:14px;overflow:hidden;border:1.5px solid var(--border);cursor:zoom-in;aspect-ratio:1/1;background:var(--cream2)}
+.gallery-main img{width:100%;height:100%;object-fit:cover;display:block}
+.thumbs{display:flex;gap:8px;margin-top:10px}
+.thumbs img{width:64px;height:64px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;opacity:.7}
+.thumbs img.active{border-color:var(--gold-dk);opacity:1}
+h1{font-size:28px;font-weight:700;margin-bottom:6px}
+.brand{font-size:13px;color:var(--muted);margin-bottom:14px}
+.price{font-size:26px;font-weight:700;color:var(--gold-dk);margin-bottom:16px}
+.spec{font-size:15px;line-height:1.7;color:#33414f;margin-bottom:20px}
+.variant-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px}
+.variant-opts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.vopt{border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13.5px;cursor:pointer;background:#fff}
+.vopt.active{border-color:var(--gold-dk);background:rgba(242,198,64,.1)}
+.vopt.disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.stock-note{font-size:12.5px;color:var(--muted);margin-bottom:16px}
+.qty-row{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.qty-row button{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:16px;cursor:pointer}
+.qty-row button:disabled{opacity:.3;cursor:not-allowed}
+.qty-row span{font-size:16px;font-weight:600;min-width:24px;text-align:center}
+.cta{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:14px 26px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none}
+.lightbox{position:fixed;inset:0;background:rgba(5,13,26,.92);display:none;align-items:center;justify-content:center;z-index:99;padding:30px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;border-radius:8px}
+.lightbox .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer}
+.lightbox .prev{left:20px}.lightbox .next{right:20px}
+.lightbox .close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.15);color:#fff;border:none;width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Volver a Real Confort MD</a>
+  <div class="grid">
+    <div>
+      <div class="gallery-main" id="galleryMain"><img id="mainImg" src="${images[0]}" alt="${name}"></div>
+      <div class="thumbs" id="thumbs">
+        ${images.map((src, i) => `<img src="${src}" data-i="${i}" class="${i === 0 ? "active" : ""}" onclick="setMain(${i})">`).join("")}
+      </div>
+    </div>
+    <div>
+      <h1>${name}</h1>
+      <div class="brand">${brand} · SKU ${escapeHtml(p.sku)}</div>
+      <div class="price">${priceText}</div>
+      <p class="spec">${spec}</p>
+      ${hasVariants ? `
+      <div class="variant-label">${variantLabel}</div>
+      <div class="variant-opts" id="variantOpts">
+        ${variantData.map((v, i) => `<button class="vopt ${v.units <= 0 ? "disabled" : ""} ${i === 0 && v.units > 0 ? "active" : ""}" data-i="${i}" ${v.units <= 0 ? "disabled" : ""} onclick="selectVariant(${i})">${escapeHtml(v.label)}</button>`).join("")}
+      </div>` : ""}
+      <div class="stock-note" id="stockNote"></div>
+      <div class="qty-row">
+        <button onclick="stepQty(-1)">−</button><span id="qtyVal">1</span><button onclick="stepQty(1)">+</button>
+      </div>
+      <a class="cta" id="waLink" href="#" target="_blank">Cotizar por WhatsApp →</a>
+    </div>
+  </div>
+</div>
+<div class="lightbox" id="lightbox">
+  <button class="close" onclick="closeLightbox()">✕</button>
+  <button class="nav prev" onclick="lbStep(-1)">‹</button>
+  <img id="lbImg" src="">
+  <button class="nav next" onclick="lbStep(1)">›</button>
+</div>
+<script>
+const IMAGES = ${JSON.stringify(images)};
+const VARIANTS = ${JSON.stringify(variantData)};
+const HAS_VARIANTS = ${JSON.stringify(hasVariants)};
+const FLAT_UNITS = ${JSON.stringify(flatUnits)};
+const PRODUCT_NAME = ${JSON.stringify(p.name)};
+const WA_NUMBER = ${JSON.stringify(WA_NUMBER)};
+let mainIdx = 0, lbIdx = 0, variantIdx = HAS_VARIANTS ? VARIANTS.findIndex(v => v.units > 0) : -1, qty = 1;
+
+function setMain(i){ mainIdx=i; document.getElementById('mainImg').src=IMAGES[i];
+  document.querySelectorAll('#thumbs img').forEach((el,idx)=>el.classList.toggle('active', idx===i)); }
+document.getElementById('galleryMain').addEventListener('click', () => openLightbox(mainIdx));
+function openLightbox(i){ lbIdx=i; document.getElementById('lbImg').src=IMAGES[i]; document.getElementById('lightbox').classList.add('open'); }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
+function lbStep(d){ lbIdx=(lbIdx+d+IMAGES.length)%IMAGES.length; document.getElementById('lbImg').src=IMAGES[lbIdx]; }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); if(e.key==='ArrowLeft') lbStep(-1); if(e.key==='ArrowRight') lbStep(1); });
+
+function currentMax(){ return HAS_VARIANTS ? (variantIdx>=0 ? VARIANTS[variantIdx].units : 0) : FLAT_UNITS; }
+function selectVariant(i){
+  if (VARIANTS[i].units <= 0) return;
+  variantIdx = i; qty = Math.min(qty, currentMax()) || 1;
+  document.querySelectorAll('#variantOpts .vopt').forEach((el,idx)=>el.classList.toggle('active', idx===i));
+  renderQty();
+}
+function stepQty(d){ const max=currentMax(); qty=Math.max(1, Math.min(max, qty+d)); renderQty(); }
+function renderQty(){
+  const max = currentMax();
+  document.getElementById('qtyVal').textContent = max>0 ? qty : 0;
+  document.getElementById('stockNote').textContent = max>0 ? max + ' disponibles' : 'Agotado en esta variante';
+  const wa = document.getElementById('waLink');
+  const variantTxt = HAS_VARIANTS && variantIdx>=0 ? ' - ' + VARIANTS[variantIdx].label : '';
+  wa.href = max>0 ? ('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Hola, quiero cotizar: ' + PRODUCT_NAME + variantTxt + ' x' + qty)) : '#';
+  wa.style.pointerEvents = max>0 ? 'auto' : 'none';
+  wa.style.opacity = max>0 ? '1' : '.4';
+}
+renderQty();
+<\/script>
+</body>
+</html>`;
+}
+
+/* =========================================================================
+   VENTAS (sales log)
+   ========================================================================= */
+function renderVentas() {
+  const sel = document.getElementById("saleProduct");
+  sel.innerHTML = products.filter(p => p.published && totalUnits(p) > 0)
+    .map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join("");
+  onSaleProductChange();
+
+  const totalRevenue = sales.reduce((s, x) => s + x.total, 0);
+  const todayRevenue = sales.filter(s => new Date(s.ts).toDateString() === new Date().toDateString()).reduce((s, x) => s + x.total, 0);
+  const unitsSold = sales.reduce((s, x) => s + x.qty, 0);
+  document.getElementById("salesStats").innerHTML = `
+    ${statTile("Ingresos hoy", formatCOP(todayRevenue), "", "")}
+    ${statTile("Ingresos totales", formatCOP(totalRevenue), "", "")}
+    ${statTile("Unidades vendidas", unitsSold, "", "")}
+  `;
+
+  const body = document.getElementById("salesTableBody");
+  const rows = sales.slice().reverse();
+  body.innerHTML = rows.length ? rows.map(s => `
+    <tr><td>${new Date(s.ts).toLocaleString("es-CO")}</td><td>${escapeHtml(s.productName)}</td>
+    <td>${escapeHtml(s.variantLabel || "—")}</td><td>${s.qty}</td><td>${formatCOP(s.total)}</td></tr>
+  `).join("") : `<tr><td colspan="5" class="empty-state">Sin ventas registradas aún.</td></tr>`;
+}
+function onSaleProductChange() {
+  const id = document.getElementById("saleProduct").value;
+  const p = products.find(x => x.id === id);
+  const variantSel = document.getElementById("saleVariant");
+  const label = document.getElementById("saleVariantLabel");
+  if (!p) { variantSel.innerHTML = ""; return; }
+  const v = getVariants(p);
+  if (v.type === "units") {
+    label.style.display = "none"; variantSel.style.display = "none";
+    variantSel.innerHTML = "";
+  } else {
+    label.style.display = "block"; variantSel.style.display = "block";
+    label.textContent = categoryConfig(p.category).variantLabel;
+    variantSel.innerHTML = v.items.filter(it => it.units > 0).map(it => `<option value="${escapeHtml(it.label)}">${escapeHtml(it.label)} (${it.units} disp.)</option>`).join("")
+      || `<option value="">Sin existencias</option>`;
+  }
+  document.getElementById("saleQty").max = v.type === "units" ? totalUnits(p) : "";
+}
+function registerSale() {
+  const id = document.getElementById("saleProduct").value;
+  const p = products.find(x => x.id === id);
+  if (!p) { toast("Selecciona un producto.", true); return; }
+  const qty = Number(document.getElementById("saleQty").value) || 0;
+  if (qty <= 0) { toast("Cantidad inválida.", true); return; }
+
+  const v = getVariants(p);
+  let variantLabel = null;
+  if (v.type !== "units") {
+    variantLabel = document.getElementById("saleVariant").value;
+    const row = (p.category === "colchones" ? p.sizes : p.colors).find(r => r.label === variantLabel);
+    if (!row || row.units < qty) { toast("No hay suficiente stock en esa variante.", true); return; }
+    row.units -= qty;
+  } else {
+    if ((p.units || 0) < qty) { toast("No hay suficiente stock.", true); return; }
+    p.units -= qty;
+  }
+
+  sales.push({ id: uid("s"), ts: Date.now(), productId: p.id, productName: p.name, variantLabel, qty, total: p.price * qty });
+  saveState();
+  toast("Venta registrada.");
+  renderVentas();
+}
+
+/* =========================================================================
+   ANALYTICS placeholders
+   ========================================================================= */
+function showConnectInfo(which) {
+  toast(`Conectar ${which} requiere un backend con OAuth — próxima fase.`);
+}
+
+/* =========================================================================
+   CSV IMPORT / EXPORT
+   ========================================================================= */
+function csvCell(v) { const s = String(v ?? ""); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function variantsToCell(p) {
+  const v = getVariants(p);
+  if (v.type === "units") return String(v.items[0].units);
+  return v.items.map(it => it.label + ":" + it.units).join(";");
+}
+function exportCSV() {
+  const header = ["id","name","brand","category","spec","price","sku","slug","published","images","variants"];
+  const rows = products.map(p => [
+    p.id, p.name, p.brand, p.category, p.spec, p.price, p.sku, p.slug, p.published, (p.images || []).join("|"), variantsToCell(p)
+  ].map(csvCell).join(","));
+  const csv = [header.join(","), ...rows].join("\n");
+  const url = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+  const a = document.createElement("a"); a.href = url; a.download = "catalogo_real_confort.csv"; a.click();
+}
+function parseCSV(text) {
+  const rows = []; let row = [], cell = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+      else if (c === '"') inQuotes = false;
+      else cell += c;
+    } else {
+      if (c === '"') inQuotes = true;
+      else if (c === ",") { row.push(cell); cell = ""; }
+      else if (c === "\n" || c === "\r") { if (cell !== "" || row.length) { row.push(cell); rows.push(row); row = []; cell = ""; } }
+      else cell += c;
+    }
+  }
+  if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+  return rows;
+}
+function importCSV(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const rows = parseCSV(reader.result);
+    const header = rows[0];
+    const idx = (name) => header.indexOf(name);
+    const incoming = rows.slice(1).filter(r => r.length > 1).map(r => {
+      const cat = r[idx("category")];
+      const cfg = categoryConfig(cat);
+      const p = {
+        id: r[idx("id")] || uid("p"),
+        name: r[idx("name")], brand: r[idx("brand")], category: cat, spec: r[idx("spec")],
+        price: Number(r[idx("price")]) || 0, sku: r[idx("sku")], slug: r[idx("slug")] || slugify(r[idx("name")]),
+        published: String(r[idx("published")]).toLowerCase() === "true",
+        images: (r[idx("images")] || "").split("|").filter(Boolean),
+        rev: 1, _snapshot: ""
+      };
+      const variantsCell = r[idx("variants")] || "";
+      if (cfg.variantType === "units") p.units = Number(variantsCell) || 0;
+      else {
+        const items = variantsCell.split(";").filter(Boolean).map(pair => {
+          const [label, units] = pair.split(":"); return { label, units: Number(units) || 0 };
+        });
+        if (cfg.variantType === "sizes") p.sizes = items; else p.colors = items;
+      }
+      return p;
+    });
+    const merged = products.filter(p => !incoming.find(x => x.id === p.id)).concat(incoming);
+    const issues = validateCatalog(merged);
+    const errors = issues.filter(i => i.level === "error");
+    if (errors.length) {
+      toast(`CSV con ${errors.length} error(es) — revisa antes de importar. Ver consola.`, true);
+      console.warn("Errores de validación CSV:", errors);
+      return;
+    }
+    products = merged;
+    saveState();
+    toast(`${incoming.length} producto(s) importado(s).`);
+    renderInventario();
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+}
+</script>
+</body>
+</html>

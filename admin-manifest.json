@@ -1,0 +1,14 @@
+{
+  "name": "Real Confort MD — Panel Admin",
+  "short_name": "RC Admin",
+  "description": "Panel de inventario y catálogo — Colchones Real Confort MD",
+  "start_url": "./admin.html",
+  "scope": "./admin.html",
+  "display": "standalone",
+  "background_color": "#050d1a",
+  "theme_color": "#050d1a",
+  "icons": [
+    { "src": "admin-icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "admin-icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
