@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>You're Invited — Our Wedding</title>
+<title>Estás Invitado — Nuestra Boda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -327,37 +327,37 @@
 <div class="invitation">
 <div class="invitation-inner">
 
-  <!-- EDIT ME: couple names, wedding date, hero blurb -->
+  <!-- EDITAR: nombres de la pareja, fecha de la boda, texto de introducción -->
   <header class="hero">
-    <!-- EDIT ME: initials for the monogram -->
+    <!-- EDITAR: iniciales para el monograma -->
     <div class="monogram">J&amp;J</div>
-    <p class="eyebrow">Together with their families</p>
+    <p class="eyebrow">Junto a sus familias</p>
     <h1 class="names">Jane<span class="ampersand">&amp;</span>John</h1>
-    <p class="date-line">request the pleasure of your company</p>
+    <p class="date-line">tienen el gusto de invitarte a su boda</p>
   </header>
 
   <div class="divider" aria-hidden="true"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
 
-  <p class="date-line" style="font-size:20px; margin-bottom: 4px;">Saturday, September 12, 2026</p>
+  <p class="date-line" style="font-size:20px; margin-bottom: 4px;">Sábado, 12 de septiembre de 2026</p>
 
-  <!-- EDIT ME: ceremony/reception details -->
+  <!-- EDITAR: detalles de ceremonia y recepción -->
   <div class="card">
     <div class="details-grid">
       <div>
-        <h3>Ceremony</h3>
-        <p>4:00 PM<br>St. Mary's Chapel<br>123 Main Street</p>
+        <h3>Ceremonia</h3>
+        <p>4:00 PM<br>Capilla San María<br>Calle Principal 123</p>
       </div>
       <div>
-        <h3>Reception</h3>
-        <p>6:00 PM<br>Riverside Gardens<br>456 River Road</p>
+        <h3>Recepción</h3>
+        <p>6:00 PM<br>Jardines Riverside<br>Avenida del Río 456</p>
       </div>
     </div>
   </div>
 
   <div class="card">
     <p class="message">
-      Your presence means the world to us. Please let us know if you'll be able
-      to join our celebration by <strong>August 15, 2026</strong>.
+      Tu presencia significa el mundo para nosotros. Por favor, cuéntanos si podrás
+      acompañarnos antes del <strong>15 de agosto de 2026</strong>.
     </p>
   </div>
 
@@ -365,50 +365,50 @@
 
   <div class="rsvp-section" id="rsvpCard">
     <form id="rsvpForm">
-      <h2>RSVP</h2>
-      <p class="sub">One reply per invitation, please.</p>
+      <h2>Confirmar Asistencia</h2>
+      <p class="sub">Una respuesta por invitación, por favor.</p>
 
       <div class="field">
-        <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" required autocomplete="name" placeholder="e.g. Alex Rivera">
+        <label for="name">Nombre Completo *</label>
+        <input type="text" id="name" name="name" required autocomplete="name" placeholder="ej. Alex Rivera">
       </div>
 
       <div class="field">
-        <label>Will you be attending? *</label>
+        <label>¿Podrás asistir? *</label>
         <div class="attend-choice">
           <input type="radio" id="attendYes" name="attending" value="yes" required>
-          <label class="opt yes" for="attendYes">✓ Joyfully accept</label>
+          <label class="opt yes" for="attendYes">✓ Con gusto asistiré</label>
           <input type="radio" id="attendNo" name="attending" value="no" required>
-          <label class="opt no" for="attendNo">✕ Regretfully decline</label>
+          <label class="opt no" for="attendNo">✕ No podré asistir</label>
         </div>
       </div>
 
       <div class="field" id="guestsField">
-        <label for="guests">Total Number Attending (including you) *</label>
+        <label for="guests">Número Total de Asistentes (incluyéndote) *</label>
         <input type="number" id="guests" name="guests" min="1" max="10" value="1">
       </div>
 
       <div class="field">
-        <label for="notes">Dietary Restrictions / Allergies</label>
-        <textarea id="notes" name="notes" placeholder="e.g. vegetarian, nut allergy — or leave blank"></textarea>
+        <label for="notes">Restricciones Alimentarias / Alergias</label>
+        <textarea id="notes" name="notes" placeholder="ej. vegetariano, alergia a nueces — o déjalo en blanco"></textarea>
       </div>
 
       <div class="field">
-        <label for="message">Message for the Couple (optional)</label>
-        <textarea id="message" name="message" placeholder="Well wishes, song requests, anything!"></textarea>
+        <label for="message">Mensaje para los Novios (opcional)</label>
+        <textarea id="message" name="message" placeholder="Buenos deseos, peticiones de canciones, ¡lo que quieras!"></textarea>
       </div>
 
-      <button type="submit" id="submitBtn">Send RSVP</button>
+      <button type="submit" id="submitBtn">Enviar Confirmación</button>
       <p class="status-msg" id="statusMsg"></p>
     </form>
 
     <div class="thankyou" id="thankyou">
-      <h2>Thank you! 💌</h2>
-      <p id="thankyouText">Your RSVP has been recorded.</p>
+      <h2>¡Gracias! 💌</h2>
+      <p id="thankyouText">Tu confirmación ha sido registrada.</p>
     </div>
   </div>
 
-  <footer>Questions? Reach out to Jane or John directly.</footer>
+  <footer>¿Preguntas? Contacta directamente a Jane o John.</footer>
 
 </div>
 </div>
@@ -445,7 +445,7 @@
     statusMsg.classList.remove('show');
 
     if (APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
-      showStatus('Setup incomplete: the form is not connected yet. See SETUP.md.', true);
+      showStatus('Configuración incompleta: el formulario aún no está conectado. Ver SETUP.md.', true);
       return;
     }
 
@@ -453,7 +453,7 @@
     const name = document.getElementById('name').value.trim();
 
     if (!name || !attending) {
-      showStatus('Please fill in your name and let us know if you can attend.', true);
+      showStatus('Por favor completa tu nombre e indícanos si podrás asistir.', true);
       return;
     }
 
@@ -466,25 +466,25 @@
     });
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
+    submitBtn.textContent = 'Enviando…';
 
     try {
       const res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: payload });
       const data = await res.json();
 
       if (!data.ok) {
-        throw new Error(data.error || 'Something went wrong.');
+        throw new Error(data.error || 'Algo salió mal.');
       }
 
       form.style.display = 'none';
       thankyouText.textContent = attending === 'yes'
-        ? "We can't wait to celebrate with you!"
-        : "We'll miss you, but thank you for letting us know.";
+        ? "¡No podemos esperar a celebrar contigo!"
+        : "Te extrañaremos, pero gracias por avisarnos.";
       thankyou.style.display = 'block';
     } catch (err) {
-      showStatus('Could not send your RSVP. Please try again in a moment.', true);
+      showStatus('No se pudo enviar tu confirmación. Por favor intenta de nuevo en un momento.', true);
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Send RSVP';
+      submitBtn.textContent = 'Enviar Confirmación';
     }
   });
 </script>

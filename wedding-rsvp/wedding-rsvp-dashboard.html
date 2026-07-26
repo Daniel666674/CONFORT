@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wedding RSVP Dashboard</title>
+<title>Panel de Confirmaciones de Boda</title>
 <style>
   .viz-root {
     color-scheme: light;
@@ -293,89 +293,89 @@
 
   <div class="topbar">
     <div>
-      <h1>Wedding RSVP Dashboard</h1>
-      <div class="updated" id="updatedAt">Not loaded yet</div>
+      <h1>Panel de Confirmaciones de Boda</h1>
+      <div class="updated" id="updatedAt">Aún no se ha cargado</div>
     </div>
     <div class="controls">
-      <button class="refresh" id="refreshBtn">Refresh</button>
+      <button class="refresh" id="refreshBtn">Actualizar</button>
       <label style="font-size:13px; color: var(--text-secondary); display:flex; align-items:center; gap:6px;">
-        <input type="checkbox" id="autoRefresh"> Auto-refresh (60s)
+        <input type="checkbox" id="autoRefresh"> Actualizar automáticamente (60s)
       </label>
     </div>
   </div>
 
   <div class="setup-warning" id="setupWarning">
-    Setup incomplete: paste your Google Apps Script Web App URL into
-    <code>APPS_SCRIPT_URL</code> near the bottom of this file. See SETUP.md.
+    Configuración incompleta: pega la URL de tu Web App de Google Apps Script en
+    <code>APPS_SCRIPT_URL</code>, cerca del final de este archivo. Ver SETUP.md.
   </div>
 
   <div class="config-row">
-    <label for="totalInvited">Total invitations sent</label>
-    <input type="number" id="totalInvited" min="0" placeholder="e.g. 80">
-    <span class="hint">Enter this to see pending replies and response rate. Saved in this browser only.</span>
+    <label for="totalInvited">Total de invitaciones enviadas</label>
+    <input type="number" id="totalInvited" min="0" placeholder="ej. 80">
+    <span class="hint">Ingresa este número para ver las respuestas pendientes y la tasa de respuesta. Se guarda solo en este navegador.</span>
   </div>
 
   <div class="tiles">
     <div class="tile">
-      <div class="label">Responses received</div>
+      <div class="label">Respuestas recibidas</div>
       <div class="value" id="tileTotal">–</div>
       <div class="sub" id="tileTotalSub">&nbsp;</div>
     </div>
     <div class="tile good">
-      <div class="label">Confirmed</div>
+      <div class="label">Confirmados</div>
       <div class="value" id="tileConfirmed">–</div>
       <div class="sub" id="tileConfirmedSub">&nbsp;</div>
     </div>
     <div class="tile critical">
-      <div class="label">Declined</div>
+      <div class="label">Declinados</div>
       <div class="value" id="tileDeclined">–</div>
       <div class="sub" id="tileDeclinedSub">&nbsp;</div>
     </div>
     <div class="tile">
-      <div class="label">Total guests attending</div>
+      <div class="label">Total de invitados asistiendo</div>
       <div class="value" id="tileHeadcount">–</div>
-      <div class="sub">For catering &amp; seating counts</div>
+      <div class="sub">Para el conteo de banquete y asientos</div>
     </div>
     <div class="tile" id="tilePendingWrap" style="display:none;">
-      <div class="label">Pending replies</div>
+      <div class="label">Respuestas pendientes</div>
       <div class="value" id="tilePending">–</div>
       <div class="sub" id="tilePendingSub">&nbsp;</div>
     </div>
   </div>
 
   <div class="bar-card">
-    <h2>Reply breakdown</h2>
+    <h2>Desglose de respuestas</h2>
     <div class="stack-bar" id="stackBar"></div>
     <div class="legend" id="legend"></div>
   </div>
 
   <div class="table-card">
     <div class="head-row">
-      <h2>All responses</h2>
-      <input type="text" class="search" id="searchInput" placeholder="Search by name…">
+      <h2>Todas las respuestas</h2>
+      <input type="text" class="search" id="searchInput" placeholder="Buscar por nombre…">
     </div>
     <div class="table-scroll">
       <table id="responseTable">
         <thead>
           <tr>
-            <th data-key="name">Name</th>
-            <th data-key="attending">Status</th>
-            <th data-key="guests">Guests</th>
-            <th data-key="notes">Dietary Notes</th>
-            <th data-key="message">Message</th>
-            <th data-key="timestamp">Submitted</th>
+            <th data-key="name">Nombre</th>
+            <th data-key="attending">Estado</th>
+            <th data-key="guests">Invitados</th>
+            <th data-key="notes">Notas Alimentarias</th>
+            <th data-key="message">Mensaje</th>
+            <th data-key="timestamp">Enviado</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
       </table>
-      <div class="empty-state" id="emptyState" style="display:none;">No responses yet.</div>
+      <div class="empty-state" id="emptyState" style="display:none;">Aún no hay respuestas.</div>
     </div>
   </div>
 
 </div>
 
 <script>
-  // EDIT ME: paste the same Google Apps Script Web App URL used in wedding-invite.html
+  // EDITAR: pega aquí la misma URL del Web App de Google Apps Script usada en wedding-invite.html
   const APPS_SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
   let allRows = [];
@@ -426,10 +426,10 @@
       const data = await res.json();
       allRows = data.rows || [];
       document.getElementById('updatedAt').textContent =
-        'Last updated ' + new Date().toLocaleTimeString();
+        'Última actualización ' + new Date().toLocaleTimeString();
       render();
     } catch (err) {
-      document.getElementById('updatedAt').textContent = 'Failed to load — check the Web App URL and try Refresh.';
+      document.getElementById('updatedAt').textContent = 'Error al cargar — verifica la URL del Web App e intenta Actualizar.';
     }
   }
 
@@ -443,9 +443,9 @@
 
     document.getElementById('tileTotal').textContent = total;
     document.getElementById('tileConfirmed').textContent = confirmed;
-    document.getElementById('tileConfirmedSub').textContent = total ? confirmedPct + '% of responses' : ' ';
+    document.getElementById('tileConfirmedSub').textContent = total ? confirmedPct + '% de las respuestas' : ' ';
     document.getElementById('tileDeclined').textContent = declined;
-    document.getElementById('tileDeclinedSub').textContent = total ? declinedPct + '% of responses' : ' ';
+    document.getElementById('tileDeclinedSub').textContent = total ? declinedPct + '% de las respuestas' : ' ';
     document.getElementById('tileHeadcount').textContent = headcount;
 
     const totalInvited = Number(totalInvitedInput.value) || 0;
@@ -461,25 +461,25 @@
       const responseRate = Math.round((total / totalInvited) * 100);
       pendingWrap.style.display = 'block';
       document.getElementById('tilePending').textContent = pending;
-      document.getElementById('tilePendingSub').textContent = responseRate + '% response rate';
-      document.getElementById('tileTotalSub').textContent = 'of ' + totalInvited + ' invited';
+      document.getElementById('tilePendingSub').textContent = responseRate + '% tasa de respuesta';
+      document.getElementById('tileTotalSub').textContent = 'de ' + totalInvited + ' invitados';
 
-      addSeg(stackBar, Math.round((confirmed / totalInvited) * 100), 'var(--good)', confirmed + ' confirmed');
-      addSeg(stackBar, Math.round((declined / totalInvited) * 100), 'var(--critical)', declined + ' declined');
-      addSeg(stackBar, pendingPct, 'var(--pending)', pending + ' pending');
+      addSeg(stackBar, Math.round((confirmed / totalInvited) * 100), 'var(--good)', confirmed + ' confirmados');
+      addSeg(stackBar, Math.round((declined / totalInvited) * 100), 'var(--critical)', declined + ' declinados');
+      addSeg(stackBar, pendingPct, 'var(--pending)', pending + ' pendientes');
 
-      addLegend(legend, 'var(--good)', 'Confirmed — ' + confirmed + ' (' + Math.round((confirmed/totalInvited)*100) + '%)');
-      addLegend(legend, 'var(--critical)', 'Declined — ' + declined + ' (' + Math.round((declined/totalInvited)*100) + '%)');
-      addLegend(legend, 'var(--pending)', 'Pending — ' + pending + ' (' + pendingPct + '%)');
+      addLegend(legend, 'var(--good)', 'Confirmados — ' + confirmed + ' (' + Math.round((confirmed/totalInvited)*100) + '%)');
+      addLegend(legend, 'var(--critical)', 'Declinados — ' + declined + ' (' + Math.round((declined/totalInvited)*100) + '%)');
+      addLegend(legend, 'var(--pending)', 'Pendientes — ' + pending + ' (' + pendingPct + '%)');
     } else {
       pendingWrap.style.display = 'none';
       document.getElementById('tileTotalSub').textContent = ' ';
 
-      addSeg(stackBar, confirmedPct, 'var(--good)', confirmed + ' confirmed');
-      addSeg(stackBar, declinedPct, 'var(--critical)', declined + ' declined');
+      addSeg(stackBar, confirmedPct, 'var(--good)', confirmed + ' confirmados');
+      addSeg(stackBar, declinedPct, 'var(--critical)', declined + ' declinados');
 
-      addLegend(legend, 'var(--good)', 'Confirmed — ' + confirmed + ' (' + confirmedPct + '%)');
-      addLegend(legend, 'var(--critical)', 'Declined — ' + declined + ' (' + declinedPct + '%)');
+      addLegend(legend, 'var(--good)', 'Confirmados — ' + confirmed + ' (' + confirmedPct + '%)');
+      addLegend(legend, 'var(--critical)', 'Declinados — ' + declined + ' (' + declinedPct + '%)');
     }
 
     renderTable();
@@ -526,7 +526,7 @@
       tr.innerHTML =
         '<td>' + escapeHtml(r.name) + '</td>' +
         '<td><span class="status-pill ' + (r.attending === 'yes' ? 'yes' : 'no') + '">' +
-          (r.attending === 'yes' ? 'Confirmed' : 'Declined') + '</span></td>' +
+          (r.attending === 'yes' ? 'Confirmado' : 'Declinado') + '</span></td>' +
         '<td>' + (r.attending === 'yes' ? (Number(r.guests) || 0) : '–') + '</td>' +
         '<td class="notes-cell">' + escapeHtml(r.notes || '–') + '</td>' +
         '<td class="msg-cell">' + escapeHtml(r.message || '–') + '</td>' +
