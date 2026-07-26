@@ -4,16 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>You're Invited — Our Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light;
-    --surface: #fffdfb;
-    --card: #ffffff;
+    --surface: #f6ede2;
+    --card: #fffdfa;
     --ink: #2c2620;
     --ink-soft: #6b5f52;
-    --accent: #a97452;
-    --accent-dark: #8a5c3e;
-    --line: #e8ddd0;
+    --accent: #b98a52;
+    --accent-dark: #93692f;
+    --accent-soft: #e7d4b8;
+    --line: #e6d8c2;
     --good: #0ca30c;
     --critical: #d03b3b;
   }
@@ -22,8 +26,10 @@
 
   body {
     margin: 0;
-    font-family: Georgia, 'Times New Roman', serif;
-    background: linear-gradient(180deg, #f7efe6 0%, var(--surface) 320px);
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    background:
+      radial-gradient(circle at 50% -10%, #fbf3e7 0%, transparent 55%),
+      linear-gradient(180deg, #f2e6d5 0%, var(--surface) 260px, var(--surface) 100%);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
   }
@@ -31,51 +37,114 @@
   .wrap {
     max-width: 640px;
     margin: 0 auto;
-    padding: 48px 20px 80px;
+    padding: 36px 16px 70px;
   }
+
+  .invitation {
+    background: var(--card);
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 18px 50px rgba(84, 58, 22, 0.14), 0 2px 8px rgba(84, 58, 22, 0.06);
+  }
+
+  .invitation-inner {
+    border: 1.5px solid var(--accent-soft);
+    border-radius: 3px;
+    padding: 44px 30px 36px;
+    position: relative;
+  }
+
+  .invitation-inner::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--accent-soft);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .monogram {
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-size: 28px;
+    color: var(--accent-dark);
+    background: #fffefb;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 22px auto;
+    max-width: 220px;
+    color: var(--accent);
+  }
+
+  .divider .line { flex: 1; height: 1px; background: var(--accent-soft); }
+  .divider .dot { width: 6px; height: 6px; transform: rotate(45deg); background: var(--accent); flex: none; }
 
   header.hero {
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom: 6px;
   }
 
   .eyebrow {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--accent-dark);
-    margin: 0 0 14px;
+    margin: 0 0 16px;
   }
 
   h1.names {
-    font-size: clamp(32px, 8vw, 52px);
-    margin: 0 0 10px;
-    font-weight: 400;
-    line-height: 1.15;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(34px, 9vw, 56px);
+    margin: 0 0 6px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
   }
 
   .ampersand {
     display: block;
-    font-style: italic;
-    font-size: 0.55em;
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-weight: 400;
+    font-size: 0.62em;
     color: var(--accent);
-    margin: 4px 0;
+    margin: 2px 0;
   }
 
   .date-line {
-    font-size: 18px;
+    font-size: 19px;
     color: var(--ink-soft);
-    margin: 0;
+    margin: 8px 0 0;
+    font-style: italic;
   }
 
   .card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 28px 26px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 14px rgba(60, 40, 20, 0.05);
+    border-radius: 10px;
+    padding: 26px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(60, 40, 20, 0.04);
+  }
+
+  .rsvp-section {
+    background: #fbf6ee;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 24px;
+    margin-top: 4px;
   }
 
   .details-grid {
@@ -114,9 +183,9 @@
   }
 
   form h2 {
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family: 'Playfair Display', Georgia, serif;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 24px;
     text-align: center;
     margin: 0 0 6px;
   }
@@ -232,9 +301,9 @@
   }
 
   .thankyou h2 {
-    font-family: Georgia, serif;
-    font-weight: 400;
-    font-size: 26px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 28px;
     margin: 8px 0 6px;
   }
 
@@ -255,13 +324,21 @@
 </head>
 <body>
 <div class="wrap">
+<div class="invitation">
+<div class="invitation-inner">
 
   <!-- EDIT ME: couple names, wedding date, hero blurb -->
   <header class="hero">
+    <!-- EDIT ME: initials for the monogram -->
+    <div class="monogram">J&amp;J</div>
     <p class="eyebrow">Together with their families</p>
     <h1 class="names">Jane<span class="ampersand">&amp;</span>John</h1>
-    <p class="date-line">are getting married — Saturday, September 12, 2026</p>
+    <p class="date-line">request the pleasure of your company</p>
   </header>
+
+  <div class="divider" aria-hidden="true"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <p class="date-line" style="font-size:20px; margin-bottom: 4px;">Saturday, September 12, 2026</p>
 
   <!-- EDIT ME: ceremony/reception details -->
   <div class="card">
@@ -284,7 +361,9 @@
     </p>
   </div>
 
-  <div class="card" id="rsvpCard">
+  <div class="divider" aria-hidden="true"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <div class="rsvp-section" id="rsvpCard">
     <form id="rsvpForm">
       <h2>RSVP</h2>
       <p class="sub">One reply per invitation, please.</p>
@@ -330,6 +409,9 @@
   </div>
 
   <footer>Questions? Reach out to Jane or John directly.</footer>
+
+</div>
+</div>
 </div>
 
 <script>
