@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wedding RSVP Dashboard</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --border:         rgba(11,11,11,0.10);
+    --good:           #0ca30c;
+    --critical:       #d03b3b;
+    --pending:        #898781;
+    --accent:         #2a78d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --page:           #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --border:         rgba(255,255,255,0.10);
+      --good:           #0ca30c;
+      --critical:       #e66767;
+      --pending:        #898781;
+      --accent:         #3987e5;
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --page:           #0d0d0d;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --border:         rgba(255,255,255,0.10);
+    --good:           #0ca30c;
+    --critical:       #e66767;
+    --pending:        #898781;
+    --accent:         #3987e5;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--page);
+    color: var(--text-primary);
+  }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  .topbar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  h1 { font-size: 22px; margin: 0; font-weight: 700; }
+  .updated { font-size: 12px; color: var(--text-muted); }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  button, input, select {
+    font-family: inherit;
+    font-size: 13px;
+  }
+
+  button.refresh {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-weight: 600;
+  }
+  button.refresh:hover { border-color: var(--accent); }
+
+  .config-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+
+  .config-row label { font-size: 13px; color: var(--text-secondary); font-weight: 600; }
+  .config-row input[type="number"] {
+    width: 90px;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--page);
+    color: var(--text-primary);
+  }
+  .config-row .hint { font-size: 12px; color: var(--text-muted); }
+
+  .setup-warning {
+    display: none;
+    background: rgba(208,59,59,0.08);
+    border: 1px solid var(--critical);
+    color: var(--critical);
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .tile {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+
+  .tile .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+
+  .tile .value {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .tile .sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+  }
+
+  .tile.good .value { color: var(--good); }
+  .tile.critical .value { color: var(--critical); }
+
+  .bar-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 18px 14px;
+    margin-bottom: 20px;
+  }
+
+  .bar-card h2 { font-size: 14px; margin: 0 0 12px; font-weight: 700; }
+
+  .stack-bar {
+    display: flex;
+    width: 100%;
+    height: 22px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--gridline);
+    gap: 2px;
+  }
+
+  .stack-bar .seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    min-width: 2px;
+  }
+  .stack-bar .seg:first-child { border-radius: 4px 0 0 4px; }
+  .stack-bar .seg:last-child { border-radius: 0 4px 4px 0; }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .legend .item { display: flex; align-items: center; gap: 6px; }
+  .legend .swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  .table-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+
+  .table-card .head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .table-card h2 { font-size: 14px; margin: 0; font-weight: 700; }
+
+  input.search {
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--page);
+    color: var(--text-primary);
+    min-width: 180px;
+  }
+
+  .table-scroll { overflow-x: auto; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+  th, td {
+    text-align: left;
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--gridline);
+    white-space: nowrap;
+  }
+
+  th {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  th:hover { color: var(--text-primary); }
+
+  td.notes-cell, td.msg-cell {
+    white-space: normal;
+    max-width: 220px;
+  }
+
+  .status-pill {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .status-pill.yes { background: rgba(12,163,12,0.12); color: var(--good); }
+  .status-pill.no { background: rgba(208,59,59,0.12); color: var(--critical); }
+
+  .empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 30px 0;
+    font-size: 13px;
+  }
+
+  tbody td { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div class="wrap viz-root">
+
+  <div class="topbar">
+    <div>
+      <h1>Wedding RSVP Dashboard</h1>
+      <div class="updated" id="updatedAt">Not loaded yet</div>
+    </div>
+    <div class="controls">
+      <button class="refresh" id="refreshBtn">Refresh</button>
+      <label style="font-size:13px; color: var(--text-secondary); display:flex; align-items:center; gap:6px;">
+        <input type="checkbox" id="autoRefresh"> Auto-refresh (60s)
+      </label>
+    </div>
+  </div>
+
+  <div class="setup-warning" id="setupWarning">
+    Setup incomplete: paste your Google Apps Script Web App URL into
+    <code>APPS_SCRIPT_URL</code> near the bottom of this file. See SETUP.md.
+  </div>
+
+  <div class="config-row">
+    <label for="totalInvited">Total invitations sent</label>
+    <input type="number" id="totalInvited" min="0" placeholder="e.g. 80">
+    <span class="hint">Enter this to see pending replies and response rate. Saved in this browser only.</span>
+  </div>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">Responses received</div>
+      <div class="value" id="tileTotal">–</div>
+      <div class="sub" id="tileTotalSub">&nbsp;</div>
+    </div>
+    <div class="tile good">
+      <div class="label">Confirmed</div>
+      <div class="value" id="tileConfirmed">–</div>
+      <div class="sub" id="tileConfirmedSub">&nbsp;</div>
+    </div>
+    <div class="tile critical">
+      <div class="label">Declined</div>
+      <div class="value" id="tileDeclined">–</div>
+      <div class="sub" id="tileDeclinedSub">&nbsp;</div>
+    </div>
+    <div class="tile">
+      <div class="label">Total guests attending</div>
+      <div class="value" id="tileHeadcount">–</div>
+      <div class="sub">For catering &amp; seating counts</div>
+    </div>
+    <div class="tile" id="tilePendingWrap" style="display:none;">
+      <div class="label">Pending replies</div>
+      <div class="value" id="tilePending">–</div>
+      <div class="sub" id="tilePendingSub">&nbsp;</div>
+    </div>
+  </div>
+
+  <div class="bar-card">
+    <h2>Reply breakdown</h2>
+    <div class="stack-bar" id="stackBar"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="table-card">
+    <div class="head-row">
+      <h2>All responses</h2>
+      <input type="text" class="search" id="searchInput" placeholder="Search by name…">
+    </div>
+    <div class="table-scroll">
+      <table id="responseTable">
+        <thead>
+          <tr>
+            <th data-key="name">Name</th>
+            <th data-key="attending">Status</th>
+            <th data-key="guests">Guests</th>
+            <th data-key="notes">Dietary Notes</th>
+            <th data-key="message">Message</th>
+            <th data-key="timestamp">Submitted</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none;">No responses yet.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // EDIT ME: paste the same Google Apps Script Web App URL used in wedding-invite.html
+  const APPS_SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+  let allRows = [];
+  let sortKey = 'timestamp';
+  let sortDir = -1;
+  let autoRefreshTimer = null;
+
+  const totalInvitedInput = document.getElementById('totalInvited');
+  totalInvitedInput.value = localStorage.getItem('wedding_total_invited') || '';
+  totalInvitedInput.addEventListener('input', () => {
+    localStorage.setItem('wedding_total_invited', totalInvitedInput.value);
+    render();
+  });
+
+  document.getElementById('refreshBtn').addEventListener('click', load);
+  document.getElementById('autoRefresh').addEventListener('change', (e) => {
+    if (e.target.checked) {
+      autoRefreshTimer = setInterval(load, 60000);
+    } else {
+      clearInterval(autoRefreshTimer);
+    }
+  });
+
+  document.getElementById('searchInput').addEventListener('input', render);
+
+  document.querySelectorAll('#responseTable th').forEach((th) => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.key;
+      if (sortKey === key) {
+        sortDir *= -1;
+      } else {
+        sortKey = key;
+        sortDir = 1;
+      }
+      render();
+    });
+  });
+
+  async function load() {
+    if (APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+      document.getElementById('setupWarning').style.display = 'block';
+      return;
+    }
+    document.getElementById('setupWarning').style.display = 'none';
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL + '?action=stats');
+      const data = await res.json();
+      allRows = data.rows || [];
+      document.getElementById('updatedAt').textContent =
+        'Last updated ' + new Date().toLocaleTimeString();
+      render();
+    } catch (err) {
+      document.getElementById('updatedAt').textContent = 'Failed to load — check the Web App URL and try Refresh.';
+    }
+  }
+
+  function render() {
+    const total = allRows.length;
+    const confirmed = allRows.filter(r => r.attending === 'yes').length;
+    const declined = allRows.filter(r => r.attending === 'no').length;
+    const headcount = allRows.reduce((s, r) => s + (Number(r.guests) || 0), 0);
+    const confirmedPct = total ? Math.round((confirmed / total) * 100) : 0;
+    const declinedPct = total ? Math.round((declined / total) * 100) : 0;
+
+    document.getElementById('tileTotal').textContent = total;
+    document.getElementById('tileConfirmed').textContent = confirmed;
+    document.getElementById('tileConfirmedSub').textContent = total ? confirmedPct + '% of responses' : ' ';
+    document.getElementById('tileDeclined').textContent = declined;
+    document.getElementById('tileDeclinedSub').textContent = total ? declinedPct + '% of responses' : ' ';
+    document.getElementById('tileHeadcount').textContent = headcount;
+
+    const totalInvited = Number(totalInvitedInput.value) || 0;
+    const pendingWrap = document.getElementById('tilePendingWrap');
+    const stackBar = document.getElementById('stackBar');
+    const legend = document.getElementById('legend');
+    stackBar.innerHTML = '';
+    legend.innerHTML = '';
+
+    if (totalInvited > 0) {
+      const pending = Math.max(0, totalInvited - total);
+      const pendingPct = Math.round((pending / totalInvited) * 100);
+      const responseRate = Math.round((total / totalInvited) * 100);
+      pendingWrap.style.display = 'block';
+      document.getElementById('tilePending').textContent = pending;
+      document.getElementById('tilePendingSub').textContent = responseRate + '% response rate';
+      document.getElementById('tileTotalSub').textContent = 'of ' + totalInvited + ' invited';
+
+      addSeg(stackBar, Math.round((confirmed / totalInvited) * 100), 'var(--good)', confirmed + ' confirmed');
+      addSeg(stackBar, Math.round((declined / totalInvited) * 100), 'var(--critical)', declined + ' declined');
+      addSeg(stackBar, pendingPct, 'var(--pending)', pending + ' pending');
+
+      addLegend(legend, 'var(--good)', 'Confirmed — ' + confirmed + ' (' + Math.round((confirmed/totalInvited)*100) + '%)');
+      addLegend(legend, 'var(--critical)', 'Declined — ' + declined + ' (' + Math.round((declined/totalInvited)*100) + '%)');
+      addLegend(legend, 'var(--pending)', 'Pending — ' + pending + ' (' + pendingPct + '%)');
+    } else {
+      pendingWrap.style.display = 'none';
+      document.getElementById('tileTotalSub').textContent = ' ';
+
+      addSeg(stackBar, confirmedPct, 'var(--good)', confirmed + ' confirmed');
+      addSeg(stackBar, declinedPct, 'var(--critical)', declined + ' declined');
+
+      addLegend(legend, 'var(--good)', 'Confirmed — ' + confirmed + ' (' + confirmedPct + '%)');
+      addLegend(legend, 'var(--critical)', 'Declined — ' + declined + ' (' + declinedPct + '%)');
+    }
+
+    renderTable();
+  }
+
+  function addSeg(container, pct, color, label) {
+    if (pct <= 0) return;
+    const seg = document.createElement('div');
+    seg.className = 'seg';
+    seg.style.width = pct + '%';
+    seg.style.background = color;
+    seg.title = label;
+    seg.textContent = pct >= 8 ? pct + '%' : '';
+    container.appendChild(seg);
+  }
+
+  function addLegend(container, color, text) {
+    const item = document.createElement('div');
+    item.className = 'item';
+    item.innerHTML = '<span class="swatch" style="background:' + color + '"></span>' + text;
+    container.appendChild(item);
+  }
+
+  function renderTable() {
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    let rows = allRows.filter(r => !query || (r.name || '').toLowerCase().includes(query));
+
+    rows = rows.slice().sort((a, b) => {
+      let av = a[sortKey], bv = b[sortKey];
+      if (sortKey === 'guests') { av = Number(av) || 0; bv = Number(bv) || 0; }
+      if (sortKey === 'timestamp') { av = new Date(av).getTime(); bv = new Date(bv).getTime(); }
+      if (av < bv) return -1 * sortDir;
+      if (av > bv) return 1 * sortDir;
+      return 0;
+    });
+
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    document.getElementById('emptyState').style.display = rows.length ? 'none' : 'block';
+
+    rows.forEach((r) => {
+      const tr = document.createElement('tr');
+      const submitted = r.timestamp ? new Date(r.timestamp).toLocaleString() : '';
+      tr.innerHTML =
+        '<td>' + escapeHtml(r.name) + '</td>' +
+        '<td><span class="status-pill ' + (r.attending === 'yes' ? 'yes' : 'no') + '">' +
+          (r.attending === 'yes' ? 'Confirmed' : 'Declined') + '</span></td>' +
+        '<td>' + (r.attending === 'yes' ? (Number(r.guests) || 0) : '–') + '</td>' +
+        '<td class="notes-cell">' + escapeHtml(r.notes || '–') + '</td>' +
+        '<td class="msg-cell">' + escapeHtml(r.message || '–') + '</td>' +
+        '<td>' + submitted + '</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  load();
+</script>
+</body>
+</html>
