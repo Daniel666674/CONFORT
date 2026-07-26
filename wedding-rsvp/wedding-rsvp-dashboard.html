@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Panel de Confirmaciones de Boda</title>
 <style>
-  .viz-root {
+  :root {
     color-scheme: light;
     --surface-1:      #fcfcfb;
     --page:           #f9f9f7;
@@ -20,7 +20,7 @@
     --accent:         #2a78d6;
   }
   @media (prefers-color-scheme: dark) {
-    :root:where(:not([data-theme="light"])) .viz-root {
+    :root:where(:not([data-theme="light"])) {
       color-scheme: dark;
       --surface-1:      #1a1a19;
       --page:           #0d0d0d;
@@ -35,7 +35,7 @@
       --accent:         #3987e5;
     }
   }
-  :root[data-theme="dark"] .viz-root {
+  :root[data-theme="dark"] {
     color-scheme: dark;
     --surface-1:      #1a1a19;
     --page:           #0d0d0d;
@@ -289,7 +289,7 @@
 </style>
 </head>
 <body>
-<div class="wrap viz-root">
+<div class="wrap">
 
   <div class="topbar">
     <div>
