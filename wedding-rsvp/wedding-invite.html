@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estás Invitado — Nuestra Boda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --surface: #f6ede2;
+    --card: #fffdfa;
+    --ink: #2c2620;
+    --ink-soft: #6b5f52;
+    --accent: #b98a52;
+    --accent-dark: #93692f;
+    --accent-soft: #e7d4b8;
+    --line: #e6d8c2;
+    --good: #0ca30c;
+    --critical: #d03b3b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    background:
+      radial-gradient(circle at 50% -10%, #fbf3e7 0%, transparent 55%),
+      linear-gradient(180deg, #f2e6d5 0%, var(--surface) 260px, var(--surface) 100%);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 36px 16px 70px;
+  }
+
+  .invitation {
+    background: var(--card);
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 0 18px 50px rgba(84, 58, 22, 0.14), 0 2px 8px rgba(84, 58, 22, 0.06);
+  }
+
+  .invitation-inner {
+    border: 1.5px solid var(--accent-soft);
+    border-radius: 3px;
+    padding: 44px 30px 36px;
+    position: relative;
+  }
+
+  .invitation-inner::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--accent-soft);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .monogram {
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-size: 28px;
+    color: var(--accent-dark);
+    background: #fffefb;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 22px auto;
+    max-width: 220px;
+    color: var(--accent);
+  }
+
+  .divider .line { flex: 1; height: 1px; background: var(--accent-soft); }
+  .divider .dot { width: 6px; height: 6px; transform: rotate(45deg); background: var(--accent); flex: none; }
+
+  header.hero {
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .eyebrow {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--accent-dark);
+    margin: 0 0 16px;
+  }
+
+  h1.names {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(34px, 9vw, 56px);
+    margin: 0 0 6px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+  }
+
+  .ampersand {
+    display: block;
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-weight: 400;
+    font-size: 0.62em;
+    color: var(--accent);
+    margin: 2px 0;
+  }
+
+  .date-line {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin: 8px 0 0;
+    font-style: italic;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(60, 40, 20, 0.04);
+  }
+
+  .rsvp-section {
+    background: #fbf6ee;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px 24px;
+    margin-top: 4px;
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    .details-grid { grid-template-columns: 1fr; }
+  }
+
+  .details-grid h3 {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin: 0 0 6px;
+  }
+
+  .details-grid p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .message {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0;
+  }
+
+  form h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+    margin: 0 0 6px;
+  }
+
+  form .sub {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+
+  label {
+    display: block;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+
+  .field { margin-bottom: 18px; }
+
+  input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fffefc;
+    color: var(--ink);
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(169, 116, 82, 0.15);
+  }
+
+  textarea { resize: vertical; min-height: 70px; }
+
+  .attend-choice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .attend-choice input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+
+  .attend-choice label.opt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 10px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, color .15s;
+    color: var(--ink-soft);
+  }
+
+  .attend-choice input:checked + label.opt.yes {
+    border-color: var(--good);
+    background: rgba(12, 163, 12, 0.08);
+    color: var(--good);
+  }
+
+  .attend-choice input:checked + label.opt.no {
+    border-color: var(--critical);
+    background: rgba(208, 59, 59, 0.08);
+    color: var(--critical);
+  }
+
+  #guestsField { display: none; }
+
+  button[type="submit"] {
+    width: 100%;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent-dark);
+    color: #fff;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+  button[type="submit"]:hover:not(:disabled) { background: #74472e; }
+
+  .status-msg {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 12px;
+    display: none;
+  }
+
+  .status-msg.error { color: var(--critical); }
+  .status-msg.show { display: block; }
+
+  .thankyou {
+    display: none;
+    text-align: center;
+    padding: 20px 10px 4px;
+  }
+
+  .thankyou h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 28px;
+    margin: 8px 0 6px;
+  }
+
+  .thankyou p {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  footer {
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="invitation">
+<div class="invitation-inner">
+
+  <!-- EDITAR: nombres de la pareja, fecha de la boda, texto de introducción -->
+  <header class="hero">
+    <!-- EDITAR: iniciales para el monograma -->
+    <div class="monogram">J&amp;J</div>
+    <p class="eyebrow">Junto a sus familias</p>
+    <h1 class="names">Jane<span class="ampersand">&amp;</span>John</h1>
+    <p class="date-line">tienen el gusto de invitarte a su boda</p>
+  </header>
+
+  <div class="divider" aria-hidden="true"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <p class="date-line" style="font-size:20px; margin-bottom: 4px;">Sábado, 12 de septiembre de 2026</p>
+
+  <!-- EDITAR: detalles de ceremonia y recepción -->
+  <div class="card">
+    <div class="details-grid">
+      <div>
+        <h3>Ceremonia</h3>
+        <p>4:00 PM<br>Capilla San María<br>Calle Principal 123</p>
+      </div>
+      <div>
+        <h3>Recepción</h3>
+        <p>6:00 PM<br>Jardines Riverside<br>Avenida del Río 456</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="message">
+      Tu presencia significa el mundo para nosotros. Por favor, cuéntanos si podrás
+      acompañarnos antes del <strong>15 de agosto de 2026</strong>.
+    </p>
+  </div>
+
+  <div class="divider" aria-hidden="true"><span class="line"></span><span class="dot"></span><span class="line"></span></div>
+
+  <div class="rsvp-section" id="rsvpCard">
+    <form id="rsvpForm">
+      <h2>Confirmar Asistencia</h2>
+      <p class="sub">Una respuesta por invitación, por favor.</p>
+
+      <div class="field">
+        <label for="name">Nombre Completo *</label>
+        <input type="text" id="name" name="name" required autocomplete="name" placeholder="ej. Alex Rivera">
+      </div>
+
+      <div class="field">
+        <label>¿Podrás asistir? *</label>
+        <div class="attend-choice">
+          <input type="radio" id="attendYes" name="attending" value="yes" required>
+          <label class="opt yes" for="attendYes">✓ Con gusto asistiré</label>
+          <input type="radio" id="attendNo" name="attending" value="no" required>
+          <label class="opt no" for="attendNo">✕ No podré asistir</label>
+        </div>
+      </div>
+
+      <div class="field" id="guestsField">
+        <label for="guests">Número Total de Asistentes (incluyéndote) *</label>
+        <input type="number" id="guests" name="guests" min="1" max="10" value="1">
+      </div>
+
+      <div class="field">
+        <label for="notes">Restricciones Alimentarias / Alergias</label>
+        <textarea id="notes" name="notes" placeholder="ej. vegetariano, alergia a nueces — o déjalo en blanco"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="message">Mensaje para los Novios (opcional)</label>
+        <textarea id="message" name="message" placeholder="Buenos deseos, peticiones de canciones, ¡lo que quieras!"></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn">Enviar Confirmación</button>
+      <p class="status-msg" id="statusMsg"></p>
+    </form>
+
+    <div class="thankyou" id="thankyou">
+      <h2>¡Gracias! 💌</h2>
+      <p id="thankyouText">Tu confirmación ha sido registrada.</p>
+    </div>
+  </div>
+
+  <footer>¿Preguntas? Contacta directamente a Jane o John.</footer>
+
+</div>
+</div>
+</div>
+
+<script>
+  // EDIT ME: paste the Google Apps Script Web App URL from SETUP.md here.
+  const APPS_SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+  const form = document.getElementById('rsvpForm');
+  const guestsField = document.getElementById('guestsField');
+  const guestsInput = document.getElementById('guests');
+  const statusMsg = document.getElementById('statusMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  const thankyou = document.getElementById('thankyou');
+  const thankyouText = document.getElementById('thankyouText');
+
+  form.querySelectorAll('input[name="attending"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      const attending = form.querySelector('input[name="attending"]:checked').value;
+      guestsField.style.display = attending === 'yes' ? 'block' : 'none';
+      guestsInput.required = attending === 'yes';
+    });
+  });
+
+  function showStatus(text, isError) {
+    statusMsg.textContent = text;
+    statusMsg.classList.toggle('error', !!isError);
+    statusMsg.classList.add('show');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusMsg.classList.remove('show');
+
+    if (APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+      showStatus('Configuración incompleta: el formulario aún no está conectado. Ver SETUP.md.', true);
+      return;
+    }
+
+    const attending = form.querySelector('input[name="attending"]:checked')?.value;
+    const name = document.getElementById('name').value.trim();
+
+    if (!name || !attending) {
+      showStatus('Por favor completa tu nombre e indícanos si podrás asistir.', true);
+      return;
+    }
+
+    const payload = new URLSearchParams({
+      name,
+      attending,
+      guests: attending === 'yes' ? (guestsInput.value || '1') : '0',
+      notes: document.getElementById('notes').value.trim(),
+      message: document.getElementById('message').value.trim()
+    });
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: payload });
+      const data = await res.json();
+
+      if (!data.ok) {
+        throw new Error(data.error || 'Algo salió mal.');
+      }
+
+      form.style.display = 'none';
+      thankyouText.textContent = attending === 'yes'
+        ? "¡No podemos esperar a celebrar contigo!"
+        : "Te extrañaremos, pero gracias por avisarnos.";
+      thankyou.style.display = 'block';
+    } catch (err) {
+      showStatus('No se pudo enviar tu confirmación. Por favor intenta de nuevo en un momento.', true);
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar Confirmación';
+    }
+  });
+</script>
+</body>
+</html>
