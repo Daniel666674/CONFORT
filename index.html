@@ -27,34 +27,39 @@
 <style>
 /* ===== TOKENS ===== */
 :root{
-  --navy:#050d1a; --navy2:#0a1e35; --blue:#0b3d6b;
-  --sky:#5bc8ea; --gold:#f2c640; --gold-dk:#c89a00;
-  --cream:#f4f9fe; --cream2:#eef6fd; --cream3:#cde5f5;
-  --text:#0e1a28; --muted:#607080; --border:#cde5f5;
-  --radius:16px;
+  --navy:#0a1c30; --navy2:#0f2a45; --blue:#14497d;
+  --sky:#2b7fb0; --sky-lt:#5bc8ea; --gold:#f2c640; --gold-dk:#b8860b;
+  --bg:#ffffff; --bg2:#f7fafc; --bg3:#eef4f9;
+  --cream:#f7fafc; --cream2:#f7fafc; --cream3:#e3ecf3;
+  --text:#0f1f2e; --muted:#5b6b7c; --border:#e2e8f0;
+  --radius:10px;
+  --sh-sm:0 1px 2px rgba(15,31,46,.06);
+  --sh-md:0 4px 14px rgba(15,31,46,.07);
+  --sh-lg:0 14px 38px rgba(15,31,46,.11);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--navy);overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 /* ===== ANNOUNCEMENT BAR ===== */
-.ann-bar{background:var(--gold);padding:10px 24px;text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:var(--navy);position:relative;overflow:hidden}
-.ann-bar::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:shimmer 2.8s infinite}
+.ann-bar{background:var(--navy);padding:9px 24px;text-align:center;font-size:12px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,.82);position:relative;overflow:hidden}
+
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 /* ===== NAV ===== */
-nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(91,200,234,.1);padding:15px 64px;display:flex;align-items:center;justify-content:space-between;transition:all .3s}
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 64px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .25s}
+nav.stuck{box-shadow:var(--sh-md)}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav-brand .n1{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#fff;letter-spacing:.03em}
-.nav-brand .n1 span{color:var(--gold)}
-.nav-brand .n2{font-size:8.5px;font-weight:600;letter-spacing:.22em;color:var(--sky);text-transform:uppercase;margin-top:1px}
+.nav-brand .n1{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--navy);letter-spacing:.03em}
+.nav-brand .n1 span{color:var(--gold-dk)}
+.nav-brand .n2{font-size:8.5px;font-weight:600;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-top:1px}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
-.nav-links a{color:rgba(255,255,255,.62);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .2s;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--sky);transition:width .25s}
+.nav-links a{color:var(--text);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--gold);transition:width .25s}
 .nav-links a:hover::after{width:100%}
-.nav-links a:hover{color:var(--sky)}
-.nav-wa{display:inline-flex;align-items:center;gap:7px;background:#25d366;color:#fff!important;padding:9px 20px;border-radius:50px;font-size:13px!important;font-weight:700!important;transition:all .2s;white-space:nowrap;text-decoration:none}
-.nav-wa:hover{background:#1db857;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.4)}
+.nav-links a:hover{color:var(--blue)}
+.nav-wa{display:inline-flex;align-items:center;gap:7px;background:#25d366;color:#fff!important;padding:10px 20px;border-radius:6px;font-size:13px!important;font-weight:700!important;transition:all .2s;white-space:nowrap;text-decoration:none}
+.nav-wa:hover{background:#1db857}
 .nav-wa::after{display:none!important}
 
 /* ===== HERO (WP/Shopify split) ===== */
@@ -63,16 +68,16 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:stretch;position:relative;z-index:1}
 .hero-copy{padding:76px 56px 76px max(64px,calc((100vw - 1340px)/2 + 64px));display:flex;flex-direction:column;justify-content:center}
 
-.hero-label{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);background:var(--gold);margin-bottom:22px;padding:7px 14px;border-radius:4px}
+.hero-label{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);background:rgba(242,198,64,.1);border:1px solid rgba(242,198,64,.28);margin-bottom:22px;padding:6px 13px;border-radius:4px}
 .hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,3.7vw,54px);font-weight:300;line-height:1.12;color:#fff;margin-bottom:18px;max-width:13ch}
 .hero-h1 em{font-style:italic;color:var(--gold)}
 .hero-p{font-size:16px;line-height:1.72;color:rgba(255,255,255,.58);max-width:470px;margin-bottom:28px}
 
 .hero-btns{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
-.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:15px 30px;border-radius:4px;font-size:14.5px;font-weight:700;letter-spacing:.02em;text-decoration:none;transition:all .2s}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:15px 30px;border-radius:6px;font-size:14.5px;font-weight:700;letter-spacing:.02em;text-decoration:none;transition:background .2s}
 .btn-gold:hover{background:#ffd75e}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:14.5px;font-weight:600;text-decoration:none;padding:15px 26px;border-radius:4px;border:1.5px solid rgba(255,255,255,.22);transition:all .2s}
-.btn-ghost:hover{border-color:var(--sky);background:rgba(91,200,234,.08)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:14.5px;font-weight:600;text-decoration:none;padding:15px 26px;border-radius:6px;border:1.5px solid rgba(255,255,255,.22);transition:all .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
 
 .hero-reviews{display:flex;align-items:center;gap:11px;margin-bottom:22px}
 .hero-stars{color:var(--gold);font-size:15px;letter-spacing:2px}
@@ -82,74 +87,75 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .hero-proof{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-top:22px;border-top:1px solid rgba(255,255,255,.08)}
 .hero-proof-i{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.55);font-weight:500}
 .hero-proof-i svg{flex-shrink:0}
+.hero-proof-i svg [stroke]{stroke:#5bc8ea}
 .hero-proof-i b{color:#fff;font-weight:700}
 
 .hero-media{position:relative;min-height:540px}
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.hero-pricepill{position:absolute;left:28px;bottom:28px;z-index:2;background:#fff;border-radius:6px;padding:13px 20px;box-shadow:0 10px 30px rgba(0,0,0,.26)}
+.hero-pricepill{position:absolute;left:28px;bottom:28px;z-index:2;background:#fff;border-radius:6px;padding:13px 20px;box-shadow:0 8px 26px rgba(0,0,0,.22)}
 .hero-pricepill .l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
 .hero-pricepill .v{font-size:20px;font-weight:700;color:var(--navy)}
 .hero-pricepill .v span{font-size:12px;color:var(--muted);font-weight:600}
 
 /* ===== TRUST STRIP ===== */
-.trust-strip{background:var(--gold);padding:17px 64px;display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap}
-.ti{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--navy);white-space:nowrap}
-.tdiv{width:1px;height:16px;background:rgba(5,13,26,.2)}
+.trust-strip{background:var(--bg2);border-bottom:1px solid var(--border);padding:15px 64px;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.ti{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--text);white-space:nowrap}
+.tdiv{width:1px;height:14px;background:var(--border)}
 
 /* ===== STATS BAR ===== */
-.stats-bar{background:var(--navy2);padding:34px 64px;border-bottom:1px solid rgba(91,200,234,.07)}
+.stats-bar{background:var(--bg);padding:44px 64px;border-bottom:1px solid var(--border)}
 .stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .stat-item{text-align:center}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#fff;line-height:1;margin-bottom:6px}
-.stat-num span{color:var(--gold)}
-.stat-label{font-size:12.5px;color:rgba(255,255,255,.45);letter-spacing:.08em;font-weight:500;text-transform:uppercase}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:400;color:var(--navy);line-height:1;margin-bottom:6px}
+.stat-num span{color:var(--gold-dk)}
+.stat-label{font-size:11.5px;color:var(--muted);letter-spacing:.1em;font-weight:600;text-transform:uppercase}
 
 /* ===== HOW IT WORKS ===== */
-#how{background:var(--cream2);padding:58px 64px}
+#how{background:var(--bg2);padding:66px 64px;border-bottom:1px solid var(--border)}
 .how-inner{max-width:1100px;margin:0 auto}
 .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px;position:relative}
-.steps-grid::before{content:'';position:absolute;top:46px;left:17%;right:17%;height:1.5px;background:linear-gradient(90deg,transparent,var(--border),transparent);z-index:0}
-.step-card{background:#fff;border-radius:var(--radius);padding:26px 24px;text-align:center;border:1.5px solid var(--border);position:relative;z-index:1;transition:all .35s}
-.step-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(11,61,107,.11);border-color:var(--sky)}
-.step-num{width:60px;height:60px;border-radius:50%;background:var(--gold);color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 6px 20px rgba(242,198,64,.3)}
-.step-icon{font-size:26px;margin-bottom:14px}
-.step-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:10px}
+.steps-grid::before{content:'';position:absolute;top:44px;left:17%;right:17%;height:1px;background:var(--border);z-index:0}
+.step-card{background:#fff;border-radius:var(--radius);padding:30px 26px;text-align:center;border:1px solid var(--border);position:relative;z-index:1;transition:box-shadow .25s,transform .25s;box-shadow:var(--sh-sm)}
+.step-card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+.step-num{width:46px;height:46px;border-radius:50%;background:var(--navy);color:var(--gold);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.step-ico{width:44px;height:44px;margin:0 auto 16px;background:var(--bg3);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.step-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:9px}
 .step-p{font-size:14px;color:var(--muted);line-height:1.68}
 
 /* ===== PRODUCTS ===== */
-#products{background:var(--cream2);padding:58px 0 62px}
+#products{background:var(--bg);padding:66px 0 70px;border-bottom:1px solid var(--border)}
 .products-inner{max-width:1400px;margin:0 auto;padding:0 64px}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;gap:30px}
-.eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sky);margin-bottom:10px}
-.sec-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.4vw,44px);font-weight:300;line-height:1.06;color:var(--navy)}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:10px}
+.sec-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3vw,40px);font-weight:400;line-height:1.14;color:var(--navy);letter-spacing:-.01em}
 .sec-h2 strong{font-weight:600}
-.sec-h2 em{font-style:italic;color:var(--sky)}
-.sec-p{font-size:15.5px;color:var(--muted);line-height:1.68;max-width:420px}
+.sec-h2 em{font-style:italic;color:var(--blue)}
+.sec-p{font-size:15px;color:var(--muted);line-height:1.7;max-width:440px}
 .carousel-nav{display:flex;gap:10px}
-.carousel-arrow{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;flex-shrink:0}
+.carousel-arrow{width:40px;height:40px;border-radius:6px;border:1px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0}
 .carousel-arrow:hover{background:var(--navy);border-color:var(--navy)}
 .carousel-arrow:hover svg path{stroke:white}
 .carousel-wrap{overflow:hidden;border-radius:var(--radius)}
 .carousel-track{display:flex;gap:20px;transition:transform .5s cubic-bezier(.25,.8,.25,1)}
-.pc{min-width:340px;background:#fff;border-radius:var(--radius);border:1.5px solid var(--border);overflow:hidden;transition:all .35s ease;cursor:pointer;flex-shrink:0;position:relative}
-.pc:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(5,13,26,.14);border-color:var(--sky)}
-.pc-badge-popular{position:absolute;top:14px;right:14px;background:var(--gold);color:var(--navy);font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:20px;z-index:2}
-.pc-vis{height:196px;background:linear-gradient(140deg,#eef7fd 0%,#cde5f5 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.pc-vis::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);transform:translateX(-100%);transition:transform .7s ease;z-index:2}
-.pc:hover .pc-vis::before{transform:translateX(160%)}
+.pc{min-width:340px;background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;transition:box-shadow .25s,transform .25s;cursor:pointer;flex-shrink:0;position:relative;box-shadow:var(--sh-sm)}
+.pc:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.pc-badge-popular{position:absolute;top:14px;right:14px;background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:4px;z-index:2}
+.pc-vis{height:200px;background:var(--bg3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+
+
 .pc-vis img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
 .pc:hover .pc-vis img{transform:scale(1.06)}
-.pc-zoom-hint{position:absolute;bottom:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(5,13,26,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:3;opacity:0;transform:scale(.8);transition:all .25s}
+.pc-zoom-hint{position:absolute;bottom:10px;right:10px;width:32px;height:32px;border-radius:6px;background:rgba(10,28,48,.62);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:3;opacity:0;transform:scale(.8);transition:all .25s}
 .pc:hover .pc-zoom-hint{opacity:1;transform:scale(1)}
 .pc-body{padding:22px 24px}
-.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);background:rgba(91,200,234,.1);padding:4px 10px;border-radius:20px;margin-bottom:10px}
-.pc-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--text);margin-bottom:6px}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:var(--bg2);border:1px solid var(--border);padding:4px 9px;border-radius:4px;margin-bottom:11px}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:6px}
 .pc-desc{font-size:13px;color:var(--muted);line-height:1.58;margin-bottom:16px}
 .pc-foot{display:flex;align-items:center;justify-content:space-between}
-.pc-price .from{font-size:10px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.04em}
-.pc-price .amount{font-size:22px;font-weight:700;color:var(--gold-dk);background:rgba(200,154,0,.08);padding:6px 10px;border-radius:6px}
-.pc-btn{background:var(--navy);color:#fff;padding:9px 18px;border-radius:50px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s}
-.pc-btn:hover{background:var(--blue);transform:translateY(-1px)}
+.pc-price .from{font-size:10px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:2px}
+.pc-price .amount{font-size:21px;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+.pc-btn{background:var(--navy);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s}
+.pc-btn:hover{background:var(--blue)}
 .carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
 .dot{width:8px;height:8px;border-radius:50%;background:rgba(91,200,234,.25);cursor:pointer;transition:all .25s}
 .dot.active{background:var(--navy);transform:scale(1.3);width:24px;border-radius:4px}
@@ -176,11 +182,11 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 @media(max-width:640px){.lightbox-box{grid-template-columns:1fr}.lightbox-img{min-height:220px}}
 
 /* ===== WHY US ===== */
-#why{background:var(--navy);padding:62px 64px}
+#why{background:var(--bg);padding:70px 64px;border-bottom:1px solid var(--border)}
 .why-inner{max-width:1100px;margin:0 auto}
-.why-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.why-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.4vw,44px);font-weight:300;color:#fff;margin-bottom:36px}
-.why-h2 em{font-style:italic;color:var(--gold)}
+.why-eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:12px}
+.why-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3vw,40px);font-weight:400;color:var(--navy);margin-bottom:38px;letter-spacing:-.01em}
+.why-h2 em{font-style:italic;color:var(--blue)}
 .alt-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:72px}
 .alt-row:last-child{margin-bottom:0}
 .alt-row.reverse{direction:rtl}
@@ -207,72 +213,72 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .gal-item:hover .gal-label{opacity:1;transform:translateY(0)}
 
 /* ===== SIZES ===== */
-#sizes{background:var(--navy2);padding:46px 64px}
-.sizes-inner{max-width:960px;margin:0 auto;text-align:center;color:#fff}
+#sizes{background:var(--bg2);padding:52px 64px;border-bottom:1px solid var(--border)}
+.sizes-inner{max-width:1100px;margin:0 auto}
 .sizes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
-.sz{border:2px solid rgba(91,200,234,.2);border-radius:var(--radius);padding:18px 14px;text-align:center;cursor:pointer;transition:all .28s;background:rgba(255,255,255,.04)}
-.sz:hover,.sz.on{border-color:var(--sky);background:rgba(91,200,234,.09);box-shadow:0 10px 28px rgba(91,200,234,.18);transform:translateY(-3px)}
+.sz{border:1px solid var(--border);border-radius:var(--radius);padding:18px 14px;text-align:center;cursor:pointer;transition:all .22s;background:#fff;box-shadow:var(--sh-sm)}
+.sz:hover,.sz.on{border-color:var(--navy);box-shadow:var(--sh-md);transform:translateY(-2px)}
 .sz-vis{height:52px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:14px}
-.sz-blk{background:var(--sky);border-radius:4px 4px 0 0;opacity:.65;transition:opacity .25s}
-.sz:hover .sz-blk,.sz.on .sz-blk{opacity:1}
-.sz h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:4px}
-.sz span{font-size:12px;color:rgba(255,255,255,.48)}
+.sz-blk{background:var(--cream3);border-radius:3px 3px 0 0;transition:background .22s}
+.sz:hover .sz-blk,.sz.on .sz-blk{background:var(--navy)}
+.sz h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.sz span{font-size:12px;color:var(--muted)}
 
 /* ===== BUNDLES ===== */
-#bundles{background:var(--navy);padding:62px 64px}
+#bundles{background:var(--bg2);padding:70px 64px;border-bottom:1px solid var(--border)}
 .bundles-inner{max-width:1100px;margin:0 auto}
-.bundle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
-.bundle-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(242,198,64,.2);border-radius:20px;padding:32px 26px;text-align:center;transition:all .35s;position:relative;overflow:hidden}
-.bundle-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,200,234,.06) 0%,rgba(242,198,64,.06) 100%);opacity:0;transition:opacity .3s}
-.bundle-card:hover::before{opacity:1}
-.bundle-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 52px rgba(242,198,64,.12)}
-.bundle-card.featured{border-color:var(--gold);background:rgba(242,198,64,.04)}
-.bundle-popular{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 16px;border-radius:0 0 12px 12px}
-.bundle-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),#e8923a);color:var(--navy);padding:6px 14px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:.08em;margin-bottom:14px;text-transform:uppercase}
-.bundle-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:8px}
-.bundle-desc{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.6}
-.bundle-items{font-size:12.5px;color:rgba(255,255,255,.45);margin-bottom:18px;padding:12px;background:rgba(0,0,0,.25);border-radius:10px;line-height:1.9}
-.bundle-price-old{font-size:13px;color:rgba(255,255,255,.38);text-decoration:line-through;margin-bottom:2px}
-.bundle-price-new{font-size:28px;font-weight:700;color:var(--gold);margin-bottom:18px;line-height:1}
-.bundle-price-new small{font-size:14px;font-weight:400;color:rgba(255,255,255,.4)}
-.bundle-cta{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:12px 24px;border-radius:50px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;position:relative;z-index:1}
-.bundle-cta:hover{background:#fde68a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(242,198,64,.3)}
+.bundle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px}
+.bundle-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:34px 26px;text-align:center;transition:box-shadow .25s,transform .25s;position:relative;overflow:hidden;box-shadow:var(--sh-sm)}
+
+
+.bundle-card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+.bundle-card.featured{border:1.5px solid var(--navy);box-shadow:var(--sh-md)}
+.bundle-popular{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 16px;border-radius:0 0 6px 6px}
+.bundle-badge{display:inline-block;background:var(--bg3);color:var(--blue);padding:5px 12px;border-radius:4px;font-size:10.5px;font-weight:700;letter-spacing:.08em;margin-bottom:14px;text-transform:uppercase}
+.bundle-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.bundle-desc{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.62}
+.bundle-items{font-size:12.5px;color:var(--muted);margin-bottom:20px;padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;line-height:1.9;text-align:left}
+.bundle-price-old{font-size:13px;color:var(--muted);text-decoration:line-through;margin-bottom:2px}
+.bundle-price-new{font-size:28px;font-weight:700;color:var(--navy);margin-bottom:20px;line-height:1}
+.bundle-price-new small{font-size:13px;font-weight:500;color:var(--muted)}
+.bundle-cta{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;padding:12px 26px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;transition:background .2s;position:relative;z-index:1}
+.bundle-cta:hover{background:var(--blue)}
 
 /* ===== TESTIMONIALS ===== */
-#testi{background:var(--cream2);padding:58px 0;overflow:hidden}
+#testi{background:var(--bg);padding:66px 0;overflow:hidden;border-bottom:1px solid var(--border)}
 .testi-head{max-width:1200px;margin:0 auto 28px;padding:0 64px;text-align:center}
 .testi-marquee-wrap{position:relative;overflow:hidden}
 .testi-marquee-wrap::before,.testi-marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:140px;z-index:2;pointer-events:none}
-.testi-marquee-wrap::before{left:0;background:linear-gradient(to right,var(--cream2),transparent)}
-.testi-marquee-wrap::after{right:0;background:linear-gradient(to left,var(--cream2),transparent)}
+.testi-marquee-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.testi-marquee-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
 .testi-track{display:flex;gap:18px;width:max-content;padding:8px 0 20px;animation:testiScroll 58s linear infinite}
 .testi-track:hover{animation-play-state:paused}
 @keyframes testiScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.tc{display:inline-flex;flex-direction:column;gap:12px;background:#fff;border-radius:var(--radius);border:1.5px solid var(--border);padding:24px 26px;width:310px;flex-shrink:0;box-shadow:0 4px 24px rgba(11,61,107,.06);transition:transform .25s,box-shadow .25s;cursor:default;vertical-align:top}
-.tc:hover{transform:translateY(-5px);box-shadow:0 16px 44px rgba(11,61,107,.13);border-color:var(--sky)}
-.tc-stars{color:var(--gold);font-size:13px;letter-spacing:3px}
+.tc{display:inline-flex;flex-direction:column;gap:12px;background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:24px 26px;width:310px;flex-shrink:0;box-shadow:var(--sh-sm);transition:transform .25s,box-shadow .25s;cursor:default;vertical-align:top}
+.tc:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+.tc-stars{color:var(--gold-dk);font-size:13px;letter-spacing:3px}
 .tc-text{font-size:13.5px;line-height:1.68;color:var(--muted);font-style:italic;flex:1}
 .tc-auth{display:flex;align-items:center;gap:10px;margin-top:4px}
-.avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--sky),var(--blue));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:11px}
+.avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:11px}
 .auth-name{font-weight:600;font-size:13px;color:var(--text)}
 .auth-loc{font-size:11px;color:var(--muted)}
 
 /* ===== CONTACT FORM ===== */
-#contact{background:linear-gradient(135deg,var(--navy2) 0%,var(--navy) 100%);padding:64px 64px}
+#contact{background:var(--bg2);padding:70px 64px}
 .contact-inner{max-width:780px;margin:0 auto}
-.contact-form{background:rgba(255,255,255,.04);border:1.5px solid rgba(91,200,234,.12);border-radius:20px;padding:32px 30px}
+.contact-form{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:32px 30px;box-shadow:var(--sh-md)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form-group{display:flex;flex-direction:column;gap:8px}
-.form-group label{font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.form-group input,.form-group textarea,.form-group select{background:rgba(255,255,255,.06);border:1.5px solid rgba(91,200,234,.15);border-radius:10px;padding:13px 16px;color:#fff;font-size:14.5px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,background .2s;width:100%}
-.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.3)}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--sky);background:rgba(91,200,234,.07)}
+.form-group label{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.form-group input,.form-group textarea,.form-group select{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:13px 15px;color:var(--text);font-size:14.5px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,background .2s;width:100%}
+.form-group input::placeholder,.form-group textarea::placeholder{color:#9aa8b6}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--navy);background:#fff}
 .form-group textarea{resize:vertical;min-height:100px}
-.form-submit{width:100%;background:var(--gold);color:var(--navy);border:none;padding:16px;border-radius:50px;font-size:16px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .25s;margin-top:8px}
-.form-submit:hover{background:#fde68a;transform:translateY(-2px);box-shadow:0 12px 32px rgba(242,198,64,.35)}
+.form-submit{width:100%;background:var(--navy);color:#fff;border:none;padding:15px;border-radius:6px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .2s;margin-top:8px}
+.form-submit:hover{background:var(--blue)}
 .form-message{display:none;padding:12px 16px;border-radius:10px;font-size:14px;margin-top:12px;text-align:center}
-.form-message.success{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);color:#86efac}
-.form-message.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#fca5a5}
+.form-message.success{background:#e8f7ee;border:1px solid #a7e0bd;color:#15803d}
+.form-message.error{background:#fdeaea;border:1px solid #f3b5b5;color:#b91c1c}
 
 /* ===== PAYMENTS ===== */
 #pays{background:var(--navy);padding:70px 64px}
@@ -281,8 +287,8 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .pays-h2 strong{font-weight:600}
 .pays-sub{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:36px}
 .pays-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
-.pay-chip{display:flex;align-items:center;gap:8px;padding:11px 22px;border:1.5px solid rgba(91,200,234,.18);border-radius:50px;font-size:14px;font-weight:600;color:rgba(255,255,255,.65);background:rgba(91,200,234,.05);transition:all .22s}
-.pay-chip:hover{border-color:var(--sky);color:#fff;background:rgba(91,200,234,.1)}
+.pay-chip{display:flex;align-items:center;gap:7px;padding:9px 16px;border:1px solid rgba(255,255,255,.16);border-radius:5px;font-size:13px;font-weight:600;color:rgba(255,255,255,.78);background:rgba(255,255,255,.05);transition:all .2s}
+.pay-chip:hover{border-color:rgba(255,255,255,.4);color:#fff}
 
 /* ===== CTA ===== */
 #cta{background:linear-gradient(135deg,var(--navy) 0%,#0b3254 100%);text-align:center;padding:108px 64px;position:relative;overflow:hidden}
@@ -293,71 +299,72 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 #cta h2 em{font-style:italic;color:var(--gold)}
 #cta p{font-size:17px;color:rgba(255,255,255,.52);margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
 .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-wa-big{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:17px 38px;border-radius:50px;font-size:16px;font-weight:700;text-decoration:none;box-shadow:0 8px 28px rgba(37,211,102,.4);transition:all .25s}
-.btn-wa-big:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(37,211,102,.52)}
-.btn-outline-lt{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.65);padding:17px 38px;border-radius:50px;font-size:16px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,.18);transition:all .25s}
-.btn-outline-lt:hover{border-color:rgba(255,255,255,.52);color:#fff;background:rgba(255,255,255,.04)}
-.addr-chip{margin-top:32px;display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border:1px solid rgba(91,200,234,.18);border-radius:50px;font-size:14px;color:rgba(255,255,255,.42)}
+.btn-wa-big{display:inline-flex;align-items:center;gap:9px;background:#25d366;color:#fff;padding:14px 26px;border-radius:6px;font-size:15px;font-weight:700;text-decoration:none;transition:background .2s}
+.btn-wa-big:hover{background:#1db857}
+.btn-outline-lt{display:inline-flex;align-items:center;gap:8px;color:#fff;padding:14px 26px;border-radius:6px;font-size:15px;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,.22);transition:all .2s}
+.btn-outline-lt:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
+.addr-chip{display:inline-flex;align-items:center;gap:9px;padding:10px 16px;border:1px solid rgba(255,255,255,.14);border-radius:5px;font-size:13px;color:rgba(255,255,255,.6)}
 
 /* ===== FOOTER ===== */
 footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding:52px 64px 24px}
 .foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;margin-bottom:34px}
-.foot-about p{font-size:14px;line-height:1.74;color:rgba(255,255,255,.36);margin-top:16px;max-width:260px}
+.foot-about p{font-size:14px;line-height:1.74;color:rgba(255,255,255,.55);margin-top:16px;max-width:260px}
 .foot-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#fff}
 .foot-brand span{color:var(--gold)}
-.foot-sub{font-size:8.5px;letter-spacing:.22em;color:rgba(255,255,255,.28);text-transform:uppercase;margin-top:2px}
+.foot-sub{font-size:8.5px;letter-spacing:.2em;color:rgba(255,255,255,.45);text-transform:uppercase;margin-top:3px}
 .foot-col h4{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#fff;margin-bottom:18px}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-.foot-col ul li a{color:rgba(255,255,255,.36);text-decoration:none;font-size:14px;transition:color .2s}
-.foot-col ul li a:hover{color:var(--sky)}
-.foot-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding-top:22px;border-top:1px solid rgba(255,255,255,.05);font-size:13px;color:rgba(255,255,255,.26)}
-.foot-bottom a{color:rgba(91,200,234,.6);text-decoration:none}
-.trust-badges{background:rgba(5,13,26,.85);padding:18px 64px;border-top:1px solid rgba(91,200,234,.07);display:flex;justify-content:center;gap:44px;flex-wrap:wrap;text-align:center;font-size:11px;color:rgba(255,255,255,.42)}
+.foot-col ul li a{color:rgba(255,255,255,.6);text-decoration:none;font-size:14px;transition:color .2s}
+.foot-col ul li a:hover{color:var(--gold)}
+.foot-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.45)}
+.foot-bottom a{color:rgba(255,255,255,.55);text-decoration:none}
+.trust-badges{background:rgba(0,0,0,.28);padding:16px 64px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:center;gap:44px;flex-wrap:wrap;text-align:center;font-size:11px;color:rgba(255,255,255,.55)}
 .trust-badges>div{display:flex;flex-direction:column;align-items:center;gap:7px}
 
 
 /* ===== WP-STYLE TABS ===== */
-.wp-tabs{display:flex;gap:4px;border-bottom:2px solid var(--border);margin-bottom:28px;flex-wrap:wrap}
-.wp-tab{background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--muted);cursor:pointer;transition:all .2s;border-radius:8px 8px 0 0}
-.wp-tab:hover{color:var(--navy);background:rgba(11,61,107,.04)}
-.wp-tab.on{color:var(--navy);border-bottom-color:var(--gold);background:rgba(242,198,64,.08)}
+.wp-tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin-bottom:30px;flex-wrap:wrap}
+.wp-tab{background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;padding:11px 4px;margin-right:22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:.01em;color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s}
+.wp-tab:hover{color:var(--navy)}
+.wp-tab.on{color:var(--navy);border-bottom-color:var(--navy);background:transparent}
 .wp-panel{display:none;animation:fadein .4s ease both}
 .wp-panel.on{display:block}
 
 /* ===== SIZES BAND ===== */
 .sizes-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;text-align:left}
-.sizes-help{color:var(--sky);font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}
-.sizes-help:hover{color:var(--gold)}
+.sizes-help{color:var(--blue);font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}
+.sizes-help:hover{color:var(--gold-dk)}
 
 /* ===== WHY CARDS ===== */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
-.why-card{background:rgba(91,200,234,.05);border:1px solid rgba(91,200,234,.13);border-radius:18px;padding:30px 26px;transition:all .3s}
-.why-card:hover{transform:translateY(-5px);border-color:rgba(242,198,64,.35);background:rgba(91,200,234,.08)}
-.why-ico{width:58px;height:58px;background:rgba(242,198,64,.1);border:1px solid rgba(242,198,64,.22);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.why-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:10px}
-.why-card p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.7}
+.why-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;transition:box-shadow .25s,transform .25s;box-shadow:var(--sh-sm)}
+.why-card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+.why-ico{width:50px;height:50px;background:var(--bg3);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.why-card h3{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:var(--navy);margin-bottom:9px}
+.why-card p{font-size:14px;color:var(--muted);line-height:1.72}
 
 /* ===== CONTACT 2-COL ===== */
 .contact-inner{max-width:1200px;margin:0 auto}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:stretch}
+.contact-side{background:var(--navy);border-radius:var(--radius);padding:38px 34px;color:#fff}
 .contact-side .cta-btns{display:flex;gap:12px;flex-wrap:wrap}
 .contact-side .pays-row{display:flex;gap:9px;flex-wrap:wrap}
-.contact-side .pay-chip{font-size:12.5px;padding:8px 15px}
+.contact-side .pay-chip{font-size:12.5px;padding:8px 14px}
 
 /* ===== BACK TO TOP ===== */
-.to-top{position:fixed;bottom:100px;right:30px;z-index:997;width:44px;height:44px;border-radius:10px;background:var(--navy2);border:1px solid rgba(91,200,234,.22);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.to-top{position:fixed;bottom:100px;right:30px;z-index:997;width:42px;height:42px;border-radius:6px;background:var(--navy);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;box-shadow:var(--sh-md)}
 .to-top.show{opacity:1;pointer-events:auto}
-.to-top:hover{background:var(--gold);color:var(--navy);transform:translateY(-3px)}
+.to-top:hover{background:var(--blue);transform:translateY(-2px)}
 
 /* ===== WA FLOAT ===== */
-.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.48);transition:transform .2s}
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,.36);transition:transform .2s}
 .wa-float:hover{transform:scale(1.1)}
-.wa-float::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:rgba(37,211,102,.2);animation:wa-pulse 2.4s ease-out infinite}
+
 @keyframes wa-pulse{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.55);opacity:0}}
 
 /* ===== MOBILE STICKY CTA ===== */
-.mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;padding:14px 20px;background:var(--navy2);border-top:1px solid rgba(91,200,234,.15);gap:10px}
-.mobile-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s}
+.mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;padding:12px 16px;background:#fff;border-top:1px solid var(--border);gap:10px;box-shadow:0 -2px 14px rgba(15,31,46,.08)}
+.mobile-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:6px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s}
 .mobile-cta .mcta-wa{background:#25d366;color:#fff}
 .mobile-cta .mcta-tel{background:rgba(91,200,234,.12);color:var(--sky);border:1.5px solid rgba(91,200,234,.3)}
 
@@ -498,7 +505,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   <div class="tdiv"></div>
   <div class="ti"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="3" stroke="#050d1a" stroke-width="2"/><path d="M1 10h22" stroke="#050d1a" stroke-width="2"/></svg>Pago en Cuotas</div>
   <div class="tdiv"></div>
-  <div class="ti">⭐ 4.9/5 · 147 Reseñas</div>
+  <div class="ti">4.9/5 · 147 Reseñas</div>
 </div>
 
 <!-- STATS BAR -->
@@ -517,7 +524,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       <div class="stat-label">Reseñas verificadas</div>
     </div>
     <div class="stat-item rev">
-      <div class="stat-num">4.<span>9</span><span style="font-size:28px;color:rgba(255,255,255,.4)">/5</span></div>
+      <div class="stat-num">4.<span>9</span><span style="font-size:26px;color:var(--muted)">/5</span></div>
       <div class="stat-label">Rating promedio</div>
     </div>
   </div>
@@ -534,19 +541,19 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 <div class="steps-grid">
       <div class="step-card rev">
         <div class="step-num">01</div>
-        <div style="font-size:28px;margin-bottom:10px">💬</div>
+        <div class="step-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#14497d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="step-h">Cotiza por WhatsApp</div>
         <p class="step-p">Escríbenos con la medida y presupuesto. Un asesor te responde en menos de 2 horas con opciones personalizadas.</p>
       </div>
       <div class="step-card rev">
         <div class="step-num">02</div>
-        <div style="font-size:28px;margin-bottom:10px">✅</div>
+        <div class="step-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#14497d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke="#14497d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="step-h">Confirma y Paga</div>
         <p class="step-p">Elige tu colchón, acuerda el método de pago (efectivo, transferencia o cuotas) y coordina la fecha de entrega.</p>
       </div>
       <div class="step-card rev">
         <div class="step-num">03</div>
-        <div style="font-size:28px;margin-bottom:10px">🚚</div>
+        <div class="step-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="14" height="12" rx="2" stroke="#14497d" stroke-width="1.6"/><path d="M15 8h4l3 5v3h-7V8z" stroke="#14497d" stroke-width="1.6"/><circle cx="5.5" cy="18.5" r="2.3" stroke="#14497d" stroke-width="1.6"/><circle cx="18" cy="18.5" r="2.3" stroke="#14497d" stroke-width="1.6"/></svg></div>
         <div class="step-h">Recíbelo en Casa</div>
         <p class="step-p">Nuestro equipo entrega e instala tu colchón en la habitación sin costo. Envío express disponible en 24–48h.</p>
       </div>
@@ -587,27 +594,27 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 
         <div class="pc rev" data-lightbox data-img="images/colchones/colchon-doble-lifestyle.jpg" data-name="Colchón Doble" data-desc="140 × 190 cm · Resortes templados con foam viscoelástico. Máximo soporte." data-price="Desde $480.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20Doble">
           <div class="pc-vis"><img src="images/colchones/colchon-doble-lifestyle.jpg" alt="Colchón Doble 140x190 cm" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="pc-body"><div class="badge" style="color:#0b3d6b;background:rgba(11,61,107,.08)">Parejas</div><div class="pc-name">Colchón Doble</div><div class="pc-desc">140 × 190 cm · Resortes templados con foam viscoelástico. Máximo soporte.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$480.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20Doble" class="pc-btn">Cotizar →</a></div></div>
+          <div class="pc-body"><div class="badge">Parejas</div><div class="pc-name">Colchón Doble</div><div class="pc-desc">140 × 190 cm · Resortes templados con foam viscoelástico. Máximo soporte.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$480.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20Doble" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
         <div class="pc rev" data-lightbox data-img="images/colchones/colchon-queen-pillowtop.jpg" data-name="Colchón Queen" data-desc="160 × 190 cm · Memory foam premium con zonas de presión diferencial." data-price="Desde $680.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20Queen">
           <div class="pc-vis"><img src="images/colchones/colchon-queen-pillowtop.jpg" alt="Colchón Queen 160x190 cm premium pillow top" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="pc-body"><div class="badge" style="color:var(--gold-dk);background:rgba(242,198,64,.12)">⭐ Premium</div><div class="pc-name">Colchón Queen</div><div class="pc-desc">160 × 190 cm · Memory foam premium con zonas de presión diferencial.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$680.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20Queen" class="pc-btn" style="background:var(--gold-dk)">Cotizar →</a></div></div>
+          <div class="pc-body"><div class="badge">Premium</div><div class="pc-name">Colchón Queen</div><div class="pc-desc">160 × 190 cm · Memory foam premium con zonas de presión diferencial.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$680.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20Queen" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
         <div class="pc rev" data-lightbox data-img="images/colchones/colchon-king-lifestyle.jpg" data-name="Colchón King" data-desc="200 × 200 cm · El rey del descanso. Lujo máximo para el hogar más exigente." data-price="Desde $950.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20King">
           <div class="pc-vis"><img src="images/colchones/colchon-king-lifestyle.jpg" alt="Colchón King 200x200 cm" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="pc-body"><div class="badge" style="color:#5bc8ea;background:rgba(91,200,234,.1)">Exclusivo</div><div class="pc-name">Colchón King</div><div class="pc-desc">200 × 200 cm · El rey del descanso. Lujo máximo para el hogar más exigente.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$950.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20King" class="pc-btn">Cotizar →</a></div></div>
+          <div class="pc-body"><div class="badge">Exclusivo</div><div class="pc-name">Colchón King</div><div class="pc-desc">200 × 200 cm · El rey del descanso. Lujo máximo para el hogar más exigente.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$950.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Colchón%20King" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
         <div class="pc rev" data-lightbox data-img="images/colchones/showroom-real-bogota.jpg" data-name="Conjunto Base + Colchón" data-desc="Base cajón o dividida + colchón a elegir. La solución completa en un precio." data-price="Desde $750.000" data-wa="https://wa.me/573001234567?text=Cotización%20Conjunto%20Base">
           <div class="pc-vis"><img src="images/colchones/showroom-real-bogota.jpg" alt="Conjunto base y colchón entregado en Bogotá" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="pc-body"><div class="badge" style="color:#1a7a3c;background:rgba(26,122,60,.09)">Ahorra Más</div><div class="pc-name">Conjunto Base + Colchón</div><div class="pc-desc">Base cajón o dividida + colchón a elegir. La solución completa en un precio.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$750.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Conjunto%20Base" class="pc-btn">Cotizar →</a></div></div>
+          <div class="pc-body"><div class="badge">Ahorra Más</div><div class="pc-name">Conjunto Base + Colchón</div><div class="pc-desc">Base cajón o dividida + colchón a elegir. La solución completa en un precio.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$750.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Conjunto%20Base" class="pc-btn">Cotizar →</a></div></div>
         </div>
 
         <div class="pc rev" data-lightbox data-img="images/colchones/colchon-medidas.jpg" data-name="Medidas Especiales" data-desc="¿Tu cama tiene medidas atípicas? Fabricamos el colchón exacto. Sin restricciones." data-price="Precio a consultar" data-wa="https://wa.me/573001234567?text=Necesito%20medida%20especial">
           <div class="pc-vis"><img src="images/colchones/colchon-medidas.jpg" alt="Colchón fabricado a medida especial" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-          <div class="pc-body"><div class="badge" style="color:#7b5fb4;background:rgba(155,127,212,.1)">Personalizado</div><div class="pc-name">Medidas Especiales</div><div class="pc-desc">¿Tu cama tiene medidas atípicas? Fabricamos el colchón exacto. Sin restricciones.</div><div class="pc-foot"><div class="pc-price"><span class="from">Precio</span><span class="amount">Consultar</span></div><a href="https://wa.me/573001234567?text=Necesito%20medida%20especial" class="pc-btn" style="background:#7b5fb4">Consultar →</a></div></div>
+          <div class="pc-body"><div class="badge">Personalizado</div><div class="pc-name">Medidas Especiales</div><div class="pc-desc">¿Tu cama tiene medidas atípicas? Fabricamos el colchón exacto. Sin restricciones.</div><div class="pc-foot"><div class="pc-price"><span class="from">Precio</span><span class="amount">Consultar</span></div><a href="https://wa.me/573001234567?text=Necesito%20medida%20especial" class="pc-btn">Consultar →</a></div></div>
         </div>
 
       </div>
@@ -626,27 +633,27 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-gris-premium.jpg" data-name="Cama Tapizada Gris Premium" data-desc="Cabecero acolchado en gris con base para almacenamiento. Incluye banca a juego." data-price="Desde $780.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Gris%20Premium">
         <div class="pc-badge-popular">Más Vendida</div>
         <div class="pc-vis"><img src="images/camas/cama-tapizada-gris-premium.jpg" alt="Cama tapizada gris premium con banca" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        <div class="pc-body"><div class="badge" style="color:var(--gold-dk);background:rgba(242,198,64,.12)">⭐ Premium</div><div class="pc-name">Cama Tapizada Gris Premium</div><div class="pc-desc">Cabecero acolchado en gris con base para almacenamiento. Incluye banca a juego.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$780.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Gris%20Premium" class="pc-btn" style="background:var(--gold-dk)">Cotizar →</a></div></div>
+        <div class="pc-body"><div class="badge">Premium</div><div class="pc-name">Cama Tapizada Gris Premium</div><div class="pc-desc">Cabecero acolchado en gris con base para almacenamiento. Incluye banca a juego.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$780.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Gris%20Premium" class="pc-btn">Cotizar →</a></div></div>
       </div>
 
       <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-azul-navy.jpg" data-name="Cama Tapizada Azul Navy" data-desc="Cabecero de canales en terciopelo azul navy. Un statement elegante para el cuarto." data-price="Desde $690.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Azul%20Navy">
         <div class="pc-vis"><img src="images/camas/cama-tapizada-azul-navy.jpg" alt="Cama tapizada azul navy con cabecero de canales" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        <div class="pc-body"><div class="badge" style="color:#5bc8ea;background:rgba(91,200,234,.1)">Exclusivo</div><div class="pc-name">Cama Tapizada Azul Navy</div><div class="pc-desc">Cabecero de canales en terciopelo azul navy. Un statement elegante para el cuarto.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$690.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Azul%20Navy" class="pc-btn">Cotizar →</a></div></div>
+        <div class="pc-body"><div class="badge">Exclusivo</div><div class="pc-name">Cama Tapizada Azul Navy</div><div class="pc-desc">Cabecero de canales en terciopelo azul navy. Un statement elegante para el cuarto.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$690.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Azul%20Navy" class="pc-btn">Cotizar →</a></div></div>
       </div>
 
       <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-negra.jpg" data-name="Cama Tapizada Negra" data-desc="Cabecero capitoné en negro, líneas minimalistas. Combina con cualquier decoración." data-price="Desde $640.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Negra">
         <div class="pc-vis"><img src="images/camas/cama-tapizada-negra.jpg" alt="Cama tapizada negra con cabecero capitoné" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        <div class="pc-body"><div class="badge" style="color:#0b3d6b;background:rgba(11,61,107,.08)">Minimalista</div><div class="pc-name">Cama Tapizada Negra</div><div class="pc-desc">Cabecero capitoné en negro, líneas minimalistas. Combina con cualquier decoración.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$640.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Negra" class="pc-btn">Cotizar →</a></div></div>
+        <div class="pc-body"><div class="badge">Minimalista</div><div class="pc-name">Cama Tapizada Negra</div><div class="pc-desc">Cabecero capitoné en negro, líneas minimalistas. Combina con cualquier decoración.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$640.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Cama%20Negra" class="pc-btn">Cotizar →</a></div></div>
       </div>
 
       <div class="pc rev" data-lightbox data-img="images/camas/base-almacenamiento-elevable.jpg" data-name="Base con Almacenamiento Elevable" data-desc="Base elevable a gas para guardar cobijas y maletas debajo del colchón. Máximo aprovechamiento del espacio." data-price="Desde $580.000" data-wa="https://wa.me/573001234567?text=Cotización%20Base%20con%20Almacenamiento">
         <div class="pc-vis"><img src="images/camas/base-almacenamiento-elevable.jpg" alt="Base de cama elevable con almacenamiento" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        <div class="pc-body"><div class="badge" style="color:#1a7a3c;background:rgba(26,122,60,.09)">Ahorra Espacio</div><div class="pc-name">Base con Almacenamiento</div><div class="pc-desc">Base elevable a gas para guardar cobijas y maletas debajo del colchón.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$580.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Base%20con%20Almacenamiento" class="pc-btn">Cotizar →</a></div></div>
+        <div class="pc-body"><div class="badge">Ahorra Espacio</div><div class="pc-name">Base con Almacenamiento</div><div class="pc-desc">Base elevable a gas para guardar cobijas y maletas debajo del colchón.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$580.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Base%20con%20Almacenamiento" class="pc-btn">Cotizar →</a></div></div>
       </div>
 
       <div class="pc rev" data-lightbox data-img="images/camas/base-cama-gris.jpg" data-name="Base Clásica Gris" data-desc="Base tapizada gris, sencilla y resistente. La opción más económica para tu colchón." data-price="Desde $320.000" data-wa="https://wa.me/573001234567?text=Cotización%20Base%20Clásica">
         <div class="pc-vis"><img src="images/camas/base-cama-gris.jpg" alt="Base de cama gris clásica" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        <div class="pc-body"><div class="badge" style="color:#7b5fb4;background:rgba(155,127,212,.1)">Económica</div><div class="pc-name">Base Clásica Gris</div><div class="pc-desc">Base tapizada gris, sencilla y resistente. La opción más económica para tu colchón.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$320.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Base%20Clásica" class="pc-btn" style="background:#7b5fb4">Cotizar →</a></div></div>
+        <div class="pc-body"><div class="badge">Económica</div><div class="pc-name">Base Clásica Gris</div><div class="pc-desc">Base tapizada gris, sencilla y resistente. La opción más económica para tu colchón.</div><div class="pc-foot"><div class="pc-price"><span class="from">Desde</span><span class="amount">$320.000</span></div><a href="https://wa.me/573001234567?text=Cotización%20Base%20Clásica" class="pc-btn">Cotizar →</a></div></div>
       </div>
 
     </div>
@@ -701,8 +708,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   <div class="sizes-inner">
     <div class="sizes-head">
       <div>
-        <div class="eyebrow" style="color:var(--sky)">Guía de Medidas</div>
-        <h2 class="sec-h2" style="color:#fff">¿Qué tamaño <strong>necesitas?</strong></h2>
+        <div class="eyebrow">Guía de Medidas</div>
+        <h2 class="sec-h2">¿Qué tamaño <strong>necesitas?</strong></h2>
       </div>
       <a href="https://wa.me/573001234567?text=Ayúdenme%20a%20elegir%20la%20medida" class="sizes-help">¿Dudas? Te asesoramos →</a>
     </div>
@@ -723,17 +730,17 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 
     <div class="why-grid">
       <div class="why-card rev">
-        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.39 8.26L21 9.27L16.5 13.64L17.77 20.23L12 17.27L6.23 20.23L7.5 13.64L3 9.27L9.61 8.26L12 2Z" fill="#f2c640"/></svg></div>
+        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.39 8.26L21 9.27L16.5 13.64L17.77 20.23L12 17.27L6.23 20.23L7.5 13.64L3 9.27L9.61 8.26L12 2Z" fill="#b8860b"/></svg></div>
         <h3>Calidad Garantizada</h3>
         <p>Control de calidad riguroso, materiales certificados y garantía de 2 años en cada compra.</p>
       </div>
       <div class="why-card rev">
-        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#f2c640" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="#f2c640" stroke-width="2"/></svg></div>
+        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#14497d" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="#14497d" stroke-width="2"/></svg></div>
         <h3>Fabricación Local</h3>
         <p>Producimos en Bogotá y vendemos directo, sin intermediarios. Más calidad por menos dinero.</p>
       </div>
       <div class="why-card rev">
-        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="1" y="3" width="15" height="13" rx="2" stroke="#f2c640" stroke-width="2"/><path d="M16 8h4l3 5v3h-7V8z" stroke="#f2c640" stroke-width="2"/><circle cx="5.5" cy="18.5" r="2.5" stroke="#f2c640" stroke-width="2"/><circle cx="18.5" cy="18.5" r="2.5" stroke="#f2c640" stroke-width="2"/></svg></div>
+        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="1" y="3" width="15" height="13" rx="2" stroke="#14497d" stroke-width="2"/><path d="M16 8h4l3 5v3h-7V8z" stroke="#14497d" stroke-width="2"/><circle cx="5.5" cy="18.5" r="2.5" stroke="#14497d" stroke-width="2"/><circle cx="18.5" cy="18.5" r="2.5" stroke="#14497d" stroke-width="2"/></svg></div>
         <h3>Entrega e Instalación Gratis</h3>
         <p>Llevamos e instalamos en la habitación sin costo en Bogotá y la Sabana, en el horario que elijas.</p>
       </div>
@@ -761,7 +768,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       </div>
 
       <div class="bundle-card featured rev">
-        <div class="bundle-popular">⭐ Más Popular</div>
+        <div class="bundle-popular">Más Popular</div>
         <div style="padding-top:14px">
           <div class="bundle-badge">15% descuento</div>
           <div class="bundle-title">Pack Queen Deluxe</div>
@@ -822,8 +829,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   <div class="contact-inner">
     <div class="contact-grid">
       <div class="contact-side">
-        <div class="eyebrow" style="color:var(--sky);display:block;margin-bottom:10px">Contáctanos hoy</div>
-        <h2 class="why-h2" style="margin-bottom:14px">¿Listo para <em>dormir mejor?</em></h2>
+        <div class="eyebrow" style="color:var(--gold);display:block;margin-bottom:10px">Contáctanos hoy</div>
+        <h2 class="why-h2" style="margin-bottom:14px;color:#fff;font-size:clamp(28px,2.6vw,36px)">¿Listo para <em style="color:var(--gold)">dormir mejor?</em></h2>
         <p style="color:rgba(255,255,255,.48);font-size:15px;line-height:1.7;margin-bottom:26px">Escríbenos por WhatsApp y un asesor te ayuda a elegir el colchón perfecto en menos de 5 minutos. Asesoría sin costo.</p>
         <div class="cta-btns" style="justify-content:flex-start">
           <a href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20conocer%20sus%20colchones" class="btn-wa-big">
@@ -840,11 +847,11 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
           Showroom Bogotá · Lun–Sáb 9am–6pm · Dom 9am–3pm
         </div>
         <div class="pays-row" style="margin-top:26px;justify-content:flex-start">
-          <div class="pay-chip">💵 Efectivo</div>
-          <div class="pay-chip">🏦 Transferencia</div>
-          <div class="pay-chip">💳 Tarjeta</div>
-          <div class="pay-chip">📱 Nequi / Daviplata</div>
-          <div class="pay-chip">🔄 Cuotas</div>
+          <div class="pay-chip">Efectivo</div>
+          <div class="pay-chip">Transferencia</div>
+          <div class="pay-chip">Tarjeta</div>
+          <div class="pay-chip">Nequi / Daviplata</div>
+          <div class="pay-chip">Cuotas</div>
         </div>
       </div>
       <div class="contact-formwrap">
@@ -869,7 +876,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       </div>
       <div class="form-message" id="form-message"></div>
       <button type="submit" class="form-submit">Enviar Consulta →</button>
-      <p style="font-size:12px;color:rgba(255,255,255,.3);margin-top:14px">O escríbenos directo por <a href="https://wa.me/573001234567" style="color:var(--sky)">WhatsApp</a></p>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:14px;text-align:center">O escríbenos directo por <a href="https://wa.me/573001234567" style="color:var(--blue);font-weight:600">WhatsApp</a></p>
     </form>
       </div>
     </div>
@@ -924,7 +931,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 
 <!-- TRUST BADGES -->
 <div class="trust-badges">
-  <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.3 3.75 10.2 9 11.25C17.25 22.2 21 17.3 21 12V7L12 2z" stroke="#f2c640" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#f2c640" stroke-width="1.5" stroke-linecap="round"/></svg>Garantía 2 Años</div>
+  <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.3 3.75 10.2 9 11.25C17.25 22.2 21 17.3 21 12V7L12 2z" stroke="#14497d" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="#14497d" stroke-width="1.5" stroke-linecap="round"/></svg>Garantía 2 Años</div>
   <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#5bc8ea" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="#5bc8ea" stroke-width="1.5" stroke-linecap="round"/></svg>Envío Express</div>
   <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2z" stroke="#22c55e" stroke-width="1.5"/><path d="M8 12l2.5 2.5 5-5.5" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/></svg>100% Original</div>
   <div><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17.5 13.64L18.77 20.23L12 17.27L5.23 20.23L6.5 13.64L2 9.27L8.91 8.26L12 2Z" stroke="#fbbf24" stroke-width="1.5"/></svg>4.9/5 Rating</div>
@@ -1084,7 +1091,9 @@ if('IntersectionObserver' in window){
   }
   document.querySelectorAll('.wp-tab').forEach(function(t){t.addEventListener('click',function(){activate(t.dataset.tab)})});
   document.querySelectorAll('[data-tab-link]').forEach(function(a){a.addEventListener('click',function(){activate(a.dataset.tabLink)})});
+  var navEl=document.querySelector('nav');
   var tt=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){navEl.classList.toggle('stuck',window.scrollY>10)},{passive:true});
   window.addEventListener('scroll',function(){tt.classList.toggle('show',window.scrollY>600)},{passive:true});
   tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
 })();
