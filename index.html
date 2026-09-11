@@ -93,7 +93,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .tdiv{width:1px;height:16px;background:rgba(5,13,26,.2)}
 
 /* ===== STATS BAR ===== */
-.stats-bar{background:var(--navy2);padding:60px 64px;border-bottom:1px solid rgba(91,200,234,.07)}
+.stats-bar{background:var(--navy2);padding:34px 64px;border-bottom:1px solid rgba(91,200,234,.07)}
 .stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .stat-item{text-align:center}
 .stat-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#fff;line-height:1;margin-bottom:6px}
@@ -101,11 +101,11 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .stat-label{font-size:12.5px;color:rgba(255,255,255,.45);letter-spacing:.08em;font-weight:500;text-transform:uppercase}
 
 /* ===== HOW IT WORKS ===== */
-#how{background:var(--cream2);padding:92px 64px}
+#how{background:var(--cream2);padding:58px 64px}
 .how-inner{max-width:1100px;margin:0 auto}
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:50px;position:relative}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px;position:relative}
 .steps-grid::before{content:'';position:absolute;top:46px;left:17%;right:17%;height:1.5px;background:linear-gradient(90deg,transparent,var(--border),transparent);z-index:0}
-.step-card{background:#fff;border-radius:var(--radius);padding:36px 28px;text-align:center;border:1.5px solid var(--border);position:relative;z-index:1;transition:all .35s}
+.step-card{background:#fff;border-radius:var(--radius);padding:26px 24px;text-align:center;border:1.5px solid var(--border);position:relative;z-index:1;transition:all .35s}
 .step-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(11,61,107,.11);border-color:var(--sky)}
 .step-num{width:60px;height:60px;border-radius:50%;background:var(--gold);color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 6px 20px rgba(242,198,64,.3)}
 .step-icon{font-size:26px;margin-bottom:14px}
@@ -113,11 +113,11 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .step-p{font-size:14px;color:var(--muted);line-height:1.68}
 
 /* ===== PRODUCTS ===== */
-#products{background:var(--cream2);padding:90px 0}
+#products{background:var(--cream2);padding:58px 0 62px}
 .products-inner{max-width:1400px;margin:0 auto;padding:0 64px}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;gap:30px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;gap:30px}
 .eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sky);margin-bottom:10px}
-.sec-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.06;color:var(--navy)}
+.sec-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.4vw,44px);font-weight:300;line-height:1.06;color:var(--navy)}
 .sec-h2 strong{font-weight:600}
 .sec-h2 em{font-style:italic;color:var(--sky)}
 .sec-p{font-size:15.5px;color:var(--muted);line-height:1.68;max-width:420px}
@@ -172,10 +172,10 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 @media(max-width:640px){.lightbox-box{grid-template-columns:1fr}.lightbox-img{min-height:220px}}
 
 /* ===== WHY US ===== */
-#why{background:var(--navy);padding:100px 64px}
+#why{background:var(--navy);padding:62px 64px}
 .why-inner{max-width:1100px;margin:0 auto}
 .why-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.why-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;color:#fff;margin-bottom:60px}
+.why-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.4vw,44px);font-weight:300;color:#fff;margin-bottom:36px}
 .why-h2 em{font-style:italic;color:var(--gold)}
 .alt-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:72px}
 .alt-row:last-child{margin-bottom:0}
@@ -191,7 +191,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 /* ===== GALLERY ===== */
 #gallery{background:var(--cream2);padding:88px 64px;overflow:hidden}
 .gallery-inner{max-width:1200px;margin:0 auto}
-.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 220px;gap:14px;margin-top:48px}
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:200px 200px;gap:14px}
 .gal-item{border-radius:var(--radius);overflow:hidden;position:relative;cursor:pointer}
 .gal-item:first-child{grid-row:1/3}
 .gal-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .5s ease;position:relative}
@@ -203,19 +203,19 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .gal-item:hover .gal-label{opacity:1;transform:translateY(0)}
 
 /* ===== SIZES ===== */
-#sizes{background:var(--navy2);padding:90px 64px}
+#sizes{background:var(--navy2);padding:46px 64px}
 .sizes-inner{max-width:960px;margin:0 auto;text-align:center;color:#fff}
-.sizes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
-.sz{border:2px solid rgba(91,200,234,.2);border-radius:var(--radius);padding:28px 16px;text-align:center;cursor:pointer;transition:all .28s;background:rgba(255,255,255,.04)}
+.sizes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.sz{border:2px solid rgba(91,200,234,.2);border-radius:var(--radius);padding:18px 14px;text-align:center;cursor:pointer;transition:all .28s;background:rgba(255,255,255,.04)}
 .sz:hover,.sz.on{border-color:var(--sky);background:rgba(91,200,234,.09);box-shadow:0 10px 28px rgba(91,200,234,.18);transform:translateY(-3px)}
-.sz-vis{height:64px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:14px}
+.sz-vis{height:52px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:14px}
 .sz-blk{background:var(--sky);border-radius:4px 4px 0 0;opacity:.65;transition:opacity .25s}
 .sz:hover .sz-blk,.sz.on .sz-blk{opacity:1}
 .sz h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:4px}
 .sz span{font-size:12px;color:rgba(255,255,255,.48)}
 
 /* ===== BUNDLES ===== */
-#bundles{background:var(--navy);padding:92px 64px}
+#bundles{background:var(--navy);padding:62px 64px}
 .bundles-inner{max-width:1100px;margin:0 auto}
 .bundle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
 .bundle-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(242,198,64,.2);border-radius:20px;padding:32px 26px;text-align:center;transition:all .35s;position:relative;overflow:hidden}
@@ -235,8 +235,8 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .bundle-cta:hover{background:#fde68a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(242,198,64,.3)}
 
 /* ===== TESTIMONIALS ===== */
-#testi{background:var(--cream2);padding:90px 0;overflow:hidden}
-.testi-head{max-width:1200px;margin:0 auto 48px;padding:0 64px;text-align:center}
+#testi{background:var(--cream2);padding:58px 0;overflow:hidden}
+.testi-head{max-width:1200px;margin:0 auto 28px;padding:0 64px;text-align:center}
 .testi-marquee-wrap{position:relative;overflow:hidden}
 .testi-marquee-wrap::before,.testi-marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:140px;z-index:2;pointer-events:none}
 .testi-marquee-wrap::before{left:0;background:linear-gradient(to right,var(--cream2),transparent)}
@@ -254,9 +254,9 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .auth-loc{font-size:11px;color:var(--muted)}
 
 /* ===== CONTACT FORM ===== */
-#contact{background:linear-gradient(135deg,var(--navy2) 0%,var(--navy) 100%);padding:92px 64px}
+#contact{background:linear-gradient(135deg,var(--navy2) 0%,var(--navy) 100%);padding:64px 64px}
 .contact-inner{max-width:780px;margin:0 auto}
-.contact-form{background:rgba(255,255,255,.04);border:1.5px solid rgba(91,200,234,.12);border-radius:24px;padding:48px 44px;margin-top:44px}
+.contact-form{background:rgba(255,255,255,.04);border:1.5px solid rgba(91,200,234,.12);border-radius:20px;padding:32px 30px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form-group{display:flex;flex-direction:column;gap:8px}
 .form-group label{font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5)}
@@ -296,8 +296,8 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .addr-chip{margin-top:32px;display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border:1px solid rgba(91,200,234,.18);border-radius:50px;font-size:14px;color:rgba(255,255,255,.42)}
 
 /* ===== FOOTER ===== */
-footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding:64px 64px 28px}
-.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:52px;margin-bottom:48px}
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding:52px 64px 24px}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;margin-bottom:34px}
 .foot-about p{font-size:14px;line-height:1.74;color:rgba(255,255,255,.36);margin-top:16px;max-width:260px}
 .foot-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#fff}
 .foot-brand span{color:var(--gold)}
@@ -310,6 +310,40 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 .foot-bottom a{color:rgba(91,200,234,.6);text-decoration:none}
 .trust-badges{background:rgba(5,13,26,.85);padding:18px 64px;border-top:1px solid rgba(91,200,234,.07);display:flex;justify-content:center;gap:44px;flex-wrap:wrap;text-align:center;font-size:11px;color:rgba(255,255,255,.42)}
 .trust-badges>div{display:flex;flex-direction:column;align-items:center;gap:7px}
+
+
+/* ===== WP-STYLE TABS ===== */
+.wp-tabs{display:flex;gap:4px;border-bottom:2px solid var(--border);margin-bottom:28px;flex-wrap:wrap}
+.wp-tab{background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--muted);cursor:pointer;transition:all .2s;border-radius:8px 8px 0 0}
+.wp-tab:hover{color:var(--navy);background:rgba(11,61,107,.04)}
+.wp-tab.on{color:var(--navy);border-bottom-color:var(--gold);background:rgba(242,198,64,.08)}
+.wp-panel{display:none;animation:fadein .4s ease both}
+.wp-panel.on{display:block}
+
+/* ===== SIZES BAND ===== */
+.sizes-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;text-align:left}
+.sizes-help{color:var(--sky);font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap}
+.sizes-help:hover{color:var(--gold)}
+
+/* ===== WHY CARDS ===== */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
+.why-card{background:rgba(91,200,234,.05);border:1px solid rgba(91,200,234,.13);border-radius:18px;padding:30px 26px;transition:all .3s}
+.why-card:hover{transform:translateY(-5px);border-color:rgba(242,198,64,.35);background:rgba(91,200,234,.08)}
+.why-ico{width:58px;height:58px;background:rgba(242,198,64,.1);border:1px solid rgba(242,198,64,.22);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.why-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:10px}
+.why-card p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.7}
+
+/* ===== CONTACT 2-COL ===== */
+.contact-inner{max-width:1200px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.contact-side .cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.contact-side .pays-row{display:flex;gap:9px;flex-wrap:wrap}
+.contact-side .pay-chip{font-size:12.5px;padding:8px 15px}
+
+/* ===== BACK TO TOP ===== */
+.to-top{position:fixed;bottom:100px;right:30px;z-index:997;width:44px;height:44px;border-radius:10px;background:var(--navy2);border:1px solid rgba(91,200,234,.22);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.to-top.show{opacity:1;pointer-events:auto}
+.to-top:hover{background:var(--gold);color:var(--navy);transform:translateY(-3px)}
 
 /* ===== WA FLOAT ===== */
 .wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.48);transition:transform .2s}
@@ -349,6 +383,11 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   .hero-illustration{height:150px}
   .trust-strip,.stats-bar,#how,#products,.products-inner,#camas,#why,#sizes,#gallery,#testi,#bundles,#contact,#pays,#cta,footer,.trust-badges{padding-left:20px;padding-right:20px}
   .camas-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:32px}
+  .wp-tab{padding:10px 14px;font-size:13px}
+  .sizes-head{flex-direction:column;align-items:flex-start}
+  .to-top{bottom:150px;right:18px}
   .foot-grid{grid-template-columns:1fr}
   .foot-bottom{flex-direction:column;gap:8px;text-align:center}
   .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto}
@@ -383,10 +422,11 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <div class="nav-brand"><div class="n1">Real <span>Confort</span> MD</div><div class="n2">Calidad y Pleno Descanso</div></div>
   </a>
   <ul class="nav-links">
-    <li><a href="#products">Colchones</a></li>
-    <li><a href="#camas">Camas</a></li>
+    <li><a href="#products" data-tab-link="tab-colchones">Colchones</a></li>
+    <li><a href="#products" data-tab-link="tab-camas">Camas</a></li>
     <li><a href="#how">Cómo Funciona</a></li>
     <li><a href="#sizes">Medidas</a></li>
+    <li><a href="#products" data-tab-link="tab-showroom">Showroom</a></li>
     <li><a href="#bundles">Combos</a></li>
     <li><a href="#testi">Clientes</a></li>
     <li><a href="https://wa.me/573001234567" class="nav-wa"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>WhatsApp</a></li>
@@ -471,9 +511,9 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <div style="text-align:center">
       <div class="eyebrow">Proceso Simple</div>
       <h2 class="sec-h2" style="margin-bottom:8px">Así de <em>fácil</em> funciona</h2>
-      <p class="sec-p" style="max-width:500px;margin:0 auto">Desde que nos contactas hasta dormir en tu colchón nuevo, el proceso es rápido y sin complicaciones.</p>
+      <p class="sec-p" style="max-width:520px;margin:0 auto">De tu mensaje a tu colchón nuevo en 24–48 horas, sin complicaciones.</p>
     </div>
-    <div class="steps-grid">
+<div class="steps-grid">
       <div class="step-card rev">
         <div class="step-num">01</div>
         <div style="font-size:28px;margin-bottom:10px">💬</div>
@@ -496,21 +536,29 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   </div>
 </section>
 
-<!-- PRODUCTS CAROUSEL -->
-<section id="products" style="background:var(--cream2);padding:90px 0">
+<!-- CATALOGO (tabs) -->
+<section id="products">
   <div class="products-inner">
     <div class="section-head">
       <div>
-        <div class="eyebrow">Nuestros Productos</div>
-        <h2 class="sec-h2">Colchones para <strong>cada hogar</strong></h2>
-        <p class="sec-p">Desde el sencillo hasta el king size — materiales certificados, precios de fábrica.</p>
+        <div class="eyebrow">Nuestro Catálogo</div>
+        <h2 class="sec-h2">Todo para <strong>tu descanso</strong></h2>
+        <p class="sec-p">Colchones, camas y bases fabricados en Bogotá — precios directos de fábrica.</p>
       </div>
       <div class="carousel-nav">
         <button class="carousel-arrow" id="prevBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#1a2535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="carousel-arrow" id="nextBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#1a2535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
     </div>
-    <div class="carousel-wrap">
+
+    <div class="wp-tabs" role="tablist">
+      <button class="wp-tab on" role="tab" data-tab="tab-colchones">Colchones</button>
+      <button class="wp-tab" role="tab" data-tab="tab-camas">Camas y Bases</button>
+      <button class="wp-tab" role="tab" data-tab="tab-showroom">Showroom</button>
+    </div>
+
+    <div class="wp-panel on" id="tab-colchones">
+<div class="carousel-wrap">
       <div class="carousel-track" id="carouselTrack">
 
         <div class="pc rev" data-lightbox data-img="images/colchones/colchon-sencillo.jpg" data-name="Colchón Sencillo" data-desc="100 × 190 cm · Espuma de alta densidad. Ideal para cuartos individuales." data-price="Desde $350.000" data-wa="https://wa.me/573001234567?text=Cotización%20Colchón%20Sencillo">
@@ -547,20 +595,10 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       </div>
     </div>
     <div class="carousel-dots" id="carouselDots"></div>
-  </div>
-</section>
-
-<!-- CAMAS -->
-<section id="camas">
-  <div class="products-inner">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">Camas Tapizadas</div>
-        <h2 class="sec-h2">Camas para <strong>vestir tu cuarto</strong></h2>
-        <p class="sec-p">Bases tapizadas y con almacenamiento, fabricadas para acompañar tu colchón nuevo.</p>
-      </div>
     </div>
-    <div class="camas-grid">
+
+    <div class="wp-panel" id="tab-camas">
+<div class="camas-grid">
 
       <div class="pc rev" data-lightbox data-img="images/camas/cama-tapizada-crema.jpg" data-name="Cama Tapizada Crema" data-desc="Cabecero capitoné en tela crema. Estructura reforzada, patas en madera maciza." data-price="Desde $620.000" data-wa="https://wa.me/573001234567?text=Cotización%20Cama%20Tapizada%20Crema">
         <div class="pc-vis"><img src="images/camas/cama-tapizada-crema.jpg" alt="Cama tapizada color crema con cabecero capitoné" loading="lazy" width="340" height="196"><div class="pc-zoom-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div></div>
@@ -594,58 +632,13 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       </div>
 
     </div>
-  </div>
-</section>
+    </div>
 
-<!-- WHY US -->
-<section id="why">
-  <div class="why-inner">
-    <div class="why-eyebrow">¿Por qué elegirnos?</div>
-    <h2 class="why-h2">Más de una década <em>durmiendo bien</em> a Bogotá</h2>
-    <div class="alt-row rev">
-      <div class="alt-text">
-        <div class="alt-num">01</div>
-        <h3>Calidad Garantizada</h3>
-        <p>Cada colchón pasa control de calidad riguroso antes de salir de nuestra planta. Materiales certificados y durables con garantía de 2 años incluida en cada compra.</p>
-      </div>
-      <div class="alt-visual">
-        <div class="alt-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.39 8.26L21 9.27L16.5 13.64L17.77 20.23L12 17.27L6.23 20.23L7.5 13.64L3 9.27L9.61 8.26L12 2Z" fill="#f2c640"/></svg></div>
-      </div>
-    </div>
-    <div class="alt-row reverse rev">
-      <div class="alt-text">
-        <div class="alt-num">02</div>
-        <h3>Fabricación Local</h3>
-        <p>Producimos en Bogotá. Controlamos cada etapa del proceso y te ofrecemos precios directos al consumidor sin intermediarios. Más calidad por menos dinero.</p>
-      </div>
-      <div class="alt-visual">
-        <div class="alt-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#f2c640" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="#f2c640" stroke-width="2"/></svg></div>
-      </div>
-    </div>
-    <div class="alt-row rev">
-      <div class="alt-text">
-        <div class="alt-num">03</div>
-        <h3>Entrega e Instalación Gratis</h3>
-        <p>Llevamos e instalamos tu colchón en la habitación sin costo adicional en toda Bogotá y la Sabana. Coordinamos el horario que mejor te convenga.</p>
-      </div>
-      <div class="alt-visual">
-        <div class="alt-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect x="1" y="3" width="15" height="13" rx="2" stroke="#f2c640" stroke-width="2"/><path d="M16 8h4l3 5v3h-7V8z" stroke="#f2c640" stroke-width="2"/><circle cx="5.5" cy="18.5" r="2.5" stroke="#f2c640" stroke-width="2"/><circle cx="18.5" cy="18.5" r="2.5" stroke="#f2c640" stroke-width="2"/></svg></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-  <div class="gallery-inner">
-    <div style="text-align:center">
-      <div class="eyebrow">Nuestro Showroom</div>
-      <h2 class="sec-h2">Ven a ver la <strong>calidad</strong> en persona</h2>
-    </div>
-    <div class="gallery-grid">
+    <div class="wp-panel" id="tab-showroom">
+<div class="gallery-grid">
       <!-- Main large item -->
       <div class="gal-item rev">
-        <div class="gal-bg" style="height:100%;min-height:454px">
+        <div class="gal-bg" style="height:100%;min-height:414px">
           <img src="images/colchones/showroom-real-bogota.jpg" alt="Entrega e instalación real en Bogotá" loading="lazy">
           <div class="gal-overlay"></div>
           <div class="gal-label">Instalación Real · Bogotá</div>
@@ -653,44 +646,49 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       </div>
       <!-- 4 smaller items -->
       <div class="gal-item rev">
-        <div class="gal-bg" style="height:220px">
+        <div class="gal-bg" style="height:200px">
           <img src="images/colchones/colchon-queen-pillowtop.jpg" alt="Detalle de colchón Queen premium" loading="lazy">
           <div class="gal-overlay"></div>
           <div class="gal-label">Colchón Queen Premium</div>
         </div>
       </div>
       <div class="gal-item rev">
-        <div class="gal-bg" style="height:220px">
+        <div class="gal-bg" style="height:200px">
           <img src="images/camas/cama-tapizada-gris-premium.jpg" alt="Cama tapizada gris premium en el showroom" loading="lazy">
           <div class="gal-overlay"></div>
           <div class="gal-label">Cama Premium</div>
         </div>
       </div>
       <div class="gal-item rev">
-        <div class="gal-bg" style="height:220px">
+        <div class="gal-bg" style="height:200px">
           <img src="images/camas/base-almacenamiento-elevable.jpg" alt="Base elevable con almacenamiento" loading="lazy">
           <div class="gal-overlay"></div>
           <div class="gal-label">Almacenamiento Inteligente</div>
         </div>
       </div>
       <div class="gal-item rev">
-        <div class="gal-bg" style="height:220px">
+        <div class="gal-bg" style="height:200px">
           <img src="images/camas/cama-tapizada-negra-cristales.jpg" alt="Cama tapizada negra con acabados de lujo" loading="lazy">
           <div class="gal-overlay"></div>
           <div class="gal-label">Acabados de Lujo</div>
         </div>
       </div>
     </div>
+    </div>
   </div>
 </section>
 
-<!-- SIZES -->
+<!-- MEDIDAS (banda compacta) -->
 <section id="sizes">
   <div class="sizes-inner">
-    <div class="eyebrow" style="color:var(--sky);display:block;margin-bottom:10px">Guía de Medidas</div>
-    <h2 class="sec-h2" style="color:#fff;margin-bottom:8px">¿Qué tamaño <strong>necesitas?</strong></h2>
-    <p style="color:rgba(255,255,255,.45);font-size:15px;max-width:440px;margin:0 auto">Elige según el espacio de tu habitación y cuántas personas lo usarán.</p>
-    <div class="sizes-grid">
+    <div class="sizes-head">
+      <div>
+        <div class="eyebrow" style="color:var(--sky)">Guía de Medidas</div>
+        <h2 class="sec-h2" style="color:#fff">¿Qué tamaño <strong>necesitas?</strong></h2>
+      </div>
+      <a href="https://wa.me/573001234567?text=Ayúdenme%20a%20elegir%20la%20medida" class="sizes-help">¿Dudas? Te asesoramos →</a>
+    </div>
+<div class="sizes-grid">
       <div class="sz on rev"><div class="sz-vis"><div class="sz-blk" style="width:36px;height:52px"></div></div><h3>Sencillo</h3><span>100 × 190 cm</span></div>
       <div class="sz rev"><div class="sz-vis"><div class="sz-blk" style="width:50px;height:52px"></div></div><h3>Doble</h3><span>140 × 190 cm</span></div>
       <div class="sz rev"><div class="sz-vis"><div class="sz-blk" style="width:60px;height:52px"></div></div><h3>Queen</h3><span>160 × 190 cm</span></div>
@@ -699,7 +697,33 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
   </div>
 </section>
 
-<!-- BUNDLES -->
+<!-- POR QUE ELEGIRNOS -->
+<section id="why">
+  <div class="why-inner" style="text-align:center">
+    <div class="why-eyebrow">¿Por qué elegirnos?</div>
+    <h2 class="why-h2">Más de una década <em>durmiendo bien</em> a Bogotá</h2>
+
+    <div class="why-grid">
+      <div class="why-card rev">
+        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.39 8.26L21 9.27L16.5 13.64L17.77 20.23L12 17.27L6.23 20.23L7.5 13.64L3 9.27L9.61 8.26L12 2Z" fill="#f2c640"/></svg></div>
+        <h3>Calidad Garantizada</h3>
+        <p>Control de calidad riguroso, materiales certificados y garantía de 2 años en cada compra.</p>
+      </div>
+      <div class="why-card rev">
+        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#f2c640" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="#f2c640" stroke-width="2"/></svg></div>
+        <h3>Fabricación Local</h3>
+        <p>Producimos en Bogotá y vendemos directo, sin intermediarios. Más calidad por menos dinero.</p>
+      </div>
+      <div class="why-card rev">
+        <div class="why-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="1" y="3" width="15" height="13" rx="2" stroke="#f2c640" stroke-width="2"/><path d="M16 8h4l3 5v3h-7V8z" stroke="#f2c640" stroke-width="2"/><circle cx="5.5" cy="18.5" r="2.5" stroke="#f2c640" stroke-width="2"/><circle cx="18.5" cy="18.5" r="2.5" stroke="#f2c640" stroke-width="2"/></svg></div>
+        <h3>Entrega e Instalación Gratis</h3>
+        <p>Llevamos e instalamos en la habitación sin costo en Bogotá y la Sabana, en el horario que elijas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMBOS -->
 <section id="bundles">
   <div class="bundles-inner">
     <div style="text-align:center">
@@ -775,12 +799,38 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 </section>
 
 <!-- CONTACT FORM -->
+<!-- CONTACTO + CTA (unificado) -->
 <section id="contact">
-  <div class="contact-inner" style="text-align:center">
-    <div class="eyebrow" style="color:var(--sky);display:block;margin-bottom:10px">Consulta Personalizada</div>
-    <h2 class="why-h2">¿Tienes preguntas? <em>Escríbenos</em></h2>
-    <p style="color:rgba(255,255,255,.45);font-size:15px;max-width:460px;margin:0 auto">Asesoramiento sin costo. Respuesta en menos de 2 horas hábiles.</p>
-    <form class="contact-form rev" onsubmit="handleFormSubmit(event)">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="contact-side">
+        <div class="eyebrow" style="color:var(--sky);display:block;margin-bottom:10px">Contáctanos hoy</div>
+        <h2 class="why-h2" style="margin-bottom:14px">¿Listo para <em>dormir mejor?</em></h2>
+        <p style="color:rgba(255,255,255,.48);font-size:15px;line-height:1.7;margin-bottom:26px">Escríbenos por WhatsApp y un asesor te ayuda a elegir el colchón perfecto en menos de 5 minutos. Asesoría sin costo.</p>
+        <div class="cta-btns" style="justify-content:flex-start">
+          <a href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20conocer%20sus%20colchones" class="btn-wa-big">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
+            Escribir por WhatsApp
+          </a>
+          <a href="tel:+573001234567" class="btn-outline-lt">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.64 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.54 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.47a16 16 0 006.08 6.08l1.83-1.83a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.8"/></svg>
+            Llamar ahora
+          </a>
+        </div>
+        <div class="addr-chip" style="margin-top:22px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
+          Showroom Bogotá · Lun–Sáb 9am–6pm · Dom 9am–3pm
+        </div>
+        <div class="pays-row" style="margin-top:26px;justify-content:flex-start">
+          <div class="pay-chip">💵 Efectivo</div>
+          <div class="pay-chip">🏦 Transferencia</div>
+          <div class="pay-chip">💳 Tarjeta</div>
+          <div class="pay-chip">📱 Nequi / Daviplata</div>
+          <div class="pay-chip">🔄 Cuotas</div>
+        </div>
+      </div>
+      <div class="contact-formwrap">
+<form class="contact-form" onsubmit="handleFormSubmit(event)">
       <div class="form-row" style="margin-bottom:16px">
         <div class="form-group">
           <label>Nombre</label>
@@ -803,43 +853,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
       <button type="submit" class="form-submit">Enviar Consulta →</button>
       <p style="font-size:12px;color:rgba(255,255,255,.3);margin-top:14px">O escríbenos directo por <a href="https://wa.me/573001234567" style="color:var(--sky)">WhatsApp</a></p>
     </form>
-  </div>
-</section>
-
-<!-- PAYMENTS -->
-<section id="pays">
-  <div class="pays-inner">
-    <h2 class="pays-h2">Pagos <strong>flexibles</strong></h2>
-    <p class="pays-sub">Efectivo, transferencia, tarjeta o cuotas — como prefieras.</p>
-    <div class="pays-row">
-      <div class="pay-chip">💵 Efectivo</div>
-      <div class="pay-chip">🏦 Transferencia</div>
-      <div class="pay-chip">💳 Tarjeta Débito/Crédito</div>
-      <div class="pay-chip">📱 Nequi / Daviplata</div>
-      <div class="pay-chip">🔄 Cuotas sin interés</div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section id="cta">
-  <div class="cta-inner">
-    <span class="cta-eyebrow">Contáctanos hoy</span>
-    <h2>¿Listo para <em>dormir mejor?</em></h2>
-    <p>Escríbenos por WhatsApp y un asesor te ayuda a elegir el colchón perfecto en menos de 5 minutos.</p>
-    <div class="cta-btns">
-      <a href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20conocer%20sus%20colchones" class="btn-wa-big">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
-        Escribir por WhatsApp
-      </a>
-      <a href="tel:+573001234567" class="btn-outline-lt">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.64 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.54 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.47a16 16 0 006.08 6.08l1.83-1.83a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.8"/></svg>
-        Llamar ahora
-      </a>
-    </div>
-    <div class="addr-chip">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
-      Showroom Bogotá · Lun–Sáb 9am–6pm · Dom 9am–3pm
+      </div>
     </div>
   </div>
 </section>
@@ -855,8 +869,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
     <div class="foot-col">
       <h4>Productos</h4>
       <ul>
-        <li><a href="#products">Colchones</a></li>
-        <li><a href="#camas">Camas Tapizadas</a></li>
+        <li><a href="#products" data-tab-link="tab-colchones">Colchones</a></li>
+        <li><a href="#products" data-tab-link="tab-camas">Camas Tapizadas</a></li>
         <li><a href="#bundles">Combos</a></li>
         <li><a href="#products">Medidas Especiales</a></li>
       </ul>
@@ -1040,5 +1054,22 @@ if('IntersectionObserver' in window){
 }
 </script>
 
+<button class="to-top" id="toTop" aria-label="Volver arriba"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<script>
+(function(){
+  function activate(id){
+    document.querySelectorAll('.wp-tab').forEach(function(t){t.classList.toggle('on',t.dataset.tab===id)});
+    document.querySelectorAll('.wp-panel').forEach(function(p){p.classList.toggle('on',p.id===id)});
+    var nav=document.querySelector('.carousel-nav'); if(nav) nav.style.visibility = (id==='tab-colchones')?'visible':'hidden';
+    var panel=document.getElementById(id);
+    if(panel) panel.querySelectorAll('.rev').forEach(function(el){el.classList.add('in')});
+  }
+  document.querySelectorAll('.wp-tab').forEach(function(t){t.addEventListener('click',function(){activate(t.dataset.tab)})});
+  document.querySelectorAll('[data-tab-link]').forEach(function(a){a.addEventListener('click',function(){activate(a.dataset.tabLink)})});
+  var tt=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){tt.classList.toggle('show',window.scrollY>600)},{passive:true});
+  tt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+})();
+</script>
 </body>
 </html>
