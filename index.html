@@ -60,7 +60,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 /* ===== HERO ===== */
 #hero{
   background:var(--navy);position:relative;overflow:hidden;
-  padding:110px 64px 0;text-align:center;
+  padding:62px 64px 0;text-align:center;
   background-image:
     radial-gradient(ellipse 70% 60% at 50% 35%,rgba(11,61,107,.65) 0%,transparent 70%),
     radial-gradient(ellipse 35% 45% at 10% 70%,rgba(91,200,234,.07) 0%,transparent 60%),
@@ -69,20 +69,20 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 /* Particles canvas */
 #particles-canvas{position:absolute;inset:0;pointer-events:none;opacity:.55}
 
-.hero-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--sky);margin-bottom:22px;animation:fadein .9s ease both}
+.hero-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--sky);margin-bottom:16px;animation:fadein .9s ease both}
 .hero-label::before,.hero-label::after{content:'';width:24px;height:1px;background:var(--sky);display:block}
-.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(50px,5.8vw,82px);font-weight:300;line-height:1.05;color:#fff;margin-bottom:20px;animation:fadein .9s .12s ease both}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,4.6vw,64px);font-weight:300;line-height:1.05;color:#fff;margin-bottom:16px;animation:fadein .9s .12s ease both}
 .hero-h1 em{font-style:italic;color:var(--gold)}
-.hero-p{font-size:17px;line-height:1.74;color:rgba(255,255,255,.56);max-width:520px;margin:0 auto 36px;animation:fadein .9s .22s ease both}
-.hero-btns{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:52px;animation:fadein .9s .32s ease both}
+.hero-p{font-size:16px;line-height:1.6;color:rgba(255,255,255,.56);max-width:520px;margin:0 auto 26px;animation:fadein .9s .22s ease both}
+.hero-btns{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:30px;animation:fadein .9s .32s ease both}
 .btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:15px 34px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;transition:all .25s;box-shadow:0 6px 24px rgba(242,198,64,.3)}
 .btn-gold:hover{background:#fde68a;transform:translateY(-2px);box-shadow:0 14px 36px rgba(242,198,64,.45)}
 .btn-ghost{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.65);font-size:15px;font-weight:500;text-decoration:none;padding:15px 28px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);transition:all .2s}
 .btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
 
 /* Hero illustration */
-.hero-illustration{position:relative;margin:0 auto;max-width:700px;height:310px;display:flex;align-items:flex-end;justify-content:center;animation:fadein .9s .4s ease both}
-.hero-mat-svg{animation:mattfloat 6s ease-in-out infinite;filter:drop-shadow(0 30px 56px rgba(5,13,26,.22))}
+.hero-illustration{position:relative;margin:0 auto;max-width:560px;height:200px;display:flex;align-items:flex-end;justify-content:center;animation:fadein .9s .4s ease both}
+.hero-mat-svg{width:100%;height:auto;max-height:100%;animation:mattfloat 6s ease-in-out infinite;filter:drop-shadow(0 30px 56px rgba(5,13,26,.22))}
 @keyframes mattfloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-18px) rotate(-1.5deg)}}
 @keyframes fadein{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 .hero-wave{display:block;width:100%;margin-top:-2px}
@@ -345,7 +345,8 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 @media(max-width:768px){
   nav{padding:14px 20px}
   .nav-links{display:none}
-  #hero{padding:80px 20px 0}
+  #hero{padding:48px 20px 0}
+  .hero-illustration{height:150px}
   .trust-strip,.stats-bar,#how,#products,.products-inner,#camas,#why,#sizes,#gallery,#testi,#bundles,#contact,#pays,#cta,footer,.trust-badges{padding-left:20px;padding-right:20px}
   .camas-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
