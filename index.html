@@ -57,35 +57,39 @@ nav{position:sticky;top:0;z-index:200;background:rgba(5,13,26,.96);backdrop-filt
 .nav-wa:hover{background:#1db857;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.4)}
 .nav-wa::after{display:none!important}
 
-/* ===== HERO ===== */
-#hero{
-  background:var(--navy);position:relative;overflow:hidden;
-  padding:62px 64px 0;text-align:center;
-  background-image:
-    radial-gradient(ellipse 70% 60% at 50% 35%,rgba(11,61,107,.65) 0%,transparent 70%),
-    radial-gradient(ellipse 35% 45% at 10% 70%,rgba(91,200,234,.07) 0%,transparent 60%),
-    radial-gradient(ellipse 30% 40% at 90% 20%,rgba(242,198,64,.04) 0%,transparent 55%);
-}
-/* Particles canvas */
-#particles-canvas{position:absolute;inset:0;pointer-events:none;opacity:.55}
+/* ===== HERO (WP/Shopify split) ===== */
+#hero{background:var(--navy);position:relative;overflow:hidden;padding:0}
+#particles-canvas{display:none}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:stretch;position:relative;z-index:1}
+.hero-copy{padding:76px 56px 76px max(64px,calc((100vw - 1340px)/2 + 64px));display:flex;flex-direction:column;justify-content:center}
 
-.hero-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--sky);margin-bottom:16px;animation:fadein .9s ease both}
-.hero-label::before,.hero-label::after{content:'';width:24px;height:1px;background:var(--sky);display:block}
-.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,4.6vw,64px);font-weight:300;line-height:1.05;color:#fff;margin-bottom:16px;animation:fadein .9s .12s ease both}
+.hero-label{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);background:var(--gold);margin-bottom:22px;padding:7px 14px;border-radius:4px}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,3.7vw,54px);font-weight:300;line-height:1.12;color:#fff;margin-bottom:18px;max-width:13ch}
 .hero-h1 em{font-style:italic;color:var(--gold)}
-.hero-p{font-size:16px;line-height:1.6;color:rgba(255,255,255,.56);max-width:520px;margin:0 auto 26px;animation:fadein .9s .22s ease both}
-.hero-btns{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:30px;animation:fadein .9s .32s ease both}
-.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:15px 34px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;transition:all .25s;box-shadow:0 6px 24px rgba(242,198,64,.3)}
-.btn-gold:hover{background:#fde68a;transform:translateY(-2px);box-shadow:0 14px 36px rgba(242,198,64,.45)}
-.btn-ghost{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.65);font-size:15px;font-weight:500;text-decoration:none;padding:15px 28px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);transition:all .2s}
-.btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+.hero-p{font-size:16px;line-height:1.72;color:rgba(255,255,255,.58);max-width:470px;margin-bottom:28px}
 
-/* Hero illustration */
-.hero-illustration{position:relative;margin:0 auto;max-width:560px;height:200px;display:flex;align-items:flex-end;justify-content:center;animation:fadein .9s .4s ease both}
-.hero-mat-svg{width:100%;height:auto;max-height:100%;animation:mattfloat 6s ease-in-out infinite;filter:drop-shadow(0 30px 56px rgba(5,13,26,.22))}
-@keyframes mattfloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-18px) rotate(-1.5deg)}}
-@keyframes fadein{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.hero-wave{display:block;width:100%;margin-top:-2px}
+.hero-btns{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:15px 30px;border-radius:4px;font-size:14.5px;font-weight:700;letter-spacing:.02em;text-decoration:none;transition:all .2s}
+.btn-gold:hover{background:#ffd75e}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:14.5px;font-weight:600;text-decoration:none;padding:15px 26px;border-radius:4px;border:1.5px solid rgba(255,255,255,.22);transition:all .2s}
+.btn-ghost:hover{border-color:var(--sky);background:rgba(91,200,234,.08)}
+
+.hero-reviews{display:flex;align-items:center;gap:11px;margin-bottom:22px}
+.hero-stars{color:var(--gold);font-size:15px;letter-spacing:2px}
+.hero-reviews span{font-size:13.5px;color:rgba(255,255,255,.55)}
+.hero-reviews b{color:#fff}
+
+.hero-proof{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-top:22px;border-top:1px solid rgba(255,255,255,.08)}
+.hero-proof-i{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.55);font-weight:500}
+.hero-proof-i svg{flex-shrink:0}
+.hero-proof-i b{color:#fff;font-weight:700}
+
+.hero-media{position:relative;min-height:540px}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero-pricepill{position:absolute;left:28px;bottom:28px;z-index:2;background:#fff;border-radius:6px;padding:13px 20px;box-shadow:0 10px 30px rgba(0,0,0,.26)}
+.hero-pricepill .l{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
+.hero-pricepill .v{font-size:20px;font-weight:700;color:var(--navy)}
+.hero-pricepill .v span{font-size:12px;color:var(--muted);font-weight:600}
 
 /* ===== TRUST STRIP ===== */
 .trust-strip{background:var(--gold);padding:17px 64px;display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap}
@@ -379,8 +383,14 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 @media(max-width:768px){
   nav{padding:14px 20px}
   .nav-links{display:none}
-  #hero{padding:48px 20px 0}
-  .hero-illustration{height:150px}
+  #hero{padding:0}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{padding:38px 20px 42px;order:2}
+  .hero-h1{max-width:none}
+  .hero-media{order:1;min-height:300px}
+  .hero-p{max-width:none}
+  .hero-proof{gap:14px}
+  .hero-pricepill{left:16px;bottom:16px;padding:11px 16px}
   .trust-strip,.stats-bar,#how,#products,.products-inner,#camas,#why,#sizes,#gallery,#testi,#bundles,#contact,#pays,#cta,footer,.trust-badges{padding-left:20px;padding-right:20px}
   .camas-grid{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
@@ -436,38 +446,46 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.05);padding
 <!-- HERO -->
 <section id="hero">
   <canvas id="particles-canvas"></canvas>
-  <div class="hero-label">Bogotá, Colombia · Est. 2010</div>
-  <h1 class="hero-h1">El descanso que tu familia<br><em>siempre merece.</em></h1>
-  <p class="hero-p">Colchones fabricados con materiales de primera calidad, a precios directos de fábrica. Más de 10 años llevando el mejor sueño a los hogares bogotanos.</p>
-  <div class="hero-btns">
-    <a href="#products" class="btn-gold">Ver Colecciones →</a>
-    <a href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20conocer%20sus%20colchones" class="btn-ghost">
-      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
-      Cotizar por WhatsApp
-    </a>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="hero-label">Bogotá, Colombia · Est. 2010</div>
+      <h1 class="hero-h1">El descanso que tu familia <em>siempre merece.</em></h1>
+      <p class="hero-p">Colchones y camas fabricados en Bogotá con materiales de primera calidad, a precios directos de fábrica.</p>
+      <div class="hero-reviews">
+        <div class="hero-stars">★★★★★</div>
+        <span><b>4.9/5</b> en 147 reseñas verificadas</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#products" class="btn-gold">Ver Colecciones →</a>
+        <a href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20conocer%20sus%20colchones" class="btn-ghost">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.1.546 4.073 1.5 5.793L0 24l6.392-1.478A11.931 11.931 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.6 9.6 0 01-4.9-1.344l-.352-.208-3.645.842.878-3.548-.228-.365A9.561 9.561 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+      </div>
+      <div class="hero-proof">
+        <div class="hero-proof-i">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.3 3.75 10.2 9 11.25C17.25 22.2 21 17.3 21 12V7L12 2z" stroke="#5bc8ea" stroke-width="1.7"/><path d="M9 12l2 2 4-4" stroke="#5bc8ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><b>2 años</b> de garantía</span>
+        </div>
+        <div class="hero-proof-i">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="14" height="12" rx="2" stroke="#5bc8ea" stroke-width="1.7"/><path d="M15 8h4l3 5v3h-7V8z" stroke="#5bc8ea" stroke-width="1.7"/><circle cx="5.5" cy="18.5" r="2.3" stroke="#5bc8ea" stroke-width="1.7"/><circle cx="18" cy="18.5" r="2.3" stroke="#5bc8ea" stroke-width="1.7"/></svg>
+          <span>Envío e instalación <b>gratis</b></span>
+        </div>
+        <div class="hero-proof-i">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#5bc8ea" stroke-width="1.7"/><polyline points="9 22 9 12 15 12 15 22" stroke="#5bc8ea" stroke-width="1.7"/></svg>
+          <span>Fabricación <b>propia</b></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <img src="images/colchones/colchon-doble-lifestyle.jpg" alt="Colchón doble Real Confort MD instalado en una habitación en Bogotá" width="900" height="560" fetchpriority="high">
+      <div class="hero-pricepill">
+        <span class="l">Colchones desde</span>
+        <div class="v">$350.000 <span>COP</span></div>
+      </div>
+    </div>
   </div>
-  <div class="hero-illustration">
-    <svg class="hero-mat-svg" width="600" height="290" viewBox="0 0 600 290" fill="none">
-      <polygon points="300,210 470,118 470,162 300,254" fill="#0b3d6b"/>
-      <polygon points="130,118 300,210 300,254 130,162" fill="#072a4c"/>
-      <polygon points="130,118 300,38 470,118 300,198" fill="#1b6ca8" opacity=".92"/>
-      <polygon points="470,56 470,116 300,196 300,136" fill="#4ab5d8" opacity=".9"/>
-      <polygon points="130,56 300,136 300,196 130,116" fill="#3aa0c0" opacity=".9"/>
-      <polygon points="130,56 300,-28 470,56 300,132" fill="#ddf1fb" opacity=".98"/>
-      <line x1="172" y1="30" x2="240" y2="68" stroke="rgba(11,61,107,.12)" stroke-width="1.8"/>
-      <line x1="210" y1="10" x2="278" y2="48" stroke="rgba(11,61,107,.12)" stroke-width="1.8"/>
-      <line x1="248" y1="-10" x2="316" y2="28" stroke="rgba(11,61,107,.12)" stroke-width="1.8"/>
-      <line x1="286" y1="-26" x2="354" y2="12" stroke="rgba(11,61,107,.12)" stroke-width="1.8"/>
-      <line x1="324" y1="-10" x2="392" y2="28" stroke="rgba(11,61,107,.12)" stroke-width="1.8"/>
-      <line x1="362" y1="10" x2="430" y2="48" stroke="rgba(11,61,107,.12)" stroke-width="1.8"/>
-      <polygon points="130,70 130,90 300,162 300,182" fill="rgba(242,198,64,.7)"/>
-      <polygon points="300,162 470,70 470,90 300,182" fill="rgba(242,198,64,.48)"/>
-      <ellipse cx="222" cy="44" rx="56" ry="23" fill="white" opacity=".84" transform="rotate(-27 222 44)"/>
-      <ellipse cx="370" cy="-2" rx="56" ry="23" fill="white" opacity=".72" transform="rotate(-27 370 -2)"/>
-      <ellipse cx="300" cy="262" rx="158" ry="21" fill="rgba(11,61,107,.16)"/>
-    </svg>
-  </div>
-  <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" height="60" fill="none"><path d="M0 30 Q180 0 360 30 Q540 60 720 30 Q900 0 1080 30 Q1260 60 1440 30 L1440 60 L0 60Z" fill="#f2c640"/></svg>
 </section>
 
 <!-- TRUST STRIP -->
